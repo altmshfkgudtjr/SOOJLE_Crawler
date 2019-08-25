@@ -1,0 +1,6 @@
+[ERROR]=====================================================================
+2019-08-25 21:44:29 :: sj35_detizen_activity
+URL :: http://www.detizen.com/activity/?Category=3&IngYn=Y&PC=10
+<class 'AttributeError'>
+'NoneType' object has no attribute 'findAll'
+

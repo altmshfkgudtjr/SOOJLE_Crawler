@@ -1,0 +1,108 @@
+from bs4 import BeautifulSoup
+from url_list import List
+from post_wash import post_wash
+import datetime
+import tag
+import everytime
+from driver_agent import chromedriver
+from date_cut import date_cut
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+from img_size import img_size
+
+
+
+#게시판 page_url 을 받으면, 그 페이지의 포스트 url 들을 반환
+def Parsing_list_url(URL, page_url):
+	List = []
+	domain = Domain_check(URL['url'])
+
+	#만약 driver이 켜져있으면 끄고, 없으면 그냥 진행
+	try:
+		driver.quit()
+	except:
+		pass
+
+	driver = chromedriver()
+	driver.get(page_url)
+	WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.li_num")))
+	'''
+	for i in range(int(num)):
+		driver.find_element_by_xpath('//*[@id="paging"]/li[4]/a').click()
+		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.li_num")))
+	'''
+	html = driver.page_source
+	bs = BeautifulSoup(html, 'html.parser')
+
+	posts1 = bs.find("ul", {"class": 'listContent'}).findAll("li")
+	posts2 = bs.find("ul", {"class": 'listContent mb20'}).findAll("li")
+	posts = posts1 + posts2
+
+	for post in posts:
+		url = post.find("span", {"class": "li_subject li_list2"}).find("a")['onclick']
+		url = url.split("'")[1]
+		url = domain + url
+		List.append(url)
+
+	data = (driver, List)
+
+	return data
+
+
+
+#포스트 url을 받으면, 그 포스트의 정보를 dictionary 형태로 반환
+def Parsing_post_data(driver, post_url, URL):
+	return_data = []
+	post_data = {}
+	domain = Domain_check(URL['url'])
+	
+
+	driver.get(post_url)
+
+	time.sleep(0.5) #마땅한 기다릴 요소가 없기에 time.sleep(0.5)를 해준다. 네트워크 및 컴퓨터 사양에 따라 ~3까지 증감시킬 것.
+	html = driver.page_source
+	bs = BeautifulSoup(html, 'html.parser')
+	
+	title = bs.find("li", {"class": "vi_subject vi_title"}).text.strip()
+	author = bs.find("span", {"id": "regname"}).text.strip()
+	date = bs.find("span", {"id": "regdate"}).text.strip()
+	date = date + " 00:00:00"
+	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
+	post = bs.find("li", {"id": "contents"}).text.strip()
+	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
+	post = post[:3000]	#post글을 3000자 까지 읽기위한 작업
+	tag_done = tag.tagging(URL, title)
+	img = 1
+		
+
+	#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[],'fav_cnt':0,'view':0} 같은 형식
+	post_data['title'] = title.upper()
+	post_data['author'] = author.upper()
+	post_data['date'] = date
+	post_data['post'] = post.upper()
+	post_data['tag'] = tag_done 	# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
+	post_data['img'] = img
+	post_data['url'] = post_url
+
+	return_data.append(post_data)
+	return_data.append(title)
+	return_data.append(date)
+	return return_data
+
+
+
+#url을 받으면 Page를 변환시켜서, 변환된 url 반환
+def Change_page(url, page):
+	url_done = url + str(page)
+
+	return url_done
+
+
+#입력된 url의 도메인 url 반환
+def Domain_check(url):
+	#행복기숙사 포스트 url 형식
+	domain = "https://happydorm.sejong.ac.kr/sejong/bbs/getBbsWriteView.kmc?&bbs_id=notice&seq="
+
+	return domain
