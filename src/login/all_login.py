@@ -1,3 +1,4 @@
+#MongoDB
 #MySQL 서버 ID, PW
 def mysql():
 	ID = "NB"

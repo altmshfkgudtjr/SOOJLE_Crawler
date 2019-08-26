@@ -1,6 +1,6 @@
 [ERROR]=====================================================================
-2019-08-25 21:44:29 :: sj35_detizen_activity
-URL :: http://www.detizen.com/activity/?Category=3&IngYn=Y&PC=10
-<class 'AttributeError'>
-'NoneType' object has no attribute 'findAll'
+2019-08-25 23:59:37 :: sj1_main_notice
+URL :: http://board.sejong.ac.kr/boardlist.do?searchField=ALL&searchLowItem=ALL&bbsConfigFK=333&siteGubun=19&menuGubun=1&currentPage=1
+<class 'NameError'>
+name 'connect_db' is not defined
 

@@ -7,7 +7,7 @@ from url_list import List
 from crawling_select import Crawling	#크롤링 전체
 import db_manager
 from datetime import datetime
-import info_id
+from info_id import post_info
 from posts_cnt import posts_cnt
 from tag_info import tag_info
 
@@ -22,7 +22,7 @@ if __name__ == '__main__':
 	print("TODAY : ", datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "\n\n")
 
 	#post_info 테이블, sj_domain 테이블 생성, lastly_post 테이블 생성
-	info_id.post_info()
+	post_info()
 	#tag_info 테이블 생성
 	tag_info()
 
