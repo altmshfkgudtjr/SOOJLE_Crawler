@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from all_login import mongo
 from url_list import List
 from domain_insert import domain_insert
 
@@ -7,8 +8,8 @@ def post_info():
 	info_input = []
 	
 	#soojle 라는 데이터베이스에 접근
-	client = MongoClient()
-	client = MongoClient('localhost', 27017)
+	data = mongo()
+	client = MongoClient(data[0], int(data[1]))
 	db = client["soojle"]
 	
 	#post_info 테이블이 존재하면 DROP TABLE
@@ -34,7 +35,8 @@ def post_info():
 	
 	
 	#최신 게시물 저장하는 lastly_post 테이블 생성
+	db.lastly_post.drop()
 	collection = db["lastly_post"]
 	for URL in List:
-		collection.insert_one({"info_id": URL['info']})
+		collection.insert_one({"info_id": URL['info'], "title": 0})
 	print(":::: lastly_post CREATE Complete! ::::")

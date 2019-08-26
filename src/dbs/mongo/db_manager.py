@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from all_login import mongo
 from time_convert import datetime_to_unixtime
 from time_convert import unixtime_to_datetime
 import filtering
@@ -6,34 +7,31 @@ from url_list import List
 
 def init_db():
 	#DB 없으면 생성
-	client = MongoClient()
-	client = MongoClient('localhost', 27017)
+	data = mongo()
+	client = MongoClient(data[0], int(data[1]))
 	db = client['soojle']
 
 
 def get_lastly_post(URL):
 	#soojle 라는 데이터베이스에 접근
-	connect = connect_db.db()
-	cur = connect.cursor()
+	data = mongo()
+	client = MongoClient(data[0], int(data[1]))
+	db = client['soojle']
 
 	table_name = URL['info']
-	query = "SELECT title FROM " + "lastly_post" + " WHERE info_id=%s"
-	cur.execute(query, (table_name,))
-	connect.commit()
-	data = cur.fetchall()
-	lastly_post_title = data[0][0]
+	document = db.lastly_post.find_one({"info_id": table_name})
+	lastly_post_title = document['title']
 
 	return lastly_post_title
 
 def push_lastly_post(URL, lastly_post_title):
 	#soojle 라는 데이터베이스에 접근
-	connect = connect_db.db()
-	cur = connect.cursor()
+	data = mongo()
+	client = MongoClient(data[0], int(data[1]))
+	db = client['soojle']
 
 	table_name = URL['info']
-	query = "UPDATE " + "lastly_post" + " SET title=%s WHERE info_id=%s"
-	cur.execute(query, (lastly_post_title, table_name))
-	connect.commit()
+	db.lastly_post.update_one({"info_id": table_name}, {'$set': {"title": lastly_post_title}})
 	print("\n\n:::: lastly_post INSERT Complete! ::::\n\n")
 
 
@@ -45,30 +43,13 @@ def db_manager(URL, post_data_prepare):
 	temp = []
 	
 	#soojle 라는 데이터베이스에 접근
-	connect = connect_db.db()
-	cur = connect.cursor()
+	data = mongo()
+	client = MongoClient(data[0], int(data[1]))
+	db = client['soojle']
 
 	#게시판에 맞는 테이블 없으면 생성
 	##### post_id: 게시물 식별값, title: 제목, author: 작성자, date: 작성일, post: 게시물내용, img: OpenGraph용 url #####
 	##### tag: 태그, info: 게시판 정보, fav_cnt: 좋아요개수, view: view 개수										 #####
-	query = "CREATE TABLE IF NOT EXISTS " + table_name + " (post_id MEDIUMINT(9) UNSIGNED NOT NULL AUTO_INCREMENT,\
-															title VARCHAR(300) NOT NULL,\
-															author VARCHAR(50) NOT NULL,\
-															date INT(11) NOT NULL,\
-															post VARCHAR(3000) NOT NULL,\
-															img VARCHAR(1000) NOT NULL,\
-															url VARCHAR(500) NOT NULL,\
-															tag VARCHAR(100) NOT NULL,\
-															view MEDIUMINT(9) UNSIGNED DEFAULT 0,\
-															fav_cnt MEDIUMINT(9) UNSIGNED DEFAULT 0,\
-															login TINYINT(1) UNSIGNED NOT NULL,\
-															PRIMARY KEY(post_id),\
-															INDEX IDX_" + table_name +" (date DESC)\
-															) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4"
-	cur.execute(query)
-	connect.commit()
-
-
 	#post_data_prepare 을 필터링 check를 해준다.
 	for post in post_data_prepare:
 		if filtering.filter_public(post['title'] + post['post']):
@@ -90,44 +71,37 @@ def db_manager(URL, post_data_prepare):
 
 
 	#게시판에서 title 값만 다 추출해서 posts_db 라는 리스트에 저장
-	query = "SELECT title FROM " + table_name
-	cur.execute(query)
-	connect.commit()
-	datas = cur.fetchall()
-	for data in datas:
-		posts_db.append(data[0])
-
-	posts_db_len = len(posts_db)					#db에 박힌 포스트의 개수
+	posts_db = db.posts.find({}, {"_id": 0,"title": 1})
+	posts_db_len = db.posts.find().count()					#db에 박힌 포스트의 개수
 
 	#posts_db에 게시물이 아무 것도 없으면 맨 처음 포스트를 넣어준다.
 	if posts_db_len == 0:
-		query = "INSERT INTO " + table_name + " (title, author, date, post, img, url, tag, login) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-		cur.execute(query, (post_data_prepare[0]['title'],\
-							post_data_prepare[0]['author'],\
-							datetime_to_unixtime(post_data_prepare[0]['date']),\
-							post_data_prepare[0]['post'],\
-							post_data_prepare[0]['img'],\
-							post_data_prepare[0]['url'],\
-							post_data_prepare[0]['tag'],\
-							URL['login']))
-		connect.commit()
+		db.posts.insert_one({\
+								"title" : post_data_prepare[0]['title'],\
+								"author": post_data_prepare[0]['author'],\
+								"date" : datetime_to_unixtime(post_data_prepare[0]['date']),\
+								"post" : post_data_prepare[0]['post'],\
+								"img" : post_data_prepare[0]['img'],\
+								"url" : post_data_prepare[0]['url'],\
+								"tag" : post_data_prepare[0]['tag'],\
+								"login" : URL['login'],\
+								"view" : 0,\
+								"fav_cnt": 0\
+							})
 		add_cnt += 1
 		posts_db_len += 1
 
 	posts_db = []
 	#게시판에서 title, date, post_id 값만 다 추출해서 posts_db 라는 리스트에 저장
-	query = "SELECT title, date, post_id FROM " + table_name
-	cur.execute(query)
-	connect.commit()
-	datas = cur.fetchall()
-	for data in datas:
-		title_data = data[0]
-		date_data = unixtime_to_datetime(data[1])
-		post_id_data = data[2]
+	documents = db.posts.find({}, {"title": 1, "date": 1})
+	for document in documents:
+		title_data = document["title"]
+		date_data = unixtime_to_datetime(document["date"])
+		post_id_data = document["_id"]
 		data_done = (title_data, date_data, post_id_data)
 		posts_db.append(data_done)
 
-	posts_db_len = len(posts_db)					#db에 박힌 포스트의 개수
+	posts_db_len = db.posts.find().count()					#db에 박힌 포스트의 개수
 	post_data_prepare_len = len(post_data_prepare)	#준비된 포스트의 개수
 
 	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되면 최신글일 경우 UPDATE 하고 add_cnt++, 또는 중복되지 않으면 add_cnt++, 아무것도 해당안되면 same_cnt++
@@ -136,15 +110,16 @@ def db_manager(URL, post_data_prepare):
 		for j in range(posts_db_len):
 			#prepare 게시물이 db 게시물과 title 이 같고, date 가 최신버전이면 UPDATE
 			if (post_data_prepare[i]['title'] == posts_db[j][0]) and (post_data_prepare[i]['date'] > str(posts_db[j][1])):
-				query = "UPDATE " + table_name + " SET author=%s, date=%s, post=%s, img=%s, url=%s, tag=%s WHERE post_id=%s"
-				cur.execute(query, (post_data_prepare[i]['author'],\
-									datetime_to_unixtime(post_data_prepare[i]['date']),\
-									post_data_prepare[i]['post'],\
-									post_data_prepare[i]['img'],\
-									post_data_prepare[i]['url'],\
-									post_data_prepare[i]['tag'],\
-									posts_db[j][2]))
-				connect.commit()
+				db.posts.update({"_id": posts_db[j][2]}, {\
+									"$set": {\
+										"author": post_data_prepare[i]['author'],\
+										"date": datetime_to_unixtime(post_data_prepare[i]['date']),\
+										"post": post_data_prepare[i]['post'],\
+										"img": post_data_prepare[i]['img'],\
+										"url": post_data_prepare[i]['url'],\
+										"tag": post_data_prepare[i]['tag']\
+									}\
+								})
 				add_cnt += 1
 				same_cnt += 1	#INSERT INTO 되는것을 막기위한 row
 				break
@@ -155,32 +130,29 @@ def db_manager(URL, post_data_prepare):
 			else:
 				continue
 		if same_cnt == 0:	#중복되지 않으면 추가
-			query = "INSERT INTO " + table_name + " (title, author, date, post, img, url, tag, login) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-			cur.execute(query, (post_data_prepare[i]['title'],\
-								post_data_prepare[i]['author'],\
-								datetime_to_unixtime(post_data_prepare[i]['date']),\
-								post_data_prepare[i]['post'],\
-								post_data_prepare[i]['img'],\
-								post_data_prepare[i]['url'],\
-								post_data_prepare[i]['tag'],\
-								URL['login']))
-			connect.commit()
+			db.posts.insert_one({
+									"title" : post_data_prepare[i]['title'],\
+									"author": post_data_prepare[i]['author'],\
+									"date" : datetime_to_unixtime(post_data_prepare[i]['date']),\
+									"post" : post_data_prepare[i]['post'],\
+									"img" : post_data_prepare[i]['img'],\
+									"url" : post_data_prepare[i]['url'],\
+									"tag" : post_data_prepare[i]['tag'],\
+									"login" : URL['login'],\
+									"view" : 0,\
+									"fav_cnt": 0\
+								})
 			add_cnt += 1
-
-	connect.close()
 	return add_cnt
 
 #'info' 의 테이블에 있는 포스트의 개수 반환하는 함수
 def get_table_posts(URL):
 	#soojle 라는 데이터베이스에 접근
-	connect = connect_db.db()
-	cur = connect.cursor()
+	data = mongo()
+	client = MongoClient(data[0], int(data[1]))
+	db = client['soojle']
 
-	query = "SELECT post_id FROM " + URL['info']
-	cur.execute(query)
-	connect.commit()
-	post_ids = cur.fetchall()
-	posts_num = len(post_ids)
+	posts_num = db.posts.find().count()
 
 	return posts_num
 

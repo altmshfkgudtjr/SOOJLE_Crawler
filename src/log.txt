@@ -1,6 +1,0 @@
-[ERROR]=====================================================================
-2019-08-25 23:59:37 :: sj1_main_notice
-URL :: http://board.sejong.ac.kr/boardlist.do?searchField=ALL&searchLowItem=ALL&bbsConfigFK=333&siteGubun=19&menuGubun=1&currentPage=1
-<class 'NameError'>
-name 'connect_db' is not defined
-
