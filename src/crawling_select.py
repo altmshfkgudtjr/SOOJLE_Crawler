@@ -31,126 +31,125 @@ def Crawling(URL):
 
 	flag = False
 	while True:
-#		try:
-		print("\npage_url :::: ", page_url)	#현재 url 출력
-		print("Page : ", page)				#현재 페이지 출력
-		#driver_page 생성---------------------------
-		if crawling_name == 'sj10':
-			driver_page = URLparser_EUCKR(page_url)
-		elif crawling_name == 'sj12':
-			driver_page = URLparser_UTF8(page_url)
-		else:
-			driver_page = URLparser(page_url)
-		#-------------------------------------------
-		#Selenium을 쓰는 경우----------------------------------------------------------------------------------------------
-		if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28'\
-		 or crawling_name == 'sj29' or crawling_name == 'sj30':
-			data = eval(crawling_name + '.Parsing_list_url(URL, page_url)')
-			driver = data[0]
-			post_urls = data[1]
-		#Requests를 쓰는 경우----------------------------------------------------------------------------------------------
-		else:
-			#로그인을 하는 경우-------------------------------------------------------------------------------
-			if URL['login'] == '1':
-				post_urls = eval(crawling_name + '.Parsing_list_url(URL, page_url)')
-			#로그인을 하지않는 경우---------------------------------------------------------------------------
+		try:
+			print("\npage_url :::: ", page_url)	#현재 url 출력
+			print("Page : ", page)				#현재 페이지 출력
+			#driver_page 생성---------------------------
+			if crawling_name == 'sj10':
+				driver_page = URLparser_EUCKR(page_url)
+			elif crawling_name == 'sj12':
+				driver_page = URLparser_UTF8(page_url)
 			else:
-				if driver_page is None:		#Connect Failed 이면 break
-					break
+				driver_page = URLparser(page_url)
+			#-------------------------------------------
+			#Selenium을 쓰는 경우----------------------------------------------------------------------------------------------
+			if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28'\
+			 or crawling_name == 'sj29' or crawling_name == 'sj30':
+				data = eval(crawling_name + '.Parsing_list_url(URL, page_url)')
+				driver = data[0]
+				post_urls = data[1]
+			#Requests를 쓰는 경우----------------------------------------------------------------------------------------------
+			else:
+				#로그인을 하는 경우-------------------------------------------------------------------------------
+				if URL['login'] == '1':
+					post_urls = eval(crawling_name + '.Parsing_list_url(URL, page_url)')
+				#로그인을 하지않는 경우---------------------------------------------------------------------------
 				else:
-					#parsing 형태--------------------------------------------------
-					if crawling_name == 'sj10':
-						bs_page = BeautifulSoup(driver_page, 'lxml')
+					if driver_page is None:		#Connect Failed 이면 break
+						break
 					else:
-						bs_page = BeautifulSoup(driver_page, 'html.parser')
-					#--------------------------------------------------------------
-				post_urls = eval(crawling_name + '.Parsing_list_url(URL, bs_page)')
-			#-----------------------------------------------------------------------------------------------
-		#-----------------------------------------------------------------------------------------------------------------
-		#get_post_data 형식 : [게시글정보dictionary, title, date]-------------------------------------------------------------------------------------------------------
-		#date 규격은 "0000-00-00 00:00:00"
-		post_data_prepare = []
-		for post_url in post_urls:
-			#Selenium인 경우--------------------------------------------------------------------------------------------------------------------
-			if crawling_name == 'sj29' or crawling_name == 'sj30':#------------------게시판 규격인 경우
-				get_post_data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL)')
-			#---------------------------------------------------------------------------------------------------게시판 규격이 아닌 경우
-			elif crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28':
-				data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL, lastly_post)')
-				post_data_prepare = data[0]
-				lastly_post = data[1]
-				if lastly_post is None:
+						#parsing 형태--------------------------------------------------
+						if crawling_name == 'sj10':
+							bs_page = BeautifulSoup(driver_page, 'lxml')
+						else:
+							bs_page = BeautifulSoup(driver_page, 'html.parser')
+						#--------------------------------------------------------------
+					post_urls = eval(crawling_name + '.Parsing_list_url(URL, bs_page)')
+				#-----------------------------------------------------------------------------------------------
+			#-----------------------------------------------------------------------------------------------------------------
+			#get_post_data 형식 : [게시글정보dictionary, title, date]-------------------------------------------------------------------------------------------------------
+			#date 규격은 "0000-00-00 00:00:00"
+			post_data_prepare = []
+			for post_url in post_urls:
+				#Selenium인 경우--------------------------------------------------------------------------------------------------------------------
+				if crawling_name == 'sj29' or crawling_name == 'sj30':#------------------게시판 규격인 경우
+					get_post_data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL)')
+				#---------------------------------------------------------------------------------------------------게시판 규격이 아닌 경우
+				elif crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28':
+					data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL, lastly_post)')
+					post_data_prepare = data[0]
+					lastly_post = data[1]
+					if lastly_post is None:
+						pass
+					else:
+						push_lastly_post(URL, lastly_post)
+				#Requests인 경우--------------------------------------------------------------------------------------------------------------------
+				else:
+					#driver_post 생성--------------------------------
+					if (crawling_name == 'sj21') or (crawling_name == 'sj4') or (crawling_name == 'sj5') or (crawling_name == 'sj8') or (crawling_name == 'sj16'): #---driver_post가 필요없는 경우
+						pass
+					elif crawling_name == 'sj10' or crawling_name == 'sj33':
+						driver_post = URLparser_EUCKR(post_url)
+					elif crawling_name == 'sj12':
+						driver_post = URLparser_UTF8(post_url)
+					else:
+						driver_post = URLparser(post_url)
+					#------------------------------------------------
+					#-----------------------------------------------------------------------------------------------위키백과 구조
+					if crawling_name == 'sj21':
+						get_post_data = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
+					#-----------------------------------------------------------------------------------------------게시판 규격이 아닌 구조
+					elif (crawling_name == 'sj4') or (crawling_name == 'sj5') or (crawling_name == 'sj8') or (crawling_name == 'sj16'):
+						post_data_prepare = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
+						break
+					#-----------------------------------------------------------------------------------------------게시판 규격인 구조
+					else:
+						if driver_post is None:		#Connect Failed 이면 continue
+							continue
+						else:
+							#parsing 형태-------------------------------------------
+							if crawling_name == 'sj10':
+								bs_post = BeautifulSoup(driver_post, 'lxml')
+							elif crawling_name == 'sj12':
+								bs_post = driver_post
+							else:
+								bs_post = BeautifulSoup(driver_post, 'html.parser')
+							#-------------------------------------------------------
+						get_post_data = eval(crawling_name + '.Parsing_post_data(bs_post, post_url, URL)')
+				#-----------------------------------------------------------------------------------------------------------------------------------
+				
+				#post_data_prepare이 이미 완성된 경우-----------------------------------------------------------------------
+				if crawling_name == 'sj4' or crawling_name == 'sj5' or crawling_name == 'sj8' or crawling_name == 'sj16'\
+				 or crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28':
 					pass
+				#post_data_prepare이 완성되지 않은 경우---------------------------------------------------------------------
 				else:
-					push_lastly_post(URL, lastly_post)
-			#Requests인 경우--------------------------------------------------------------------------------------------------------------------
-			else:
-				#driver_post 생성--------------------------------
-				if (crawling_name == 'sj21') or (crawling_name == 'sj4') or (crawling_name == 'sj5') or (crawling_name == 'sj8') or (crawling_name == 'sj16'): #---driver_post가 필요없는 경우
-					pass
-				elif crawling_name == 'sj10' or crawling_name == 'sj33':
-					driver_post = URLparser_EUCKR(post_url)
-				elif crawling_name == 'sj12':
-					driver_post = URLparser_UTF8(post_url)
-				else:
-					driver_post = URLparser(post_url)
-				#------------------------------------------------
-				#-----------------------------------------------------------------------------------------------위키백과 구조
-				if crawling_name == 'sj21':
-					get_post_data = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
-				#-----------------------------------------------------------------------------------------------게시판 규격이 아닌 구조
-				elif (crawling_name == 'sj4') or (crawling_name == 'sj5') or (crawling_name == 'sj8') or (crawling_name == 'sj16'):
-					post_data_prepare = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
-					break
-				#-----------------------------------------------------------------------------------------------게시판 규격인 구조
-				else:
-					if driver_post is None:		#Connect Failed 이면 continue
+					title = get_post_data[1]
+					date = get_post_data[2]
+		
+					print(date, "::::", title)	#현재 크롤링한 포스트의 date, title 출력
+		
+					#게시물의 날짜가 end_date 보다 옛날 글이면 continue, 최신 글이면 append
+					if str(date) <= end_date:
 						continue
 					else:
-						#parsing 형태-------------------------------------------
-						if crawling_name == 'sj10':
-							bs_post = BeautifulSoup(driver_post, 'lxml')
-						elif crawling_name == 'sj12':
-							bs_post = driver_post
-						else:
-							bs_post = BeautifulSoup(driver_post, 'html.parser')
-						#-------------------------------------------------------
-					get_post_data = eval(crawling_name + '.Parsing_post_data(bs_post, post_url, URL)')
-			#-----------------------------------------------------------------------------------------------------------------------------------
-			
-			#post_data_prepare이 이미 완성된 경우-----------------------------------------------------------------------
-			if crawling_name == 'sj4' or crawling_name == 'sj5' or crawling_name == 'sj8' or crawling_name == 'sj16'\
-			 or crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28':
-				pass
-			#post_data_prepare이 완성되지 않은 경우---------------------------------------------------------------------
-			else:
-				title = get_post_data[1]
-				date = get_post_data[2]
-	
-				print(date, "::::", title)	#현재 크롤링한 포스트의 date, title 출력
-	
-				#게시물의 날짜가 end_date 보다 옛날 글이면 continue, 최신 글이면 append
-				if str(date) <= end_date:
-					continue
-				else:
-					post_data_prepare.append(get_post_data[0])
-		#----------------------------------------------------------------------------------------------------------
-		#--------------------------------------------------------------------------------------------------------------------------------------------------------------
-		add_cnt = db_manager(URL, post_data_prepare)
-		print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
-	
-		#dirver 종료 [Selenium 을 사용했을 시]
-		if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28'\
-		 or crawling_name == 'sj29' or crawling_name == 'sj30':
-			driver.quit()
+						post_data_prepare.append(get_post_data[0])
+			#----------------------------------------------------------------------------------------------------------
+			#--------------------------------------------------------------------------------------------------------------------------------------------------------------
+			add_cnt = db_manager(URL, post_data_prepare)
+			print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
 		
-		#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지
-		if add_cnt == 0:
-			break
-		else:
-			page += 1
-			page_url = eval(crawling_name + '.Change_page(main_url, page)')
-		'''
+			#dirver 종료 [Selenium 을 사용했을 시]
+			if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28'\
+			 or crawling_name == 'sj29' or crawling_name == 'sj30':
+				driver.quit()
+			
+			#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지
+			if add_cnt == 0:
+				break
+			else:
+				page += 1
+				page_url = eval(crawling_name + '.Change_page(main_url, page)')
 		except Exception as e:
 			log_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 			log_info = URL['info']
@@ -170,4 +169,3 @@ def Crawling(URL):
 				continue
 			else:
 				break
-		'''
