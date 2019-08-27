@@ -20,7 +20,7 @@ def Crawling(URL):
 	main_url = URL['url']	#게시판 url 추출 : 페이지 바꾸는 데에 사용
 	page_url = eval(crawling_name + '.Change_page(main_url, page)')	#현재 페이지 포스트 url 반환
 	end_date = date_cut(URL['info'])	# end_date 추출
-	if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28':
+	if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28' or crawling_name == 'sj36':
 		lastly_post = get_lastly_post(URL)
 	elif crawling_name == 'sj34':	# 동적 게시판 예외
 		sj34.everytime_all_board(URL, end_date)
@@ -43,7 +43,7 @@ def Crawling(URL):
 				driver_page = URLparser(page_url)
 			#-------------------------------------------
 			#Selenium을 쓰는 경우----------------------------------------------------------------------------------------------
-			if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28'\
+			if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28' or crawling_name == 'sj36'\
 			 or crawling_name == 'sj29' or crawling_name == 'sj30':
 				data = eval(crawling_name + '.Parsing_list_url(URL, page_url)')
 				driver = data[0]
@@ -75,7 +75,7 @@ def Crawling(URL):
 				if crawling_name == 'sj29' or crawling_name == 'sj30':#------------------게시판 규격인 경우
 					get_post_data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL)')
 				#---------------------------------------------------------------------------------------------------게시판 규격이 아닌 경우
-				elif crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28':
+				elif crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28' or crawling_name == 'sj36':
 					data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL, lastly_post)')
 					post_data_prepare = data[0]
 					lastly_post = data[1]
@@ -120,7 +120,7 @@ def Crawling(URL):
 				
 				#post_data_prepare이 이미 완성된 경우-----------------------------------------------------------------------
 				if crawling_name == 'sj4' or crawling_name == 'sj5' or crawling_name == 'sj8' or crawling_name == 'sj16'\
-				 or crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28':
+				 or crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28' or crawling_name == 'sj36':
 					pass
 				#post_data_prepare이 완성되지 않은 경우---------------------------------------------------------------------
 				else:
@@ -140,7 +140,7 @@ def Crawling(URL):
 			print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
 		
 			#dirver 종료 [Selenium 을 사용했을 시]
-			if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28'\
+			if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28' or crawling_name == 'sj36'\
 			 or crawling_name == 'sj29' or crawling_name == 'sj30':
 				driver.quit()
 			

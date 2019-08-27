@@ -37,7 +37,7 @@ def Parsing_post_data(bs, post_url, URL):
 	domain = Domain_check(URL['url'])
 
 	title = bs.find("td", {"class": "subject-value"}).text.strip()
-	author = bs.find("td", {"class": "writer"}).text
+	author = bs.find("td", {"class": "writer"}).text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
 	date = bs.find("td", {"class": "date"}).text

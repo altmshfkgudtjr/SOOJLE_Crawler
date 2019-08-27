@@ -85,6 +85,7 @@ def db_manager(URL, post_data_prepare):
 								"url" : post_data_prepare[0]['url'],\
 								"tag" : post_data_prepare[0]['tag'],\
 								"login" : URL['login'],\
+								"info" : URL['info'].split("_")[1],\
 								"view" : 0,\
 								"fav_cnt": 0\
 							})
@@ -139,6 +140,7 @@ def db_manager(URL, post_data_prepare):
 									"url" : post_data_prepare[i]['url'],\
 									"tag" : post_data_prepare[i]['tag'],\
 									"login" : URL['login'],\
+									"info" : URL['info'].split("_")[1],\
 									"view" : 0,\
 									"fav_cnt": 0\
 								})

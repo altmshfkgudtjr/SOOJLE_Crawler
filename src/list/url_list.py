@@ -526,7 +526,7 @@ List = (\
 	#에브리타임 모든 게시판 [sj34_everytime_all]
 	{'url': "https://everytime.kr",\
 	'info': "sj34_everytime_all",\
-	'title_tag' : "커뮤니티/", 'login' : "0"},
+	'title_tag' : "커뮤니티/", 'login' : "1"},
 	#데티즌 공모전 [sj35_detizen_...]
 	#123
 	{'url': "http://www.detizen.com/contest/?Category=1&IngYn=Y&PC=",\

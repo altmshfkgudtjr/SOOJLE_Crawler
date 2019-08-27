@@ -1,0 +1,18 @@
+[ERROR]=====================================================================
+2019-08-28 00:21:21 :: sj1_main_notice
+URL :: http://board.sejong.ac.kr/boardlist.do?searchField=ALL&searchLowItem=ALL&bbsConfigFK=333&siteGubun=19&menuGubun=1&currentPage=1
+<class 'TypeError'>
+'list' object is not callable
+
+[ERROR]=====================================================================
+2019-08-28 00:21:24 :: sj1_main_notice
+URL :: http://board.sejong.ac.kr/boardlist.do?searchField=ALL&searchLowItem=ALL&bbsConfigFK=333&siteGubun=19&menuGubun=1&currentPage=1
+<class 'TypeError'>
+'list' object is not callable
+
+[ERROR]=====================================================================
+2019-08-28 00:21:27 :: sj1_main_entrance
+URL :: http://board.sejong.ac.kr/boardlist.do?searchField=ALL&searchLowItem=ALL&bbsConfigFK=334&siteGubun=19&menuGubun=1&currentPage=1
+<class 'TypeError'>
+'list' object is not callable
+

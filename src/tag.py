@@ -2,6 +2,12 @@ from tagname_list import tag_names
 from tagname_list import List
 
 
+#태그 문자열들을 리스트화 시키기
+def tag_listing(tag_list):
+	tag_done = []
+	for tag in tag_list:
+		tag_done.append(tag)
+	return tag_done
 
 #태그 리스트들을 "태그1/태그2/태그3/.../" 이런 형식으로 만들어주는 함수
 def tag_attach(tag_list):
@@ -9,6 +15,8 @@ def tag_attach(tag_list):
 	tag_done = ''
 	for num in range(tag_list_len):
 		tag_done = tag_done + tag_list[num] + "/"
+	#몽고디비용 태그 리스트화
+	tag_done = tag_listing(tag_list)
 	return tag_done
 
 
@@ -119,6 +127,7 @@ def tagging(URL, title):
 	#태그들을 하나의 문자열로 만든 string 반환
 	tag_list = set_tag(tag_list)
 	tag_done = tag_attach(tag_list)
+
 	return tag_done
 
 

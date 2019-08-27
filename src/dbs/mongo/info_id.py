@@ -35,7 +35,6 @@ def post_info():
 	
 	
 	#최신 게시물 저장하는 lastly_post 테이블 생성
-	db.lastly_post.drop()
 	collection = db["lastly_post"]
 	for URL in List:
 		collection.insert_one({"info_id": URL['info'], "title": 0})
