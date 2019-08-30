@@ -7,6 +7,10 @@ from time_convert import mongo_to_datetime
 import filtering
 from url_list import List
 from datetime import datetime
+import hashlib
+
+#md5 해쉬
+enc = hashlib.md5()
 
 #공모전 ~까지를 위한 collum 생성
 contest_list = ["campuspick", "detizen"]
@@ -82,8 +86,10 @@ def db_manager(URL, post_data_prepare):
 	posts_db_len = db.posts.find().count()					#db에 박힌 포스트의 개수
 
 	#posts_db에 게시물이 아무 것도 없으면 맨 처음 포스트를 넣어준다.
+	hash_before = post_data_prepare[0]['title'] + post_data_prepare[0]['post']
 	if posts_db_len == 0:
 		query = {
+					"hashed" : hashlib.md5(hash_before.encode('utf-8')).hexdigest(),
 					"title" : post_data_prepare[0]['title'],
 					"author": post_data_prepare[0]['author'],
 					"date" : datetime_to_mongo(post_data_prepare[0]['date']),
@@ -120,43 +126,18 @@ def db_manager(URL, post_data_prepare):
 	for i in range(post_data_prepare_len):
 		same_cnt = 0	#중복되는 카운트
 		for j in range(posts_db_len):
-			#prepare 게시물이 db 게시물과 title 이 같고, date 가 최신버전이면 UPDATE
-			if (post_data_prepare[i]['title'] == posts_db[j][0]) and (post_data_prepare[i]['date'] > str(posts_db[j][1])):
-				if URL['info'].split("_")[1] in contest_list:
-					query = {"_id": posts_db[j][2]}, {
-								"$set": {
-									"author": post_data_prepare[i]['author'],
-									"date": datetime_to_mongo(now),
-									"post": post_data_prepare[i]['post'],
-									"img": post_data_prepare[i]['img'],
-									"url": post_data_prepare[i]['url'],
-									"tag": post_data_prepare[i]['tag'],
-									"end_date": datetime_to_mongo(post_data_prepare[i]['date'])
-								}
-							}
-				else:
-					query = {"_id": posts_db[j][2]}, {
-								"$set": {
-									"author": post_data_prepare[i]['author'],
-									"date": datetime_to_mongo(post_data_prepare[i]['date']),
-									"post": post_data_prepare[i]['post'],
-									"img": post_data_prepare[i]['img'],
-									"url": post_data_prepare[i]['url'],
-									"tag": post_data_prepare[i]['tag']
-								}
-							}
-				db.posts.update(query)
-				add_cnt += 1
-				same_cnt += 1	#INSERT INTO 되는것을 막기위한 row
-				break
-			#prepare 게시물이 db 게시물과 title 이 같고, date 가 같거나 옛날버전이면 same_cnt++
-			elif (post_data_prepare[i]['title'] == posts_db[j][0]) and (post_data_prepare[i]['date'] <= str(posts_db[j][1])):
+			#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
+			hash_before = post_data_prepare[i]['title'] + post_data_prepare[i]['post']
+			hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
+			if (db.posts.find({"hashed": hash_done}).count() >= 1):
 				same_cnt += 1
 				break
 			else:
 				continue
 		if same_cnt == 0:	#중복되지 않으면 추가
+			hash_before = post_data_prepare[0]['title'] + post_data_prepare[0]['post']
 			query = {
+					"hashed" : hash_done,
 					"title" : post_data_prepare[0]['title'],
 					"author": post_data_prepare[0]['author'],
 					"date" : datetime_to_mongo(post_data_prepare[0]['date']),
