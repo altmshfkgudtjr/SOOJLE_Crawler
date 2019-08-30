@@ -1,10 +1,10 @@
 from time import gmtime, strftime
-from time_convert import datetime_to_unixtime
+from time_convert import datetime_to_mongo
 
 
 
 today = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-today = datetime_to_unixtime(today)
+today = datetime_to_mongo(today)
 # author 은 0으로 지정
 List = (\
 	{'post_id': "1", 'info': "domain_sejong_main",\

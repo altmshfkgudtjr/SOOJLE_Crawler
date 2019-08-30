@@ -16,4 +16,15 @@ def domain_insert():
 
 	#sj_domain 리스트 값 INSERT
 	for domain in List:
-		collection_domain.insert_one({"post_id":domain['post_id'], "title":domain['title'], "date":domain['date'], "post":domain['post'], "img":domain['img'], "url":domain['url'], "tag":domain['title_tag'], "login": 0, "view": 0})
+		query = {
+					"post_id":domain['post_id'],
+					"title":domain['title'],
+					"date":(domain['date']),
+					"post":domain['post'],
+					"img":domain['img'],
+					"url":domain['url'],
+					"tag":domain['title_tag'],
+					"login": 0,
+					"view": 0
+				}
+		collection_domain.insert_one(query)

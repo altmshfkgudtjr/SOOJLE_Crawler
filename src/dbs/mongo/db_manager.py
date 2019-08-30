@@ -2,8 +2,15 @@ from pymongo import MongoClient
 from all_login import mongo
 from time_convert import datetime_to_unixtime
 from time_convert import unixtime_to_datetime
+from time_convert import datetime_to_mongo
+from time_convert import mongo_to_datetime
 import filtering
 from url_list import List
+from datetime import datetime
+
+#공모전 ~까지를 위한 collum 생성
+contest_list = ["campuspick", "detizen"]
+now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def init_db():
 	#DB 없으면 생성
@@ -76,19 +83,23 @@ def db_manager(URL, post_data_prepare):
 
 	#posts_db에 게시물이 아무 것도 없으면 맨 처음 포스트를 넣어준다.
 	if posts_db_len == 0:
-		db.posts.insert_one({\
-								"title" : post_data_prepare[0]['title'],\
-								"author": post_data_prepare[0]['author'],\
-								"date" : datetime_to_unixtime(post_data_prepare[0]['date']),\
-								"post" : post_data_prepare[0]['post'],\
-								"img" : post_data_prepare[0]['img'],\
-								"url" : post_data_prepare[0]['url'],\
-								"tag" : post_data_prepare[0]['tag'],\
-								"login" : URL['login'],\
-								"info" : URL['info'].split("_")[1],\
-								"view" : 0,\
-								"fav_cnt": 0\
-							})
+		query = {
+					"title" : post_data_prepare[0]['title'],
+					"author": post_data_prepare[0]['author'],
+					"date" : datetime_to_mongo(post_data_prepare[0]['date']),
+					"post" : post_data_prepare[0]['post'],
+					"img" : post_data_prepare[0]['img'],
+					"url" : post_data_prepare[0]['url'],
+					"tag" : post_data_prepare[0]['tag'],
+					"login" : URL['login'],
+					"info" : URL['info'].split("_")[1],
+					"view" : 0,
+					"fav_cnt": 0
+				}
+		if URL['info'].split("_")[1] in contest_list:
+			query["date"] = datetime_to_mongo(now)
+			query["end_date"] = datetime_to_mongo(post_data_prepare[0]['date'])
+		db.posts.insert_one(query)
 		add_cnt += 1
 		posts_db_len += 1
 
@@ -97,7 +108,7 @@ def db_manager(URL, post_data_prepare):
 	documents = db.posts.find({}, {"title": 1, "date": 1})
 	for document in documents:
 		title_data = document["title"]
-		date_data = unixtime_to_datetime(document["date"])
+		date_data = mongo_to_datetime(document["date"])
 		post_id_data = document["_id"]
 		data_done = (title_data, date_data, post_id_data)
 		posts_db.append(data_done)
@@ -111,16 +122,30 @@ def db_manager(URL, post_data_prepare):
 		for j in range(posts_db_len):
 			#prepare 게시물이 db 게시물과 title 이 같고, date 가 최신버전이면 UPDATE
 			if (post_data_prepare[i]['title'] == posts_db[j][0]) and (post_data_prepare[i]['date'] > str(posts_db[j][1])):
-				db.posts.update({"_id": posts_db[j][2]}, {\
-									"$set": {\
-										"author": post_data_prepare[i]['author'],\
-										"date": datetime_to_unixtime(post_data_prepare[i]['date']),\
-										"post": post_data_prepare[i]['post'],\
-										"img": post_data_prepare[i]['img'],\
-										"url": post_data_prepare[i]['url'],\
-										"tag": post_data_prepare[i]['tag']\
-									}\
-								})
+				if URL['info'].split("_")[1] in contest_list:
+					query = {"_id": posts_db[j][2]}, {
+								"$set": {
+									"author": post_data_prepare[i]['author'],
+									"date": datetime_to_mongo(now),
+									"post": post_data_prepare[i]['post'],
+									"img": post_data_prepare[i]['img'],
+									"url": post_data_prepare[i]['url'],
+									"tag": post_data_prepare[i]['tag'],
+									"end_date": datetime_to_mongo(post_data_prepare[i]['date'])
+								}
+							}
+				else:
+					query = {"_id": posts_db[j][2]}, {
+								"$set": {
+									"author": post_data_prepare[i]['author'],
+									"date": datetime_to_mongo(post_data_prepare[i]['date']),
+									"post": post_data_prepare[i]['post'],
+									"img": post_data_prepare[i]['img'],
+									"url": post_data_prepare[i]['url'],
+									"tag": post_data_prepare[i]['tag']
+								}
+							}
+				db.posts.update(query)
 				add_cnt += 1
 				same_cnt += 1	#INSERT INTO 되는것을 막기위한 row
 				break
@@ -131,19 +156,23 @@ def db_manager(URL, post_data_prepare):
 			else:
 				continue
 		if same_cnt == 0:	#중복되지 않으면 추가
-			db.posts.insert_one({
-									"title" : post_data_prepare[i]['title'],\
-									"author": post_data_prepare[i]['author'],\
-									"date" : datetime_to_unixtime(post_data_prepare[i]['date']),\
-									"post" : post_data_prepare[i]['post'],\
-									"img" : post_data_prepare[i]['img'],\
-									"url" : post_data_prepare[i]['url'],\
-									"tag" : post_data_prepare[i]['tag'],\
-									"login" : URL['login'],\
-									"info" : URL['info'].split("_")[1],\
-									"view" : 0,\
-									"fav_cnt": 0\
-								})
+			query = {
+					"title" : post_data_prepare[0]['title'],
+					"author": post_data_prepare[0]['author'],
+					"date" : datetime_to_mongo(post_data_prepare[0]['date']),
+					"post" : post_data_prepare[0]['post'],
+					"img" : post_data_prepare[0]['img'],
+					"url" : post_data_prepare[0]['url'],
+					"tag" : post_data_prepare[0]['tag'],
+					"login" : URL['login'],
+					"info" : URL['info'].split("_")[1],
+					"view" : 0,
+					"fav_cnt": 0
+				}
+			if URL['info'].split("_")[1] in contest_list:
+				query["date"] = datetime_to_mongo(now)
+				query["end_date"] = datetime_to_mongo(post_data_prepare[0]['date'])
+			db.posts.insert_one(query)
 			add_cnt += 1
 	return add_cnt
 
