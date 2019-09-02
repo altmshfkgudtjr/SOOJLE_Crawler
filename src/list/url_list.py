@@ -535,5 +535,20 @@ List = (\
 	#124
 	{'url': "http://www.detizen.com/activity/?Category=3&IngYn=Y&PC=",\
 	'info': "sj35_detizen_activity",\
-	'title_tag' : ["공모전&대외활동"], 'login' : "0"}\
+	'title_tag' : ["공모전&대외활동"], 'login' : "0"},\
+	#잡코리아
+	#잡코리아 꿀팁[sj36_jobkoreatip_tip]
+	#125
+	{'url': "http://www.jobkorea.co.kr/goodjob/Tip?schCtgr=0&TipKwrdArray=알바생&TipKwrdArray=정보&TipKwrdArray=대화&TipKwrdArray=대기업&TipKwrdArray=뉴스&TipKwrdArray=상식퀴즈&TipKwrdArray=면접&TipKwrdArray=직장인&TipKwrdArray=연봉&TipKwrdArray=취준생&Page=",\
+	'info': "sj36_jobkoreatip_tip",\
+	'title_tag' : ["취업&진로"], 'login' : "0"},\
+	#잡코리아 [sj37_jobkorea_...]
+	#126
+	{'url': "http://www.jobkorea.co.kr/starter/?&schWork=2&isSaved=1&LinkGubun=0&Page=",\
+	'info': "sj37_jobkorea_job",\
+	'title_tag' : ["취업&진로"], 'login' : "0"},\
+	#127
+	{'url': "http://www.jobkorea.co.kr/Starter/?&LinkGubun=0&Page=",\
+	'info': "sj37_jobkorea_public",\
+	'title_tag' : ["취업&진로"], 'login' : "0"},\
 	)

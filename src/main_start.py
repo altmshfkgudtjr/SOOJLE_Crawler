@@ -41,6 +41,5 @@ if __name__ == '__main__':
 
 	print(":::: Posts in Boards Count ::::")
 	posts_cnt()															# 모든 게시물 빈도 출력
-	posts_time_sort()													# 포스트 Date 내림차순 정렬
 
 	print("\n\nCrawling End!\n\n")

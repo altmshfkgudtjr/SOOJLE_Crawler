@@ -57,8 +57,8 @@ def tagging(URL, title):
 	#세종대 main 사이트
 	if info[0] == 'sj1':
 		tag_main(info, title, tag_list, title_tag)
-	#세종대 udream 사이트
-	elif (info[0]=='sj2') or (info[0]=='sj3') or (info[0]=='sj4') or (info[0]=='sj5'):
+	#세종대 udream 사이트 + 데티즌 공모전 + 잡코리아
+	elif (info[0]=='sj2') or (info[0]=='sj3') or (info[0]=='sj4') or (info[0]=='sj5') or info[0] == 'sj35' or info[0] == 'sj36' or info[0] == 'sj37':
 		tag_udream(info, title, tag_list, title_tag)
 	#세종대 학술정보원 사이트
 	elif info[0] == 'sj6':
@@ -204,7 +204,6 @@ def tag_udream(info, title, tag_list, title_tag):
 		tag_list.append("공모전&대외활동")
 
 	tagging_public(title, tag_list)
-
 
 
 

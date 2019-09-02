@@ -13,7 +13,7 @@ import hashlib
 enc = hashlib.md5()
 
 #공모전 ~까지를 위한 collum 생성
-contest_list = ["campuspick", "detizen"]
+contest_list = ["campuspick", "detizen", "jobkorea"]
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def init_db():
@@ -122,7 +122,7 @@ def db_manager(URL, post_data_prepare):
 	posts_db_len = db.posts.find().count()					#db에 박힌 포스트의 개수
 	post_data_prepare_len = len(post_data_prepare)	#준비된 포스트의 개수
 
-	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되면 최신글일 경우 UPDATE 하고 add_cnt++, 또는 중복되지 않으면 add_cnt++, 아무것도 해당안되면 same_cnt++
+	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 same_cnt++
 	for i in range(post_data_prepare_len):
 		same_cnt = 0	#중복되는 카운트
 		for j in range(posts_db_len):
@@ -135,16 +135,16 @@ def db_manager(URL, post_data_prepare):
 			else:
 				continue
 		if same_cnt == 0:	#중복되지 않으면 추가
-			hash_before = post_data_prepare[0]['title'] + post_data_prepare[0]['post']
+			hash_before = post_data_prepare[i]['title'] + post_data_prepare[i]['post']
 			query = {
 					"hashed" : hash_done,
-					"title" : post_data_prepare[0]['title'],
-					"author": post_data_prepare[0]['author'],
-					"date" : datetime_to_mongo(post_data_prepare[0]['date']),
-					"post" : post_data_prepare[0]['post'],
-					"img" : post_data_prepare[0]['img'],
-					"url" : post_data_prepare[0]['url'],
-					"tag" : post_data_prepare[0]['tag'],
+					"title" : post_data_prepare[i]['title'],
+					"author": post_data_prepare[i]['author'],
+					"date" : datetime_to_mongo(post_data_prepare[i]['date']),
+					"post" : post_data_prepare[i]['post'],
+					"img" : post_data_prepare[i]['img'],
+					"url" : post_data_prepare[i]['url'],
+					"tag" : post_data_prepare[i]['tag'],
 					"login" : URL['login'],
 					"info" : URL['info'].split("_")[1],
 					"view" : 0,
@@ -152,7 +152,7 @@ def db_manager(URL, post_data_prepare):
 				}
 			if URL['info'].split("_")[1] in contest_list:
 				query["date"] = datetime_to_mongo(now)
-				query["end_date"] = datetime_to_mongo(post_data_prepare[0]['date'])
+				query["end_date"] = datetime_to_mongo(post_data_prepare[i]['date'])
 			db.posts.insert_one(query)
 			add_cnt += 1
 	return add_cnt
