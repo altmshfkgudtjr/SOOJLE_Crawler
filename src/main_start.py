@@ -6,11 +6,11 @@ import sj_path	#환경변수 지정
 from url_list import List
 from crawling_select import Crawling	#크롤링 전체
 import db_manager
+from db_url import init_url_collection
 from datetime import datetime
 from info_id import post_info
 from posts_cnt import posts_cnt
 from tag_info import tag_info
-from posts_time_sort import posts_time_sort
 
 
 
@@ -26,7 +26,8 @@ if __name__ == '__main__':
 	post_info()
 	#tag_info 테이블 생성
 	tag_info()
-
+	#url 테이블 생성
+	init_url_collection()
 
 	print("\n\nCrawling Start!\n\n")
 

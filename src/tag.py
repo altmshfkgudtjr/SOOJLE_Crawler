@@ -48,7 +48,8 @@ def real_word(text, word):
 def tagging(URL, title):
 	tag_list = []
 	info = URL['info'].split('_')
-	title_tag = URL['title_tag'].split("/")
+	#title_tag = URL['title_tag'].split("/")
+	title_tag = URL['title_tag']
 	#소문자를 전부 대문자화 시켜준다
 	title = title.upper()
 
@@ -125,8 +126,9 @@ def tagging(URL, title):
 
 
 	#태그들을 하나의 문자열로 만든 string 반환
-	tag_list = set_tag(tag_list)
-	tag_done = tag_attach(tag_list)
+	#tag_list = set_tag(tag_list)
+	#tag_done = tag_attach(tag_list)
+	tag_done = set_tag(tag_list)
 
 	return tag_done
 
