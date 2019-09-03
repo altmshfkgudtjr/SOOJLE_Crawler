@@ -7,10 +7,13 @@ from url_list import List
 from crawling_select import Crawling	#크롤링 전체
 import db_manager
 from db_url import init_url_collection
+from db_date import init_date_collection
+from date_cut import date_init
 from datetime import datetime
 from info_id import post_info
 from posts_cnt import posts_cnt
 from tag_info import tag_info
+from db_health import url_health_change
 
 
 
@@ -28,6 +31,11 @@ if __name__ == '__main__':
 	tag_info()
 	#url 테이블 생성
 	init_url_collection()
+	#date 테이블 생성 밎 dictionary 화
+	init_date_collection()
+	date_init()
+	#url health check 변경
+	url_health_change()
 
 	print("\n\nCrawling Start!\n\n")
 

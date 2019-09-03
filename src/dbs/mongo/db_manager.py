@@ -86,7 +86,7 @@ def db_manager(URL, post_data_prepare):
 	posts_db_len = db.posts.find().count()					#db에 박힌 포스트의 개수
 
 	#posts_db에 게시물이 아무 것도 없으면 맨 처음 포스트를 넣어준다.
-	hash_before = post_data_prepare[0]['title'] + post_data_prepare[0]['post']
+	hash_before = post_data_prepare[0]['title'] + post_data_prepare[0]['author'] + post_data_prepare[0]['post']
 	if posts_db_len == 0:
 		query = {
 					"hashed" : hashlib.md5(hash_before.encode('utf-8')).hexdigest(),
@@ -127,7 +127,7 @@ def db_manager(URL, post_data_prepare):
 		same_cnt = 0	#중복되는 카운트
 		for j in range(posts_db_len):
 			#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
-			hash_before = post_data_prepare[i]['title'] + post_data_prepare[i]['post']
+			hash_before = post_data_prepare[i]['title'] + post_data_prepare[0]['author'] + post_data_prepare[i]['post']
 			hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
 			if (db.posts.find({"hashed": hash_done}).count() >= 1):
 				same_cnt += 1

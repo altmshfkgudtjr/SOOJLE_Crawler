@@ -5,6 +5,7 @@ from url_parser import URLparser_UTF8
 from db_manager import db_manager
 from db_manager import get_lastly_post
 from db_manager import push_lastly_post
+from db_health import url_health_check
 from date_cut import date_cut
 from datetime import datetime
 import time
@@ -152,6 +153,8 @@ def Crawling(URL):
 			page_url = eval(crawling_name + '.Change_page(main_url, page)')
 		'''
 		except Exception as e:
+			# 앞으로 10번동안 이 사이트 크롤링 일시중지
+			url_health_check(URL['url'])
 			log_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 			log_info = URL['info']
 			log_url = page_url
