@@ -10,7 +10,6 @@ def init_url_collection():
 
 	if db.url.find().count() == 0:
 		for component in List:
-			print("1")
 			query = {
 				"url": component['url'],
 				"info": component['info'],

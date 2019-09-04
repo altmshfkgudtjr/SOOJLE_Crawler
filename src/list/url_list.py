@@ -556,4 +556,9 @@ List = (\
 	{'url': "http://www.gongibob.com/bbs_review.html?page=&viewnum=0&viewpagelimit=10",\
 	'info': "sj38_sejongbab_tip",\
 	'title_tag' : ["취업&진로"], 'login' : "0"},\
+	#이공계인력중계센터 [sj39_rndjob_...]
+	#129
+	{'url': "http://rndjob.or.kr/yard/notice.asp?&cur_pack=0&sfield=&gtxt=&gbn=A01&page=",\
+	'info': "sj39_rndjob_job",\
+	'title_tag' : ["취업&진로"], 'login' : "0"}\
 	)
