@@ -11,7 +11,7 @@ from datetime import datetime
 import time
 import sj1, sj2, sj3, sj4, sj5, sj6, sj7, sj8, sj9, sj10, sj11, sj12, sj13, sj14, sj15, sj16, sj17, sj18,\
  sj19, sj20, sj21, sj23, sj24, sj25, sj26, sj27, sj28, sj29, sj30, sj31, sj32, sj33, sj34, sj35, sj36, sj37,\
- sj38, sj39
+ sj38, sj39, sj40, sj41, sj42
 
 
 

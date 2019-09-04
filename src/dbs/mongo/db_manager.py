@@ -13,7 +13,7 @@ import hashlib
 enc = hashlib.md5()
 
 #공모전 ~까지를 위한 collum 생성
-contest_list = ["campuspick", "detizen", "jobkorea"]
+contest_list = ["campuspick", "detizen", "jobkorea", "jobsolution"]
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def init_db():

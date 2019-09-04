@@ -762,5 +762,10 @@ List = (\
 	'title': "인디드", 'date': today,\
 	'post': "공무직, 2019년 제4차 (시설관리분야), 2019년도 제3회 경찰청 일반직공무원를 포함한 63,781 건 이상의 서울 일자리가 Indeed.com에 있습니다!",\
 	'img': "1", 'url': "https://kr.indeed.com/",\
-	'title_tag': ["사이트", "취업&진로", "알바&구인"]}\
+	'title_tag': ["사이트", "취업&진로", "알바&구인"]},\
+	{'post_id': "145", 'info': "domain_businessmanner_main",\
+	'title': "세종대학교 JOB 솔루션 - 비지니스 매너", 'date': today,\
+	'post': "에티켓과 매너는 다르다? 비즈니스에서 꼭 필요한 글로벌 매너, 신입사원을 위한 TIP, 글로벌 비지니스 매너에 대해서 알려드립니다",\
+	'img': "1", 'url': "http://u.educe.co.kr/jobsej/?mod=business&m_idx=205",\
+	'title_tag': ["사이트", "취업&진로"]}\
 )

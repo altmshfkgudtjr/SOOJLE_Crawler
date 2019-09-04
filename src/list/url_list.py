@@ -560,5 +560,22 @@ List = (\
 	#129
 	{'url': "http://rndjob.or.kr/yard/notice.asp?&cur_pack=0&sfield=&gtxt=&gbn=A01&page=",\
 	'info': "sj39_rndjob_job",\
-	'title_tag' : ["취업&진로"], 'login' : "0"}\
+	'title_tag' : ["취업&진로"], 'login' : "0"},\
+	#세종대학교 job solution [sj40_jobsolution_...]
+	#130
+	{'url': "http://u.educe.co.kr/jobsej/?mod=recruit&m_idx=217&orderword=pd&page=",\
+	'info': "sj40_jobsolution_job",\
+	'title_tag' : ["취업&진로"], 'login' : "0"},\
+	#131
+	{'url': "http://u.educe.co.kr/jobsej/?mod=jobFair&m_idx=227&page=",\
+	'info': "sj41_jobsolutionAnother_semina",\
+	'title_tag' : ["취업&진로", "행사", "세미나"], 'login' : "0"},\
+	#132
+	{'url': "http://u.educe.co.kr/jobsej/?mod=interview&m_idx=57&page=",\
+	'info': "sj42_jobsolutionAnother_review",\
+	'title_tag' : ["취업&진로"], 'login' : "0"},\
+	#133
+	{'url': "http://u.educe.co.kr/jobsej/?mod=afterInterview&m_idx=89&page=",\
+	'info': "sj42_jobsolutionAnother_interview",\
+	'title_tag' : ["취업&진로"], 'login' : "0"},\
 	)
