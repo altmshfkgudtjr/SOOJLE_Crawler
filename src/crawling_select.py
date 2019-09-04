@@ -10,14 +10,15 @@ from date_cut import date_cut
 from datetime import datetime
 import time
 import sj1, sj2, sj3, sj4, sj5, sj6, sj7, sj8, sj9, sj10, sj11, sj12, sj13, sj14, sj15, sj16, sj17, sj18,\
- sj19, sj20, sj21, sj23, sj24, sj25, sj26, sj27, sj28, sj29, sj30, sj31, sj32, sj33, sj34, sj35, sj36, sj37
+ sj19, sj20, sj21, sj23, sj24, sj25, sj26, sj27, sj28, sj29, sj30, sj31, sj32, sj33, sj34, sj35, sj36, sj37,\
+ sj38
 
 
 
 def Crawling(URL):
 	info_name = URL['info'].split('_')
 	crawling_name = info_name[0]	#게시판 크롤링 선택
-	page = 1
+	page = 4
 	main_url = URL['url']	#게시판 url 추출 : 페이지 바꾸는 데에 사용
 	page_url = eval(crawling_name + '.Change_page(main_url, page)')	#현재 페이지 포스트 url 반환
 	end_date = date_cut(URL['info'])	# end_date 추출
@@ -45,7 +46,7 @@ def Crawling(URL):
 		#-------------------------------------------
 		#Selenium을 쓰는 경우----------------------------------------------------------------------------------------------
 		if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28'\
-		 or crawling_name == 'sj29' or crawling_name == 'sj30':
+		 or crawling_name == 'sj29' or crawling_name == 'sj30' or crawling_name == 'sj38':
 			data = eval(crawling_name + '.Parsing_list_url(URL, page_url)')
 			driver = data[0]
 			post_urls = data[1]
@@ -142,7 +143,7 @@ def Crawling(URL):
 	
 		#dirver 종료 [Selenium 을 사용했을 시]
 		if crawling_name == 'sj23' or crawling_name == 'sj26' or crawling_name == 'sj27' or crawling_name == 'sj28'\
-		 or crawling_name == 'sj29' or crawling_name == 'sj30':
+		 or crawling_name == 'sj29' or crawling_name == 'sj30' or crawling_name == 'sj38':
 			driver.quit()
 		
 		#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지

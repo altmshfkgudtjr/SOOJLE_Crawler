@@ -18,7 +18,7 @@ from db_health import url_health_change
 
 
 db_manager.init_db()	#DB가 없으면 생성
-URLS = List[:]	#url_list에서 List를 URL으로 가져옴
+URLS = List[127:]	#url_list에서 List를 URL으로 가져옴
 
 if __name__ == '__main__':
 	print("\n\n")

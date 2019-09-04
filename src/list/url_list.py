@@ -551,4 +551,9 @@ List = (\
 	{'url': "http://www.jobkorea.co.kr/Starter/?&LinkGubun=0&Page=",\
 	'info': "sj37_jobkorea_public",\
 	'title_tag' : ["취업&진로"], 'login' : "0"},\
+	#세종대공기밥 [sj38_sejongbab_...]
+	#128
+	{'url': "http://www.gongibob.com/bbs_review.html?page=&viewnum=0&viewpagelimit=10",\
+	'info': "sj38_sejongbab_tip",\
+	'title_tag' : ["취업&진로"], 'login' : "0"},\
 	)
