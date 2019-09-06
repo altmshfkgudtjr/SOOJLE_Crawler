@@ -561,7 +561,7 @@ List = (\
 	{'url': "http://rndjob.or.kr/yard/notice.asp?&cur_pack=0&sfield=&gtxt=&gbn=A01&page=",\
 	'info': "sj39_rndjob_job",\
 	'title_tag' : ["취업&진로"], 'login' : "0"},\
-	#세종대학교 job solution [sj40_jobsolution_...]
+	#세종대학교 job solution [sj40~sj42_jobsolution_...]
 	#130
 	{'url': "http://u.educe.co.kr/jobsej/?mod=recruit&m_idx=217&orderword=pd&page=",\
 	'info': "sj40_jobsolution_job",\
@@ -578,4 +578,9 @@ List = (\
 	{'url': "http://u.educe.co.kr/jobsej/?mod=afterInterview&m_idx=89&page=",\
 	'info': "sj42_jobsolutionAnother_interview",\
 	'title_tag' : ["취업&진로"], 'login' : "0"},\
+	#인디드 [sj43_indeed_job]
+	#134
+	{'url': "https://kr.indeed.com/jobs?q=&l=서울&start=",\
+	'info': "sj43_indeed_job",\
+	'title_tag' : ["취업&진로"], 'login' : "0"}\
 	)
