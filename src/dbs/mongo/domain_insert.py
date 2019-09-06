@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from all_login import mongo
 from domain_list import List
+from tknizer import *
 
 def domain_insert():
 	#soojle 라는 데이터베이스에 접근
@@ -25,6 +26,8 @@ def domain_insert():
 					"url":domain['url'],
 					"tag":domain['title_tag'],
 					"login": 0,
-					"view": 0
+					"view": 0,
+					"title_token": domain['title'].split(" "),
+					"token": get_tk(domain['title'] + domain['post'])
 				}
 		collection_domain.insert_one(query)

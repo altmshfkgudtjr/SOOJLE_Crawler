@@ -10,3 +10,5 @@ sys.path.insert(0,'./etc')
 sys.path.insert(0,'./list')
 sys.path.insert(0,'./dbs/mysql')
 sys.path.insert(0,'./dbs/mongo')
+#IML Tokenizer
+sys.path.insert(0,'./etc/IML_Tokenizer/src')

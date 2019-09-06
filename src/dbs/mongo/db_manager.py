@@ -8,6 +8,7 @@ import filtering
 from url_list import List
 from datetime import datetime
 import hashlib
+from tknizer import *
 
 #md5 해쉬
 enc = hashlib.md5()
@@ -93,14 +94,16 @@ def db_manager(URL, post_data_prepare):
 					"title" : post_data_prepare[0]['title'],
 					"author": post_data_prepare[0]['author'],
 					"date" : datetime_to_mongo(post_data_prepare[0]['date']),
-					"post" : post_data_prepare[0]['post'],
+					"post" : post_data_prepare[0]['post'][:200],
 					"img" : post_data_prepare[0]['img'],
 					"url" : post_data_prepare[0]['url'],
 					"tag" : post_data_prepare[0]['tag'],
 					"login" : URL['login'],
 					"info" : URL['info'].split("_")[1],
 					"view" : 0,
-					"fav_cnt": 0
+					"fav_cnt": 0,
+					"title_token" : post_data_prepare[0]['title'].split(" "),
+					"token" : get_tk(post_data_prepare[0]['title'] + post_data_prepare[0]['post'])
 				}
 		if URL['info'].split("_")[1] in contest_list:
 			query["date"] = datetime_to_mongo(now)
@@ -141,14 +144,16 @@ def db_manager(URL, post_data_prepare):
 					"title" : post_data_prepare[i]['title'],
 					"author": post_data_prepare[i]['author'],
 					"date" : datetime_to_mongo(post_data_prepare[i]['date']),
-					"post" : post_data_prepare[i]['post'],
+					"post" : post_data_prepare[i]['post'][:200],
 					"img" : post_data_prepare[i]['img'],
 					"url" : post_data_prepare[i]['url'],
 					"tag" : post_data_prepare[i]['tag'],
 					"login" : URL['login'],
 					"info" : URL['info'].split("_")[1],
 					"view" : 0,
-					"fav_cnt": 0
+					"fav_cnt": 0,
+					"title_token" : post_data_prepare[i]['title'].split(" "),
+					"token" : get_tk(post_data_prepare[i]['title'] + post_data_prepare[i]['post'])
 				}
 			if URL['info'].split("_")[1] in contest_list:
 				query["date"] = datetime_to_mongo(now)
