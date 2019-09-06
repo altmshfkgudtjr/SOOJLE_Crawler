@@ -91,11 +91,9 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 					phrase_vocas = bs_post.findAll("span", {"class": "text"})
 					phrase = phrase_vocas[1].text.strip()
 				phrase = post_wash(phrase)
-				phrase = phrase[:3000]
 			else:
 				phrase = bs_post.find("p", {"class": "comment"}).text.strip()
 				phrase = post_wash(phrase)
-				phrase = phrase[:3000]
 			tag_done = tag.tagging(URL, title)
 			if bs_post.find("div", {"class": "image"}) is None:
 				img = 5
@@ -123,7 +121,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			post_data['title'] = title.upper()
 			post_data['author'] = author.upper()
 			post_data['date'] = date
-			post_data['post'] = phrase.upper()
+			post_data['post'] = phrase.lower()
 			post_data['tag'] = tag_done
 			post_data['img'] = img
 			post_data['url'] = url

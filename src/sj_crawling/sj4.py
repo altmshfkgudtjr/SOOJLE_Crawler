@@ -5,7 +5,6 @@ import datetime
 from date_cut import date_cut_dict
 import tag
 import udream
-from tknizer import *
 
 
 #게시판 page_url 을 받으면, 그 페이지의 url 반환
@@ -43,9 +42,7 @@ def Parsing_post_data(post_url, URL):
 		date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
 		post = post_infoes[1].text + post_infoes[2].text + post_infoes[3].text + "~" + post_infoes[4].text
 		post = post_wash(post)
-		post = post[:3000]	#post글을 3000자 까지 읽기위한 작업
 		tag_done = tag.tagging(URL, title)
-		token = get_tk(title + post)
 		post = post[:200]
 		img = 1
 		url = post_infoes[5].find("a")["href"]
@@ -58,8 +55,6 @@ def Parsing_post_data(post_url, URL):
 		post_data['tag'] = tag_done		# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
 		post_data['img'] = img
 		post_data['url'] = url
-		post_data['title_token'] = title.split(" ")
-		post_data['token'] = token
 
 		print(date, "::::", title)
 

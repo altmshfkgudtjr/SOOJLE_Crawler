@@ -73,7 +73,6 @@ or URL['info'].split("_")[2] == 'club' or URL['info'].split("_")[2] == 'trade':
 	date = everytime_time(date)
 	post = bs.find("p", {'class': "large"}).text.strip()
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
-	post = post[:3000]	#post글을 3000자 까지 읽기위한 작업
 	tag_done = tag.tagging(URL, title) + "/" + board_tag.replace(" ", "")
 	if bs.find("figure", {"class": "attach"}) is not None:
 		try:
@@ -102,7 +101,7 @@ or URL['info'].split("_")[2] == 'club' or URL['info'].split("_")[2] == 'trade':
 	post_data['title'] = title.upper()
 	post_data['author'] = author.upper()
 	post_data['date'] = date
-	post_data['post'] = post.upper()
+	post_data['post'] = post.lower()
 	post_data['tag'] = tag_done 	# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
 	post_data['img'] = img
 	post_data['url'] = post_url
@@ -195,8 +194,7 @@ def everytime_all_board(URL, end_date):
 			board_url = board['url']
 			page_url = Change_page(board_url, page)	#현재 페이지 포스트 url 반환
 			print("\nTarget : ", URL['info'], " :: ", board['tag'])
-	
-			flag = False
+
 			# 페이지 반복문
 			while True:
 				print("page_url :::: ", page_url)	#현재 url 출력

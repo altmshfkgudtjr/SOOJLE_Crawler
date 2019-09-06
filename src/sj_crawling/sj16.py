@@ -61,7 +61,7 @@ def Parsing_post_data(bs, URL):
 			post_data['title'] = title.upper()
 			post_data['author'] = author.upper()
 			post_data['date'] = date
-			post_data['post'] = phrase.upper()
+			post_data['post'] = phrase.lower()
 			post_data['tag'] = tag_done		# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
 			post_data['img'] = img
 			post_data['url'] = url

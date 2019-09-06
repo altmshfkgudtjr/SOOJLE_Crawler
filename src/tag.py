@@ -58,17 +58,16 @@ def tagging(URL, title):
 	if info[0] == 'sj1':
 		tag_main(info, title, tag_list, title_tag)
 	#세종대 udream 사이트 + 데티즌 공모전 + 잡코리아
-	elif (info[0]=='sj2') or (info[0]=='sj3') or (info[0]=='sj4') or (info[0]=='sj5') or info[0] == 'sj35' or info[0] == 'sj36' or info[0] == 'sj37'\
-	  or info[0] == 'sj38' or info[0] == 'sj39' or info[0] == "sj40" or info[0] == "sj41" or info[0] == "sj42" or info[0] == "sj43":
+	elif info[0] in ["sj2", "sj3", "sj4", "sj5", "sj35", "sj36", "sj37", "sj38", "sj39", "sj40", "sj41", "sj42", "sj43"]:
 		tag_udream(info, title, tag_list, title_tag)
 	#세종대 학술정보원 사이트
 	elif info[0] == 'sj6':
 		tag_library(info, title, tag_list, title_tag)
 	#세종대 홍보원 사이트
-	elif info[0] == 'sj7' or info[0] == 'sj8':
+	elif info[0] in ["sj7", "sj8"]:
 		tag_promotion(info, title, tag_list, title_tag)
 	#세종대 학과사이트
-	elif info[0] == 'sj9' or info[0] == 'sj10' or info[0] == 'sj11' or info[0] == 'sj12' or info[0] == 'sj13' or info[0] == 'sj14':
+	elif info[0] in ["sj9", "sj10", "sj11", "sj12", "sj13", "sj14"]:
 		tag_major(info, title, tag_list, title_tag)
 	#세종대 대양휴머니티칼리지
 	elif info[0] == 'sj15':
@@ -104,7 +103,7 @@ def tagging(URL, title):
 	elif info[0] == 'sj25':
 		tag_thinkgood_info(info, title, tag_list, title_tag)
 	#캠퍼스픽
-	elif info[0] == 'sj26' or info[0] == 'sj28':
+	elif info[0] in ["sj26", "sj28"]:
 		tag_campuspick(info, title, tag_list, title_tag)
 	#캠퍼스픽 스터디
 	elif info[0] == 'sj27':
@@ -116,7 +115,7 @@ def tagging(URL, title):
 	elif info[0] == 'sj30':
 		tag_sejong_station(info, title, tag_list, title_tag)
 	#두드림
-	elif info[0] == 'sj31' or info[0] == 'sj32':
+	elif info[0] in ["sj31", "sj32"]:
 		tag_sejong_dodream(info, title, tag_list, title_tag)
 	#전자도서관
 	elif info[0] == 'sj33':

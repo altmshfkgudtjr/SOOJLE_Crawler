@@ -97,14 +97,13 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			date = str(datetime.datetime.strptime(date, "%Y/%m/%d %H:%M:%S"))
 			phrase = bs_post.find("p", {'class': "text"}).text.strip()
 			phrase = post_wash(phrase)		#post 의 공백을 전부 제거하기 위함
-			phrase = phrase[:3000]	#post글을 3000자 까지 읽기위한 작업
 			tag_done = tag.tagging(URL, title)
 			img = 8
 
 			post_data['title'] = title.upper()
 			post_data['author'] = author.upper()
 			post_data['date'] = date
-			post_data['post'] = phrase.upper()
+			post_data['post'] = phrase.lower()
 			post_data['tag'] = tag_done
 			post_data['img'] = img
 			post_data['url'] = url

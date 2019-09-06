@@ -55,7 +55,6 @@ def Parsing_post_data(bs, URL):
 			date = date + " 00:00:00"
 		phrase = post_infoes[1].text.strip()
 		phrase = post_wash(phrase)
-		phrase = phrase[:3000]	#post글을 3000자 까지 읽기위한 작업
 		tag_done = tag.tagging(URL, title)
 		url = post.find("a")["href"]
 		#뉴스 url 에 들어가서 img를 가져오기위한 작업
@@ -87,7 +86,7 @@ def Parsing_post_data(bs, URL):
 		post_data['title'] = title.upper()
 		post_data['author'] = author.upper()
 		post_data['date'] = date
-		post_data['post'] = phrase.upper()
+		post_data['post'] = phrase.lower()
 		post_data['tag'] = tag_done		# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
 		post_data['img'] = img
 		post_data['url'] = url

@@ -17,7 +17,6 @@ def URLparser(URL):	#header을 지정하고 requests.get 하는 함수
 		try:
 			html = requests.get(URL, verify = False,  headers = header).text
 		except:
-			time.sleep(3)
 			print("Connection Failed")
 			return None
 	return html
