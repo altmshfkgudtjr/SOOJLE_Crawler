@@ -6,7 +6,7 @@ from db_manager import db_manager
 from db_manager import get_lastly_post
 from db_manager import push_lastly_post
 from date_cut import date_cut
-from error_handler import error_handeler
+from error_handler import error_handler
 from datetime import datetime
 import time
 import sj1, sj2, sj3, sj4, sj5, sj6, sj7, sj8, sj9, sj10, sj11, sj12, sj13, sj14, sj15, sj16, sj17, sj18,\
@@ -56,6 +56,7 @@ def Crawling(URL):
 				#로그인을 하지않는 경우---------------------------------------------------------------------------
 				else:
 					if driver_page is None:		#Connect Failed 이면 break
+						error_handler("driver_none", URL, page_url)
 						break
 					else:
 						#parsing 형태--------------------------------------------------
@@ -105,7 +106,8 @@ def Crawling(URL):
 					#-----------------------------------------------------------------------------------------------게시판 규격인 구조
 					else:
 						if driver_post is None:		#Connect Failed 이면 continue
-							continue
+							error_handler("driver_none", URL, page_url)
+							break
 						else:
 							#parsing 형태-------------------------------------------
 							if crawling_name in ['sj10']:
@@ -150,5 +152,5 @@ def Crawling(URL):
 				page_url = eval(crawling_name + '.Change_page(main_url, page)')
 		# Error handler : 만약 크롤링이 실패했을 경우, 에러를 logging 하고 크롤링을 중단한다.
 		except Exception as e:
-			error_handeler(e, URL, page_url)
+			error_handler(e, URL, page_url)
 			break
