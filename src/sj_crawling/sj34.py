@@ -12,6 +12,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from img_size import img_size
+from error_handler import error_handler
 
 
 
@@ -55,11 +56,13 @@ def Parsing_post_data(driver, post_url, URL, board_tag):
 	except:
 		try:
 			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "time.large")))
-		except:
-			return return_data;
+		except Exception as e:
+			error_handler(e, URL, post_url, db)
+			return "error"
+
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
-	
+	'''
 	if URL['info'].split("_")[2] == 'free' or URL['info'].split("_")[2] == 'notice' or URL['info'].split("_")[2] == 'jobinfo' or URL['info'].split("_")[2] == 'promotion'\
 or URL['info'].split("_")[2] == 'club' or URL['info'].split("_")[2] == 'trade':
 		title = bs.find("h2", {"class": "large"}).text.strip()
@@ -67,13 +70,14 @@ or URL['info'].split("_")[2] == 'club' or URL['info'].split("_")[2] == 'trade':
 		title = "!@#$soojle-notitle" + bs.find("p", {'class': "large"}).text.strip()
 		if len(title) >= 300:
 			title = title[:299]
-
+	'''
+	title = bs.find("p", {'class': "large"}).text.strip()
 	author = "0"
 	date = bs.find("time").text.strip()
 	date = everytime_time(date)
 	post = bs.find("p", {'class': "large"}).text.strip()
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
-	tag_done = tag.tagging(URL, title) + "/" + board_tag.replace(" ", "")
+	tag_done = tag.tagging(URL, title)
 	if bs.find("figure", {"class": "attach"}) is not None:
 		try:
 			img = bs.find("figure", {"class": "attach"}).find("img")['src']		#게시글의 첫번째 이미지를 가져옴.
@@ -150,7 +154,7 @@ def everytime_time(text):
 
 	return date
 
-def everytime_all_board(URL, end_date):
+def everytime_all_board(URL, end_date, db):
 	main_url = URL['url']
 	board_search_url = "https://everytime.kr/community/search?keyword="
 	board_search_word = ['게시판', '갤러리']
@@ -214,7 +218,8 @@ def everytime_all_board(URL, end_date):
 				# 포스트 반복문
 				for post_url in post_urls:
 					get_post_data = Parsing_post_data(driver, post_url, URL, board['tag'])
-	
+					if get_post_data == "error":
+						break
 					title = get_post_data[1]
 					date = get_post_data[2]
 		
@@ -226,7 +231,7 @@ def everytime_all_board(URL, end_date):
 					else:
 						post_data_prepare.append(get_post_data[0])
 	
-				add_cnt = db_manager(URL, post_data_prepare)
+				add_cnt = db_manager(URL, post_data_prepare, db)
 				print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
 	
 				#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지

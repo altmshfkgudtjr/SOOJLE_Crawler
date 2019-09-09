@@ -12,18 +12,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from img_size import img_size
 from date_cut import date_cut
 from datetime import datetime
-from db_manager import get_lastly_post
 from db_manager import push_lastly_post
 
 
 
 #게시판 page_url 을 받으면, 그 페이지의 포스트 url 들을 반환
-def Parsing_list_url(URL, page_url):
+def Parsing_list_url(URL, page_url, lastly_post):
 	List = []
 	domain = Domain_check(URL['url'])
 	end_date = date_cut(URL['info'])
 	lastly_num = 0		#한번만 실행하기위한 조건변수
-	lastly_post = get_lastly_post(URL)	#lastly_post 가져온다
+	#lastly_post = get_lastly_post(URL)	#lastly_post 가져온다
 
 	#만약 driver이 켜져있으면 끄고, 없으면 그냥 진행
 	try:

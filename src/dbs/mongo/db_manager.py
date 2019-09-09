@@ -46,7 +46,6 @@ def db_manager(URL, post_data_prepare, db):
 	add_cnt = 0
 	#table_name = URL['info']
 	table_name = "posts"
-	posts_db = []
 	temp = []
 	
 	#soojle 라는 데이터베이스에 접근
@@ -72,15 +71,12 @@ def db_manager(URL, post_data_prepare, db):
 
 	#한 페이지에 title 이 중복되는 것이 있으면 걸러주는 함수
 	post_data_prepare = sameposts_set(post_data_prepare)
-
-
-	#게시판에서 title 값만 다 추출해서 posts_db 라는 리스트에 저장
-	posts_db = db.posts.find({}, {"_id": 0,"title": 1})
-	posts_db_len = db.posts.find().count()					#db에 박힌 포스트의 개수
+	#db에 박힌 포스트의 개수
+	posts_db_len = db.posts.find().count()
 
 	#posts_db에 게시물이 아무 것도 없으면 맨 처음 포스트를 넣어준다.
-	hash_before = post_data_prepare[0]['title'] + post_data_prepare[0]['author'] + post_data_prepare[0]['post']
 	if posts_db_len == 0:
+		hash_before = post_data_prepare[0]['title'] + post_data_prepare[0]['author'] + post_data_prepare[0]['post']
 		query = {
 					"hashed" : hashlib.md5(hash_before.encode('utf-8')).hexdigest(),
 					"title" : post_data_prepare[0]['title'],
@@ -104,17 +100,7 @@ def db_manager(URL, post_data_prepare, db):
 		add_cnt += 1
 		posts_db_len += 1
 
-	posts_db = []
-	#게시판에서 title, date, post_id 값만 다 추출해서 posts_db 라는 리스트에 저장
-	documents = db.posts.find({}, {"title": 1, "date": 1})
-	for document in documents:
-		title_data = document["title"]
-		date_data = mongo_to_datetime(document["date"])
-		post_id_data = document["_id"]
-		data_done = (title_data, date_data, post_id_data)
-		posts_db.append(data_done)
-
-	posts_db_len = db.posts.find().count()					#db에 박힌 포스트의 개수
+	posts_db_len = db.posts.find().count()			#db에 박힌 포스트의 개수
 	post_data_prepare_len = len(post_data_prepare)	#준비된 포스트의 개수
 
 	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 same_cnt++
