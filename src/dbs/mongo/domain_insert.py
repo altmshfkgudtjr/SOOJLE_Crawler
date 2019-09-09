@@ -1,13 +1,10 @@
 from pymongo import MongoClient
-from all_login import mongo
 from domain_list import List
 from tknizer import *
 
-def domain_insert():
+
+def domain_insert(db):
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client["soojle"]
 
 	#sj_domain 테이블이 존재하면 DROP TABLE
 	db.sj_domain.drop()

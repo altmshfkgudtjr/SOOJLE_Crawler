@@ -1,18 +1,11 @@
 from pymongo import MongoClient
-from all_login import mongo
-from url_list import List
-
-
+#from url_list import List
 
 #현재 서버의 테이블의 게시글 수를 출력해주는 함수
-def posts_cnt():
-	all_cnt = 0
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
-	
+def posts_cnt(db):
 	print("\nAll Posts Count :::: ", db.posts.find().count())
 	'''
+	all_cnt = 0
 	for num in List:
 		info = num['info']
 	

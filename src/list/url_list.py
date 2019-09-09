@@ -418,7 +418,7 @@ List = (\
 	#97
 	{'url': "https://www.thinkcontest.com/Contest/CateField.html?s=ing&page=",\
 	'info': "sj25_thinkgood_info",\
-	'title_tag' : ["씽굿"], 'login' : "0"},\
+	'title_tag' : ["씽굿", "공모전&대외활동"], 'login' : "0"},\
 	#캠퍼스픽 [sj26_campuspick_...]
 	#98
 	{'url': "https://www.campuspick.com/activity",\

@@ -1,7 +1,4 @@
 from pymongo import MongoClient
-from all_login import mongo
-from time_convert import datetime_to_unixtime
-from time_convert import unixtime_to_datetime
 from time_convert import datetime_to_mongo
 from time_convert import mongo_to_datetime
 import filtering
@@ -14,21 +11,22 @@ from tknizer import *
 enc = hashlib.md5()
 
 #공모전 ~까지를 위한 collum 생성
-contest_list = ["campuspick", "detizen", "jobkorea", "jobsolution"]
+contest_list = ["campuspick", "detizen", "jobkorea", "jobsolution", "thinkgood"]
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-def init_db():
-	#DB 없으면 생성
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
+def collection_indexing(db):
+	#콜렉션 인덱싱 작업
+	db.posts.createIndex({"hashed":1})
+	db.posts.createIndex({"date":1})
+	db.posts.createIndex({"end_date":1})
 
 
-def get_lastly_post(URL):
+def init_db(db):
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
+	print()
+
+def get_lastly_post(URL, db):
+	#soojle 라는 데이터베이스에 접근
 
 	table_name = URL['info']
 	document = db.lastly_post.find_one({"info_id": table_name})
@@ -36,18 +34,15 @@ def get_lastly_post(URL):
 
 	return lastly_post_title
 
-def push_lastly_post(URL, lastly_post_title):
+def push_lastly_post(URL, lastly_post_title, db):
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
 
 	table_name = URL['info']
 	db.lastly_post.update_one({"info_id": table_name}, {'$set': {"title": lastly_post_title}})
 	print("\n\n:::: lastly_post INSERT Complete! ::::\n\n")
 
 
-def db_manager(URL, post_data_prepare):
+def db_manager(URL, post_data_prepare, db):
 	add_cnt = 0
 	#table_name = URL['info']
 	table_name = "posts"
@@ -55,9 +50,6 @@ def db_manager(URL, post_data_prepare):
 	temp = []
 	
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
 
 	#게시판에 맞는 테이블 없으면 생성
 	##### post_id: 게시물 식별값, title: 제목, author: 작성자, date: 작성일, post: 게시물내용, img: OpenGraph용 url #####
@@ -163,11 +155,8 @@ def db_manager(URL, post_data_prepare):
 	return add_cnt
 
 #'info' 의 테이블에 있는 포스트의 개수 반환하는 함수
-def get_table_posts(URL):
+def get_table_posts(URL, db):
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
 
 	posts_num = db.posts.find().count()
 

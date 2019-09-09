@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 from pymongo import MongoClient
-from all_login import mongo
 
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 now_minus = datetime.now() + timedelta(days = -1)
@@ -58,11 +57,7 @@ date_cut_dict_before = {
 	"sj43": "2019-09-01 00:00:00"\
 }
 
-def date_init():
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
-
+def date_init(db):
 	date_db = db.date.find()
 	for date_one in date_db:
 		date_cut_dict[date_one['crawler']] = date_one['date_exp']

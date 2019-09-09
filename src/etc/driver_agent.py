@@ -3,8 +3,13 @@ from selenium import webdriver
 
 
 def chromedriver():
-	options = webdriver.ChromeOptions()
+	#만약 driver이 켜져있으면 끄고, 없으면 그냥 진행
+	try:
+		driver.quit()
+	except:
+		pass
 
+	options = webdriver.ChromeOptions()
 	options.add_argument('headless')
 	options.add_argument('window-size=1920x1080')
 	options.add_argument("disable-gpu")
@@ -13,14 +18,4 @@ def chromedriver():
 
 	driver = webdriver.Chrome('../chromedriver.exe', chrome_options=options)
 	
-	
-
 	return driver
-
-
-
-#만약 driver이 켜져있으면 끄고, 없으면 그냥 진행
-	try:
-		driver.quit()
-	except:
-		pass

@@ -1,9 +1,10 @@
 from db_health import url_health_check
 from datetime import datetime
+import time
 
-def error_handler(e, URL, page_url):
+def error_handler(e, URL, page_url, db):
 	# 앞으로 10번동안 이 사이트 크롤링 일시중지
-	url_health_check(URL['url'])
+	url_health_check(URL['url'], db)
 	log_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	log_info = URL['info']
 	log_url = page_url

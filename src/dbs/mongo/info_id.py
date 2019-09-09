@@ -1,16 +1,13 @@
 from pymongo import MongoClient
-from all_login import mongo
 from url_list import List
 from domain_insert import domain_insert
 
 
-def post_info():
+
+def post_info(db):
 	info_input = []
 	
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client["soojle"]
 	
 	#post_info 테이블이 존재하면 DROP TABLE
 	db.post_info.drop()
@@ -30,7 +27,7 @@ def post_info():
 	print(":::: post_info INSERT Complete! ::::")
 
 	#도메인 sj_domain 테이블 추가 + domain_list 추가
-	domain_insert()
+	domain_insert(db)
 	print(":::: sj_domain INSERT Complete! ::::")
 	
 	

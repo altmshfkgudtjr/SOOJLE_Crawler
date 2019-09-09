@@ -1,0 +1,12 @@
+[ERROR]=====================================================================
+2019-09-08 22:28:06 :: sj20_sejong_dc
+URL :: https://gall.dcinside.com/board/lists/?id=sejong&page=1
+<class 'str'>
+driver_none
+
+[ERROR]=====================================================================
+2019-09-08 22:28:42 :: sj20_sejong_dc
+URL :: https://gall.dcinside.com/board/lists/?id=sejong&page=1
+<class 'str'>
+driver_none
+

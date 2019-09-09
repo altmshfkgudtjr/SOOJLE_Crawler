@@ -1,12 +1,8 @@
 from pymongo import MongoClient
-from all_login import mongo
 
 # 현재 Crawling Site 가 접속이 가능한지 유무 판단해서 true or false 추가
-def url_health_check(target_url):
+def url_health_check(target_url, db):
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
 
 	target_id = None
 	db_url_list = db.url.find({}, {"url":1})
@@ -21,15 +17,13 @@ def url_health_check(target_url):
 			db.posts.update_one({"_id": target_id}, {"$set", {"stay_cnt": target_cnt - 1}})
 		else:
 			db.posts.update_one({"_id": target_id}, {"$set", {"crawling": False, "stay_cnt": 10}})
-	db.posts.update_one({"_id": target_id}, {"$set", {"crawling": False, "stay_cnt": 10}})
+	print()
+	db.posts.update_one({"_id": target_id}, {"$set": {"crawling": False, "stay_cnt": 10}})
 	print("\n:::: THIS URL CAN NOT CRAWLED! ::::\n")
 
 # 만약 stay_cnt 가 0 인 것이 있으면 이제부터 긁을 것
-def url_health_change():
+def url_health_change(db):
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client['soojle']
 
 	db_url_list = db.url.find({}, {"crawling":1, "stay_cnt":1})
 	for db_url in db_url_list:

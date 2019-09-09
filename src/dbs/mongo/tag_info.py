@@ -1,17 +1,12 @@
 from pymongo import MongoClient
-from all_login import mongo
 from tagname_list import tag_names
 from tagname_list import List
 from tagname_list import tag_names_board
 from tagname_list import List_board
 
 
-
-def tag_info():
+def tag_info(db):
 	#soojle 라는 데이터베이스에 접근
-	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	db = client["soojle"]
 
 	#만약 tag_info 라는 테이블이 있으면 DROP
 	db.tag_info.drop()
