@@ -14,7 +14,10 @@ def Parsing_list_url(URL, bs):
 	domain = Domain_check(URL['url'])
 
 	#리스트 반환
-	posts = bs.find("ul", {"class": 'basic-list page-list'}).findAll("li")
+	try:
+		posts = bs.find("ul", {"class": 'basic-list page-list'}).findAll("li")
+	except:
+		return List
 	for post in posts:
 		target = post.find('a')['href']
 		target_start = target.find('?')
