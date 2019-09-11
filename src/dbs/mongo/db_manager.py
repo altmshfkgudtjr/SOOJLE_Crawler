@@ -71,8 +71,10 @@ def db_manager(URL, post_data_prepare, db):
 
 	#한 페이지에 title 이 중복되는 것이 있으면 걸러주는 함수
 	post_data_prepare = sameposts_set(post_data_prepare)
+
 	#db에 박힌 포스트의 개수
 	posts_db_len = db.posts.find().count()
+	posts_db_len = db.posts.find().limit(1000).count()
 
 	#posts_db에 게시물이 아무 것도 없으면 맨 처음 포스트를 넣어준다.
 	if posts_db_len == 0:
@@ -106,15 +108,17 @@ def db_manager(URL, post_data_prepare, db):
 	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 same_cnt++
 	for i in range(post_data_prepare_len):
 		same_cnt = 0	#중복되는 카운트
+		#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
+		hash_before = post_data_prepare[i]['title'] + post_data_prepare[0]['author'] + post_data_prepare[i]['post']
+		hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
+		print("Hasing Done!!")
 		for j in range(posts_db_len):
-			#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
-			hash_before = post_data_prepare[i]['title'] + post_data_prepare[0]['author'] + post_data_prepare[i]['post']
-			hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
-			if (db.posts.find({"hashed": hash_done}).count() >= 1):
+			if (db.posts.find_one({"hashed": hash_done}) != None):
 				same_cnt += 1
 				break
 			else:
 				continue
+		print("Find Done!")
 		if same_cnt == 0:	#중복되지 않으면 추가
 			hash_before = post_data_prepare[i]['title'] + post_data_prepare[i]['post']
 			query = {
@@ -138,6 +142,7 @@ def db_manager(URL, post_data_prepare, db):
 				query["end_date"] = datetime_to_mongo(post_data_prepare[i]['date'])
 			db.posts.insert_one(query)
 			add_cnt += 1
+			print("Insert Done!\n")
 	return add_cnt
 
 #'info' 의 테이블에 있는 포스트의 개수 반환하는 함수
