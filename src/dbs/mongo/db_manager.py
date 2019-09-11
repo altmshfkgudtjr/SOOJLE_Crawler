@@ -8,7 +8,7 @@ import hashlib
 from tknizer import *
 
 #md5 해쉬
-enc = hashlib.md5()
+enc = hashlib.md5()W
 
 #공모전 ~까지를 위한 collum 생성
 contest_list = ["campuspick", "detizen", "jobkorea", "jobsolution", "thinkgood"]
@@ -111,14 +111,12 @@ def db_manager(URL, post_data_prepare, db):
 		#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
 		hash_before = post_data_prepare[i]['title'] + post_data_prepare[0]['author'] + post_data_prepare[i]['post']
 		hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
-		print("Hasing Done!!")
 		for j in range(posts_db_len):
 			if (db.posts.find_one({"hashed": hash_done}) != None):
 				same_cnt += 1
 				break
 			else:
 				continue
-		print("Find Done!")
 		if same_cnt == 0:	#중복되지 않으면 추가
 			hash_before = post_data_prepare[i]['title'] + post_data_prepare[i]['post']
 			query = {
@@ -142,7 +140,6 @@ def db_manager(URL, post_data_prepare, db):
 				query["end_date"] = datetime_to_mongo(post_data_prepare[i]['date'])
 			db.posts.insert_one(query)
 			add_cnt += 1
-			print("Insert Done!\n")
 	return add_cnt
 
 #'info' 의 테이블에 있는 포스트의 개수 반환하는 함수
