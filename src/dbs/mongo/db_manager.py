@@ -8,7 +8,7 @@ import hashlib
 from tknizer import *
 
 #md5 해쉬
-enc = hashlib.md5()W
+enc = hashlib.md5()
 
 #공모전 ~까지를 위한 collum 생성
 contest_list = ["campuspick", "detizen", "jobkorea", "jobsolution", "thinkgood"]
@@ -72,69 +72,27 @@ def db_manager(URL, post_data_prepare, db):
 	#한 페이지에 title 이 중복되는 것이 있으면 걸러주는 함수
 	post_data_prepare = sameposts_set(post_data_prepare)
 
-	#db에 박힌 포스트의 개수
-	posts_db_len = db.posts.find().count()
-
-	#posts_db에 게시물이 아무 것도 없으면 맨 처음 포스트를 넣어준다.
-	if posts_db_len == 0:
-		hash_before = post_data_prepare[0]['title'] + post_data_prepare[0]['author'] + post_data_prepare[0]['post']
-		query = {
-					"hashed" : hashlib.md5(hash_before.encode('utf-8')).hexdigest(),
-					"title" : post_data_prepare[0]['title'],
-					"author": post_data_prepare[0]['author'],
-					"date" : datetime_to_mongo(post_data_prepare[0]['date']),
-					"post" : post_data_prepare[0]['post'][:200],
-					"img" : post_data_prepare[0]['img'],
-					"url" : post_data_prepare[0]['url'],
-					"tag" : post_data_prepare[0]['tag'],
-					"login" : URL['login'],
-					"info" : URL['info'].split("_")[1],
-					"view" : 0,
-					"fav_cnt": 0,
-					"title_token" : post_data_prepare[0]['title'].split(" "),
-					"token" : get_tk(post_data_prepare[0]['title'] + post_data_prepare[0]['post'])
-				}
-		if URL['info'].split("_")[1] in contest_list:
-			query["date"] = datetime_to_mongo(now)
-			query["end_date"] = datetime_to_mongo(post_data_prepare[0]['date'])
-		db.posts.insert_one(query)
-		add_cnt += 1
-		posts_db_len += 1
-
-	post_data_prepare_len = len(post_data_prepare)	#준비된 포스트의 개수
-
 	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 same_cnt++
-	for i in range(post_data_prepare_len):
-		same_cnt = 0	#중복되는 카운트
+	for post_one in post_data_prepare:
 		#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
-		hash_before = post_data_prepare[i]['title'] + post_data_prepare[0]['author'] + post_data_prepare[i]['post']
+		hash_before = post_one['title'] + post_one['author'] + post_one['post']
 		hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
 		if db.posts.find_one({"hashed": hash_done}) != None:
-			pass
+			continue
 		else:
-			if same_cnt == 0:	#중복되지 않으면 추가
-				hash_before = post_data_prepare[i]['title'] + post_data_prepare[i]['post']
-				query = {
-						"hashed" : hash_done,
-						"title" : post_data_prepare[i]['title'],
-						"author": post_data_prepare[i]['author'],
-						"date" : datetime_to_mongo(post_data_prepare[i]['date']),
-						"post" : post_data_prepare[i]['post'][:200],
-						"img" : post_data_prepare[i]['img'],
-						"url" : post_data_prepare[i]['url'],
-						"tag" : post_data_prepare[i]['tag'],
-						"login" : URL['login'],
-						"info" : URL['info'].split("_")[1],
-						"view" : 0,
-						"fav_cnt": 0,
-						"title_token" : post_data_prepare[i]['title'].split(" "),
-						"token" : get_tk(post_data_prepare[i]['title'] + post_data_prepare[i]['post'])
-					}
-				if URL['info'].split("_")[1] in contest_list:
-					query["date"] = datetime_to_mongo(now)
-					query["end_date"] = datetime_to_mongo(post_data_prepare[i]['date'])
-				db.posts.insert_one(query)
-				add_cnt += 1
+			post_one["hashed"] = hash_done
+			post_one["date"] = datetime_to_mongo(post_one['date'])
+			post_one["post"] = post_one["post"][:200]
+			post_one["info"] = URL['info'].split("_")[1]
+			post_one["view"] = 0
+			post_one["fav_cnt"] = 0
+			post_one["title_token"] = post_one["title"].split(" ")
+			post_one["token"] = get_tk(post_one["title"] + post_one["post"])
+			if URL['info'].split("_")[1] in contest_list:
+				post_one["date"] = datetime_to_mongo(now)
+				post_one["end_date"] = datetime_to_mongo(post_one['date'])
+			db.posts.insert_one(post_one)
+			add_cnt += 1
 	return add_cnt
 
 #'info' 의 테이블에 있는 포스트의 개수 반환하는 함수
