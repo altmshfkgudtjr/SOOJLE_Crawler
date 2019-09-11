@@ -74,7 +74,6 @@ def db_manager(URL, post_data_prepare, db):
 
 	#db에 박힌 포스트의 개수
 	posts_db_len = db.posts.find().count()
-	posts_db_len = db.posts.find().limit(1000).count()
 
 	#posts_db에 게시물이 아무 것도 없으면 맨 처음 포스트를 넣어준다.
 	if posts_db_len == 0:
@@ -102,7 +101,6 @@ def db_manager(URL, post_data_prepare, db):
 		add_cnt += 1
 		posts_db_len += 1
 
-	posts_db_len = db.posts.find().count()			#db에 박힌 포스트의 개수
 	post_data_prepare_len = len(post_data_prepare)	#준비된 포스트의 개수
 
 	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 same_cnt++
@@ -111,35 +109,32 @@ def db_manager(URL, post_data_prepare, db):
 		#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
 		hash_before = post_data_prepare[i]['title'] + post_data_prepare[0]['author'] + post_data_prepare[i]['post']
 		hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
-		for j in range(posts_db_len):
-			if (db.posts.find_one({"hashed": hash_done}) != None):
-				same_cnt += 1
-				break
-			else:
-				continue
-		if same_cnt == 0:	#중복되지 않으면 추가
-			hash_before = post_data_prepare[i]['title'] + post_data_prepare[i]['post']
-			query = {
-					"hashed" : hash_done,
-					"title" : post_data_prepare[i]['title'],
-					"author": post_data_prepare[i]['author'],
-					"date" : datetime_to_mongo(post_data_prepare[i]['date']),
-					"post" : post_data_prepare[i]['post'][:200],
-					"img" : post_data_prepare[i]['img'],
-					"url" : post_data_prepare[i]['url'],
-					"tag" : post_data_prepare[i]['tag'],
-					"login" : URL['login'],
-					"info" : URL['info'].split("_")[1],
-					"view" : 0,
-					"fav_cnt": 0,
-					"title_token" : post_data_prepare[i]['title'].split(" "),
-					"token" : get_tk(post_data_prepare[i]['title'] + post_data_prepare[i]['post'])
-				}
-			if URL['info'].split("_")[1] in contest_list:
-				query["date"] = datetime_to_mongo(now)
-				query["end_date"] = datetime_to_mongo(post_data_prepare[i]['date'])
-			db.posts.insert_one(query)
-			add_cnt += 1
+		if db.posts.find_one({"hashed": hash_done}) != None:
+			pass
+		else:
+			if same_cnt == 0:	#중복되지 않으면 추가
+				hash_before = post_data_prepare[i]['title'] + post_data_prepare[i]['post']
+				query = {
+						"hashed" : hash_done,
+						"title" : post_data_prepare[i]['title'],
+						"author": post_data_prepare[i]['author'],
+						"date" : datetime_to_mongo(post_data_prepare[i]['date']),
+						"post" : post_data_prepare[i]['post'][:200],
+						"img" : post_data_prepare[i]['img'],
+						"url" : post_data_prepare[i]['url'],
+						"tag" : post_data_prepare[i]['tag'],
+						"login" : URL['login'],
+						"info" : URL['info'].split("_")[1],
+						"view" : 0,
+						"fav_cnt": 0,
+						"title_token" : post_data_prepare[i]['title'].split(" "),
+						"token" : get_tk(post_data_prepare[i]['title'] + post_data_prepare[i]['post'])
+					}
+				if URL['info'].split("_")[1] in contest_list:
+					query["date"] = datetime_to_mongo(now)
+					query["end_date"] = datetime_to_mongo(post_data_prepare[i]['date'])
+				db.posts.insert_one(query)
+				add_cnt += 1
 	return add_cnt
 
 #'info' 의 테이블에 있는 포스트의 개수 반환하는 함수
