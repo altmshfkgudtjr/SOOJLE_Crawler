@@ -57,7 +57,7 @@ def db_manager(URL, post_data_prepare, db):
 	for post in post_data_prepare:
 		if filtering.filter_public(post['title'] + post['post']):
 			print("Unhealty Post ---- ", post['title'])
-		elif URL['info'].split('_')[0] == 'sj20' or  URL['info'].split('-')[0] == 'sj22':
+		elif URL['info'].split('_')[0] == 'sj20' or  URL['info'].split('-')[0] == 'sj34':
 			if filtering.filter_hardcore(post['title'] + post['post']):
 				print("Harmful Post ---- ", post['title'])
 		else:
