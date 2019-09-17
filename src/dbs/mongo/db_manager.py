@@ -80,6 +80,7 @@ def db_manager(URL, post_data_prepare, db):
 		if db.posts.find_one({"hashed": hash_done}) != None:
 			continue
 		else:
+			post_one["title"] = post_one["title"][:200]
 			post_one["hashed"] = hash_done
 			post_one["date"] = datetime_to_mongo(post_one['date'])
 			post_one["post"] = post_one["post"][:200]
@@ -88,9 +89,10 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["fav_cnt"] = 0
 			post_one["title_token"] = post_one["title"].split(" ")
 			post_one["token"] = get_tk(post_one["title"] + post_one["post"])
+			post_one["login"] = URL["login"]
 			if URL['info'].split("_")[1] in contest_list:
+				post_one["end_date"] = post_one['date']
 				post_one["date"] = datetime_to_mongo(now)
-				post_one["end_date"] = datetime_to_mongo(post_one['date'])
 			db.posts.insert_one(post_one)
 			add_cnt += 1
 	return add_cnt

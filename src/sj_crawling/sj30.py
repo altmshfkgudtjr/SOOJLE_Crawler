@@ -17,7 +17,7 @@ from db_manager import push_lastly_post
 
 
 #게시판 page_url 을 받으면, 그 페이지의 포스트 url 들을 반환
-def Parsing_list_url(URL, page_url, lastly_post):
+def Parsing_list_url(URL, page_url, lastly_post, db):
 	List = []
 	domain = Domain_check(URL['url'])
 	end_date = date_cut(URL['info'])
@@ -52,8 +52,16 @@ def Parsing_list_url(URL, page_url, lastly_post):
 			query = '//*[@id="primaryContent"]/table/tbody/tr[2]/td[2]/div[3]/div/a[' + str(num) + ']'
 		else:
 			query = '//*[@id="primaryContent"]/table/tbody/tr[2]/td[2]/div[2]/div/a[' + str(num) + ']'
-		driver.find_element_by_xpath(query).click()
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
+		try:
+			driver.find_element_by_xpath(query).click()
+		except:
+			data = (driver, List)
+			return data
+		try:
+			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
+		except:
+			driver.navigate().refresh();
+			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
 		html = driver.page_source
 		bs = BeautifulSoup(html, 'html.parser')
 		posts = bs.find("table", {"class": "bbsList"}).find("tbody").findAll("tr")
@@ -80,9 +88,8 @@ def Parsing_list_url(URL, page_url, lastly_post):
 				List.append(url)
 				cnt += 1
 
-
 		#항상 첫번째페이지의 공지를 제외한 첫번째글이 lastly_post가 되도록 지정해줌
-		if lastly_num == 1 or lastly_post == '0':
+		if lastly_num == 1 or lastly_post == 0:
 			for post in posts:
 				if post.find("td", {"class": "num"}).find("img") != None:
 					continue
@@ -95,7 +102,7 @@ def Parsing_list_url(URL, page_url, lastly_post):
 					date = "20" + date + " 00:00:00"
 					date = str(datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
 				lastly_post = date + title
-				push_lastly_post(URL, lastly_post)
+				push_lastly_post(URL, lastly_post, db)
 				break
 
 		if cnt == 0:	#날짜가 전부 옛날이면 break
@@ -173,7 +180,7 @@ def Parsing_post_data(driver, post_url, URL):
 
 #url을 받으면 Page를 변환시켜서, 변환된 url 반환
 def Change_page(url, page):
-	url_done = url + str(page)
+	url_done = url + "1"
 
 	return url_done
 

@@ -36,9 +36,18 @@ def Parsing_list_url(URL, page_url):
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
 
-	posts1 = bs.find("ul", {"class": 'listContent'}).findAll("li")
-	posts2 = bs.find("ul", {"class": 'listContent mb20'}).findAll("li")
-	posts = posts1 + posts2
+	try:
+		posts1 = bs.find("ul", {"class": 'listContent'}).findAll("li")
+		posts2 = bs.find("ul", {"class": 'listContent mb20'}).findAll("li")
+		posts = posts1 + posts2
+	except:
+		try:
+			posts1 = bs.find("ul", {"class": 'listContent'}).findAll("li")
+			posts2 = bs.find("ul", {"class": 'listContent mb20'}).findAll("li")
+			posts = posts1 + posts2
+		except:
+			data = (driver, List)
+			return data
 
 	for post in posts:
 		url = post.find("span", {"class": "li_subject li_list2"}).find("a")['onclick']

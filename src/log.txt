@@ -1,12 +1,706 @@
 [ERROR]=====================================================================
-2019-09-08 22:28:06 :: sj20_sejong_dc
+2019-09-14 03:40:32 :: sj30_sejongstation_qna
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KRl2&lastbbsdepth=004kdzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-14 04:20:13 :: sj30_sejongstation_qna
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KRl2&lastbbsdepth=004kdzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-14 04:40:52 :: sj30_sejongstation_trade
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KOco&lastbbsdepth=001VHzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'AttributeError'>
+'NoneType' object has no attribute 'text'
+
+[ERROR]=====================================================================
+2019-09-14 16:32:17 :: sj34_everytime_all
+URL :: https://everytime.kr/377390/p/1638
+<class 'UnboundLocalError'>
+local variable 'but_cnt' referenced before assignment
+
+[ERROR]=====================================================================
+2019-09-14 16:32:22 :: sj34_everytime_all
+URL :: https://everytime.kr/258755/p/1629
+<class 'UnboundLocalError'>
+local variable 'but_cnt' referenced before assignment
+
+[ERROR]=====================================================================
+2019-09-14 16:32:26 :: sj34_everytime_all
+URL :: https://everytime.kr/385977/p/1629
+<class 'UnboundLocalError'>
+local variable 'but_cnt' referenced before assignment
+
+[ERROR]=====================================================================
+2019-09-14 22:55:52 :: sj34_everytime_all
+URL :: https://everytime.kr/377390/p/2502
+<class 'urllib3.exceptions.ProtocolError'>
+('Connection aborted.', ConnectionResetError(10054, '현재 연결은 원격 호스트에 의해 강제로 끊겼습니다', None, 10054, None))
+
+[ERROR]=====================================================================
+2019-09-15 00:04:42 :: sj35_detizen_contest
+URL :: http://www.detizen.com/contest/?Category=1&IngYn=Y&PC=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-15 00:05:09 :: sj35_detizen_activity
+URL :: http://www.detizen.com/activity/?Category=3&IngYn=Y&PC=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-15 00:55:51 :: sj34_everytime_all
+URL :: https://everytime.kr/377390/v/68106411
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-15 20:17:00 :: sj34_everytime_all
+URL :: https://everytime.kr/377390/p/5478
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-15 20:18:47 :: sj34_everytime_all
+URL :: https://everytime.kr/258755/p/4385
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-15 20:20:31 :: sj34_everytime_all
+URL :: https://everytime.kr/385977/p/4385
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-15 20:22:16 :: sj34_everytime_all
+URL :: https://everytime.kr/385889/p/4385
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-15 20:24:00 :: sj34_everytime_all
+URL :: https://everytime.kr/377482/p/4385
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-15 20:26:26 :: sj35_detizen_contest
+URL :: http://www.detizen.com/contest/?Category=1&IngYn=Y&PC=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-15 20:26:47 :: sj35_detizen_activity
+URL :: http://www.detizen.com/activity/?Category=3&IngYn=Y&PC=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-15 20:28:50 :: sj37_jobkorea_job
+URL :: http://www.jobkorea.co.kr/starter/?&schWork=2&isSaved=1&LinkGubun=0&Page=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-15 20:30:28 :: sj37_jobkorea_public
+URL :: http://www.jobkorea.co.kr/Starter/?&LinkGubun=0&Page=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-15 20:41:31 :: sj40_jobsolution_job
+URL :: http://u.educe.co.kr/jobsej/?mod=recruit&m_idx=217&orderword=pd&page=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-15 20:44:01 :: sj41_jobsolutionAnother_semina
+URL :: http://u.educe.co.kr/jobsej/?mod=jobFair&m_idx=227&page=36
+<class 'AttributeError'>
+'NoneType' object has no attribute 'text'
+
+[ERROR]=====================================================================
+2019-09-16 01:40:15 :: sj43_indeed_job
+URL :: https://kr.indeed.com/jobs?q=&l=서울&start=400
+<class 'AttributeError'>
+'NoneType' object has no attribute 'text'
+
+[ERROR]=====================================================================
+2019-09-16 03:14:35 :: sj34_everytime_all
+URL :: https://everytime.kr/258755/p/209
+<class 'urllib3.exceptions.ProtocolError'>
+('Connection aborted.', ConnectionResetError(10054, '현재 연결은 원격 호스트에 의해 강제로 끊겼습니다', None, 10054, None))
+
+[ERROR]=====================================================================
+2019-09-16 07:56:42 :: sj34_everytime_all
+URL :: https://everytime.kr/258755/p/640
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 07:58:27 :: sj34_everytime_all
+URL :: https://everytime.kr/385977/p/209
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 14:04:27 :: sj34_everytime_all
+URL :: https://everytime.kr/385889/p/704
+<class 'urllib3.exceptions.ProtocolError'>
+('Connection aborted.', ConnectionResetError(10054, '현재 연결은 원격 호스트에 의해 강제로 끊겼습니다', None, 10054, None))
+
+[ERROR]=====================================================================
+2019-09-16 16:54:06 :: sj34_everytime_all
+URL :: https://everytime.kr
+<class 'selenium.common.exceptions.NoSuchElementException'>
+Message: no such element: Unable to locate element: {"method":"css selector","selector":"[name="userid"]"}
+  (Session info: chrome=76.0.3809.132)
+
+
+[ERROR]=====================================================================
+2019-09-16 16:54:47 :: sj35_detizen_contest
+URL :: http://www.detizen.com/contest/?Category=1&IngYn=Y&PC=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-16 16:55:21 :: sj35_detizen_activity
+URL :: http://www.detizen.com/activity/?Category=3&IngYn=Y&PC=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-16 16:58:12 :: sj37_jobkorea_job
+URL :: http://www.jobkorea.co.kr/starter/?&schWork=2&isSaved=1&LinkGubun=0&Page=1
+<class 'TypeError'>
+strptime() argument 1 must be str, not datetime.datetime
+
+[ERROR]=====================================================================
+2019-09-16 18:03:31 :: sj43_indeed_job
+URL :: https://kr.indeed.com/jobs?q=&l=서울&start=70
+<class 'AttributeError'>
+'NoneType' object has no attribute 'text'
+
+[ERROR]=====================================================================
+2019-09-16 18:32:41 :: sj20_sejong_dc
 URL :: https://gall.dcinside.com/board/lists/?id=sejong&page=1
 <class 'str'>
 driver_none
 
 [ERROR]=====================================================================
-2019-09-08 22:28:42 :: sj20_sejong_dc
-URL :: https://gall.dcinside.com/board/lists/?id=sejong&page=1
-<class 'str'>
-driver_none
+2019-09-16 19:26:34 :: sj27_campuspick_certificate
+URL :: https://www.campuspick.com/study/list?category1=3&category2=0
+<class 'ValueError'>
+time data '2019/18/12/31 16:01:00' does not match format '%Y/%m/%d %H:%M:%S'
+
+[ERROR]=====================================================================
+2019-09-16 19:45:33 :: sj30_sejongstation_free
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KObl&lastbbsdepth=003Auzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 19:55:27 :: sj30_sejongstation_activity
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KObP&lastbbsdepth=000Eozzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 19:57:39 :: sj30_sejongstation_study
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KOdc&lastbbsdepth=0006Mzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 19:59:56 :: sj30_sejongstation_trade
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KOco&lastbbsdepth=001VHzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 20:20:01 :: sj34_everytime_all
+URL :: https://everytime.kr/258755/p/704
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 20:21:46 :: sj34_everytime_all
+URL :: https://everytime.kr/385977/p/704
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 21:43:35 :: sj34_everytime_all
+URL :: https://everytime.kr/385889/p/939
+<class 'urllib3.exceptions.ProtocolError'>
+('Connection aborted.', ConnectionResetError(10054, '현재 연결은 원격 호스트에 의해 강제로 끊겼습니다', None, 10054, None))
+
+[ERROR]=====================================================================
+2019-09-16 22:03:03 :: sj34_everytime_all
+URL :: https://everytime.kr/258755/p/939
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-16 22:04:49 :: sj34_everytime_all
+URL :: https://everytime.kr/385977/p/939
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 01:45:48 :: sj34_everytime_all
+URL :: https://everytime.kr/385977/p/6
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 03:37:55 :: sj34_everytime_all
+URL :: https://everytime.kr/377482/p/142
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 04:16:13 :: sj34_everytime_all
+URL :: https://everytime.kr/367450/p/90
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 04:18:36 :: sj34_everytime_all
+URL :: https://everytime.kr/258757/p/3
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 05:07:03 :: sj34_everytime_all
+URL :: https://everytime.kr/389027/p/114
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 05:37:51 :: sj34_everytime_all
+URL :: https://everytime.kr/391378/p/72
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 05:44:56 :: sj34_everytime_all
+URL :: https://everytime.kr/419439/p/13
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 06:42:51 :: sj34_everytime_all
+URL :: https://everytime.kr/390999/p/139
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 06:59:20 :: sj34_everytime_all
+URL :: https://everytime.kr/389287/p/32
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 07:10:58 :: sj34_everytime_all
+URL :: https://everytime.kr/435560/p/25
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 07:29:53 :: sj34_everytime_all
+URL :: https://everytime.kr/390966/p/40
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 07:44:32 :: sj34_everytime_all
+URL :: https://everytime.kr/393410/p/29
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 07:52:46 :: sj34_everytime_all
+URL :: https://everytime.kr/424353/p/16
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 07:54:56 :: sj34_everytime_all
+URL :: https://everytime.kr/445121/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:16:00 :: sj34_everytime_all
+URL :: https://everytime.kr/387226/p/42
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:26:01 :: sj34_everytime_all
+URL :: https://everytime.kr/420333/p/17
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:29:02 :: sj34_everytime_all
+URL :: https://everytime.kr/445324/p/4
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:38:26 :: sj34_everytime_all
+URL :: https://everytime.kr/419832/p/16
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:41:26 :: sj34_everytime_all
+URL :: https://everytime.kr/426831/p/4
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:43:31 :: sj34_everytime_all
+URL :: https://everytime.kr/443852/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:45:59 :: sj34_everytime_all
+URL :: https://everytime.kr/446178/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:48:22 :: sj34_everytime_all
+URL :: https://everytime.kr/446172/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:51:23 :: sj34_everytime_all
+URL :: https://everytime.kr/445612/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:53:09 :: sj34_everytime_all
+URL :: https://everytime.kr/445600/p/1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:55:40 :: sj34_everytime_all
+URL :: https://everytime.kr/444700/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:57:28 :: sj34_everytime_all
+URL :: https://everytime.kr/444646/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 08:59:13 :: sj34_everytime_all
+URL :: https://everytime.kr/443924/p/1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:01:45 :: sj34_everytime_all
+URL :: https://everytime.kr/443187/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:03:35 :: sj34_everytime_all
+URL :: https://everytime.kr/443054/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:05:20 :: sj34_everytime_all
+URL :: https://everytime.kr/442603/p/1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:08:21 :: sj34_everytime_all
+URL :: https://everytime.kr/442393/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:10:08 :: sj34_everytime_all
+URL :: https://everytime.kr/442208/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:11:53 :: sj34_everytime_all
+URL :: https://everytime.kr/442080/p/1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:13:39 :: sj34_everytime_all
+URL :: https://everytime.kr/441783/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:16:03 :: sj34_everytime_all
+URL :: https://everytime.kr/441434/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:17:48 :: sj34_everytime_all
+URL :: https://everytime.kr/441275/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:19:37 :: sj34_everytime_all
+URL :: https://everytime.kr/441121/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:21:26 :: sj34_everytime_all
+URL :: https://everytime.kr/440195/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:24:32 :: sj34_everytime_all
+URL :: https://everytime.kr/439390/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:27:04 :: sj34_everytime_all
+URL :: https://everytime.kr/439025/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:29:33 :: sj34_everytime_all
+URL :: https://everytime.kr/438556/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:31:18 :: sj34_everytime_all
+URL :: https://everytime.kr/438448/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:35:00 :: sj34_everytime_all
+URL :: https://everytime.kr/437533/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:37:24 :: sj34_everytime_all
+URL :: https://everytime.kr/436862/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:39:10 :: sj34_everytime_all
+URL :: https://everytime.kr/436549/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:44:04 :: sj34_everytime_all
+URL :: https://everytime.kr/433508/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:45:49 :: sj34_everytime_all
+URL :: https://everytime.kr/433193/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:47:37 :: sj34_everytime_all
+URL :: https://everytime.kr/433023/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:49:36 :: sj34_everytime_all
+URL :: https://everytime.kr/432956/p/3
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:51:23 :: sj34_everytime_all
+URL :: https://everytime.kr/432774/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 09:53:09 :: sj34_everytime_all
+URL :: https://everytime.kr/432236/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 10:18:03 :: sj34_everytime_all
+URL :: https://everytime.kr/445600/p/1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 10:21:48 :: sj34_everytime_all
+URL :: https://everytime.kr/443924/p/1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 10:25:39 :: sj34_everytime_all
+URL :: https://everytime.kr/442603/p/1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 10:29:50 :: sj34_everytime_all
+URL :: https://everytime.kr/442080/p/1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 10:52:42 :: sj34_everytime_all
+URL :: https://everytime.kr/445472/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 10:55:14 :: sj34_everytime_all
+URL :: https://everytime.kr/442210/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 10:57:15 :: sj34_everytime_all
+URL :: https://everytime.kr/432893/p/4
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 10:59:50 :: sj34_everytime_all
+URL :: https://everytime.kr/429496/p/3
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 11:01:51 :: sj34_everytime_all
+URL :: https://everytime.kr/428433/p/4
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 11:04:14 :: sj34_everytime_all
+URL :: https://everytime.kr/422297/p/2
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-17 11:07:10 :: sj34_everytime_all
+URL :: https://everytime.kr/418486/p/5
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
 

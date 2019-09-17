@@ -33,6 +33,8 @@ def post_info(db):
 	
 	#최신 게시물 저장하는 lastly_post 테이블 생성
 	collection = db["lastly_post"]
-	for URL in List:
-		collection.insert_one({"info_id": URL['info'], "title": 0})
-	print(":::: lastly_post CREATE Complete! ::::")
+
+	if collection.find().count() == 0:
+		for URL in List:
+			collection.insert_one({"info_id": URL['info'], "title": 0})
+		print(":::: lastly_post CREATE Complete! ::::")

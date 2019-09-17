@@ -21,9 +21,7 @@ def Crawling(URL, db):
 	main_url = URL['url']	#게시판 url 추출 : 페이지 바꾸는 데에 사용
 	page_url = eval(crawling_name + '.Change_page(main_url, page)')	#현재 페이지 포스트 url 반환
 	end_date = date_cut(URL['info'])	# end_date 추출
-	if crawling_name in ["sj23", "sj26", "sj27", "sj28", "sj30"]:
-		lastly_post = get_lastly_post(URL, db)
-	elif crawling_name in ["sj34"]:		# 동적 게시판 예외
+	if crawling_name in ["sj34"]:		# 동적 게시판 예외
 		sj34.everytime_all_board(URL, end_date, db)
 		return
 
@@ -31,6 +29,8 @@ def Crawling(URL, db):
 	print("Target : ", URL['info'])
 
 	while True:
+		if crawling_name in ["sj23", "sj26", "sj27", "sj28", "sj30"]:
+			lastly_post = get_lastly_post(URL, db)
 		try:
 			print("\npage_url :::: ", page_url)	#현재 url 출력
 			print("Page : ", page)				#현재 페이지 출력
@@ -48,7 +48,7 @@ def Crawling(URL, db):
 				driver = data[0]
 				post_urls = data[1]
 			elif crawling_name in ["sj30"]:#---------------------------세종대역 예외처리
-				data = eval(crawling_name + '.Parsing_list_url(URL, page_url, lastly_post)')
+				data = eval(crawling_name + '.Parsing_list_url(URL, page_url, lastly_post, db)')
 				driver = data[0]
 				post_urls = data[1]
 			#Requests를 쓰는 경우----------------------------------------------------------------------------------------------
