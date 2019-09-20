@@ -704,3 +704,493 @@ URL :: https://everytime.kr/418486/p/5
 Message: 
 
 
+[ERROR]=====================================================================
+2019-09-20 16:43:56 :: sj2_udream_notice
+URL :: http://udream.sejong.ac.kr/Community/Notice/NoticeList.aspx?rp=1
+<class 'requests.exceptions.InvalidSchema'>
+No connection adapters were found for '<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+<title></title>
+<link href="/dhtml/share.css" rel="stylesheet"/>
+<script src="/dhtml/common.js" type="text/javascript"></script>
+<script src="/app/system/hcontrol.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            radioChk($("#pro").val());
+        });
+
+        var chkSsl = "https://udream.sejong.ac.kr";
+        if (chkSsl.length > 0) {
+            if (document.location.href.indexOf("https") == -1) {
+                document.location.href = chkSsl + "/main/login.aspx";
+            }
+        }
+
+        function loginFunc(val) {
+            if (val == 2) $("#bizLogin").css("display", "block");
+            else $("#bizLogin").css("display", "none");
+        }
+
+        function radioChk(vals) {
+            $(".bizReg").hide();
+            $(".memberReg").hide();
+
+            $(".progroup").each(function () {
+                $(this).removeClass("active");
+            });
+
+            $("#radio" + vals).addClass("active");
+            $("#pro").val(vals);
+            if (vals == 2) {
+                $(".bizReg").show();
+            }
+            else if (vals == 0) {
+                $(".memberReg").show();
+            }
+            else if (vals == 9) {
+                //사이버대 임시로 일단 동작은 일반인과 같게 하도록함.
+                $(".memberReg").show();
+                $("#pro").val(0);
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<section class="vbox">
+<header class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+<script src="/dhtml/top.js" type="text/javascript"></script>
+</header>
+<section class="hbox">
+<section class="m-t-lg wrapper-md animated fadeInUp">
+<div class="aside-xxl container">
+<a class="navbar-brand block"><img alt="로고" src="/img/common/logo.png" style="height:25px;"/></a>
+<section class="m-b-lg">
+<header class="wrapper text-center">
+<strong>로그인 하시려면 아래 정보를 입력하세요.</strong>
+</header>
+<form action="https://udream.sejong.ac.kr/main/loginPro.aspx" method="post">
+<div class="list-group">
+<div class="list-group-item">
+<input class="form-control no-border" name="rUserid" placeholder="아이디" type="text"/>
+</div>
+<div class="list-group-item">
+<input class="form-control no-border" name="rPW" placeholder="비밀번호" type="password"/>
+</div>
+<div class="list-group-item text-center">
+<div class="btn-group">
+<button class="btn btn-default active progroup" id="radio1" onclick="radioChk(1)" type="button">학생</button>
+<button class="btn btn-default progroup" id="radio2" onclick="radioChk(2)" type="button">기업</button>
+<button class="btn btn-default progroup" id="radio3" onclick="radioChk(3)" type="button">교직원</button>
+<button class="btn btn-default progroup" id="radio0" onclick="radioChk(0)" type="button">일반인</button>
+<button class="btn btn-default progroup" id="radio9" onclick="radioChk(9)" type="button">세종사이버대</button>
+</div>
+<input id="pro" name="pro" type="hidden" value="1"/>
+</div>
+<div class="list-group-item text-center memberReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default" onclick="go('/Main/Member/OutsiderJoinCheck.aspx')" type="button">회원가입</button>
+<button class="btn btn-default" onclick="go('/Main/Member/MemberFind.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+<div class="list-group-item text-center bizReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default hidden" onclick="go('/Biz/BizFormPre.aspx')" type="button">기업회원가입</button>
+<button class="btn btn-default" onclick="go('/Biz/BizFindID.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+<div class="line line-dashed"></div>
+</form>
+</section>
+</div>
+</section>
+</section>
+</section>
+</body>
+</html>
+'
+
+[ERROR]=====================================================================
+2019-09-20 16:43:59 :: sj3_udream_jobinfo
+URL :: https://udream.sejong.ac.kr/Recruit/RecruitList.aspx?rp=1
+<class 'requests.exceptions.InvalidSchema'>
+No connection adapters were found for '<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+<title></title>
+<link href="/dhtml/share.css" rel="stylesheet"/>
+<script src="/dhtml/common.js" type="text/javascript"></script>
+<script src="/app/system/hcontrol.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            radioChk($("#pro").val());
+        });
+
+        var chkSsl = "https://udream.sejong.ac.kr";
+        if (chkSsl.length > 0) {
+            if (document.location.href.indexOf("https") == -1) {
+                document.location.href = chkSsl + "/main/login.aspx";
+            }
+        }
+
+        function loginFunc(val) {
+            if (val == 2) $("#bizLogin").css("display", "block");
+            else $("#bizLogin").css("display", "none");
+        }
+
+        function radioChk(vals) {
+            $(".bizReg").hide();
+            $(".memberReg").hide();
+
+            $(".progroup").each(function () {
+                $(this).removeClass("active");
+            });
+
+            $("#radio" + vals).addClass("active");
+            $("#pro").val(vals);
+            if (vals == 2) {
+                $(".bizReg").show();
+            }
+            else if (vals == 0) {
+                $(".memberReg").show();
+            }
+            else if (vals == 9) {
+                //사이버대 임시로 일단 동작은 일반인과 같게 하도록함.
+                $(".memberReg").show();
+                $("#pro").val(0);
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<section class="vbox">
+<header class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+<script src="/dhtml/top.js" type="text/javascript"></script>
+</header>
+<section class="hbox">
+<section class="m-t-lg wrapper-md animated fadeInUp">
+<div class="aside-xxl container">
+<a class="navbar-brand block"><img alt="로고" src="/img/common/logo.png" style="height:25px;"/></a>
+<section class="m-b-lg">
+<header class="wrapper text-center">
+<strong>로그인 하시려면 아래 정보를 입력하세요.</strong>
+</header>
+<form action="https://udream.sejong.ac.kr/main/loginPro.aspx" method="post">
+<div class="list-group">
+<div class="list-group-item">
+<input class="form-control no-border" name="rUserid" placeholder="아이디" type="text"/>
+</div>
+<div class="list-group-item">
+<input class="form-control no-border" name="rPW" placeholder="비밀번호" type="password"/>
+</div>
+<div class="list-group-item text-center">
+<div class="btn-group">
+<button class="btn btn-default active progroup" id="radio1" onclick="radioChk(1)" type="button">학생</button>
+<button class="btn btn-default progroup" id="radio2" onclick="radioChk(2)" type="button">기업</button>
+<button class="btn btn-default progroup" id="radio3" onclick="radioChk(3)" type="button">교직원</button>
+<button class="btn btn-default progroup" id="radio0" onclick="radioChk(0)" type="button">일반인</button>
+<button class="btn btn-default progroup" id="radio9" onclick="radioChk(9)" type="button">세종사이버대</button>
+</div>
+<input id="pro" name="pro" type="hidden" value="1"/>
+</div>
+<div class="list-group-item text-center memberReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default" onclick="go('/Main/Member/OutsiderJoinCheck.aspx')" type="button">회원가입</button>
+<button class="btn btn-default" onclick="go('/Main/Member/MemberFind.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+<div class="list-group-item text-center bizReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default hidden" onclick="go('/Biz/BizFormPre.aspx')" type="button">기업회원가입</button>
+<button class="btn btn-default" onclick="go('/Biz/BizFindID.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+<div class="line line-dashed"></div>
+</form>
+</section>
+</div>
+</section>
+</section>
+</section>
+</body>
+</html>
+'
+
+[ERROR]=====================================================================
+2019-09-20 16:44:02 :: sj4_udream_workinfo
+URL :: http://udream.sejong.ac.kr/WorkCenter/WorkRecruit.aspx?rp=1
+<class 'requests.exceptions.InvalidSchema'>
+No connection adapters were found for '<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+<title></title>
+<link href="/dhtml/share.css" rel="stylesheet"/>
+<script src="/dhtml/common.js" type="text/javascript"></script>
+<script src="/app/system/hcontrol.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            radioChk($("#pro").val());
+        });
+
+        var chkSsl = "https://udream.sejong.ac.kr";
+        if (chkSsl.length > 0) {
+            if (document.location.href.indexOf("https") == -1) {
+                document.location.href = chkSsl + "/main/login.aspx";
+            }
+        }
+
+        function loginFunc(val) {
+            if (val == 2) $("#bizLogin").css("display", "block");
+            else $("#bizLogin").css("display", "none");
+        }
+
+        function radioChk(vals) {
+            $(".bizReg").hide();
+            $(".memberReg").hide();
+
+            $(".progroup").each(function () {
+                $(this).removeClass("active");
+            });
+
+            $("#radio" + vals).addClass("active");
+            $("#pro").val(vals);
+            if (vals == 2) {
+                $(".bizReg").show();
+            }
+            else if (vals == 0) {
+                $(".memberReg").show();
+            }
+            else if (vals == 9) {
+                //사이버대 임시로 일단 동작은 일반인과 같게 하도록함.
+                $(".memberReg").show();
+                $("#pro").val(0);
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<section class="vbox">
+<header class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+<script src="/dhtml/top.js" type="text/javascript"></script>
+</header>
+<section class="hbox">
+<section class="m-t-lg wrapper-md animated fadeInUp">
+<div class="aside-xxl container">
+<a class="navbar-brand block"><img alt="로고" src="/img/common/logo.png" style="height:25px;"/></a>
+<section class="m-b-lg">
+<header class="wrapper text-center">
+<strong>로그인 하시려면 아래 정보를 입력하세요.</strong>
+</header>
+<form action="https://udream.sejong.ac.kr/main/loginPro.aspx" method="post">
+<div class="list-group">
+<div class="list-group-item">
+<input class="form-control no-border" name="rUserid" placeholder="아이디" type="text"/>
+</div>
+<div class="list-group-item">
+<input class="form-control no-border" name="rPW" placeholder="비밀번호" type="password"/>
+</div>
+<div class="list-group-item text-center">
+<div class="btn-group">
+<button class="btn btn-default active progroup" id="radio1" onclick="radioChk(1)" type="button">학생</button>
+<button class="btn btn-default progroup" id="radio2" onclick="radioChk(2)" type="button">기업</button>
+<button class="btn btn-default progroup" id="radio3" onclick="radioChk(3)" type="button">교직원</button>
+<button class="btn btn-default progroup" id="radio0" onclick="radioChk(0)" type="button">일반인</button>
+<button class="btn btn-default progroup" id="radio9" onclick="radioChk(9)" type="button">세종사이버대</button>
+</div>
+<input id="pro" name="pro" type="hidden" value="1"/>
+</div>
+<div class="list-group-item text-center memberReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default" onclick="go('/Main/Member/OutsiderJoinCheck.aspx')" type="button">회원가입</button>
+<button class="btn btn-default" onclick="go('/Main/Member/MemberFind.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+<div class="list-group-item text-center bizReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default hidden" onclick="go('/Biz/BizFormPre.aspx')" type="button">기업회원가입</button>
+<button class="btn btn-default" onclick="go('/Biz/BizFindID.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+<div class="line line-dashed"></div>
+</form>
+</section>
+</div>
+</section>
+</section>
+</section>
+</body>
+</html>
+'
+
+[ERROR]=====================================================================
+2019-09-20 16:44:04 :: sj5_udream_workyoung
+URL :: http://udream.sejong.ac.kr/WorkCenter/WorkIntern.aspx?rp=1
+<class 'requests.exceptions.InvalidSchema'>
+No connection adapters were found for '<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+<title></title>
+<link href="/dhtml/share.css" rel="stylesheet"/>
+<script src="/dhtml/common.js" type="text/javascript"></script>
+<script src="/app/system/hcontrol.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            radioChk($("#pro").val());
+        });
+
+        var chkSsl = "https://udream.sejong.ac.kr";
+        if (chkSsl.length > 0) {
+            if (document.location.href.indexOf("https") == -1) {
+                document.location.href = chkSsl + "/main/login.aspx";
+            }
+        }
+
+        function loginFunc(val) {
+            if (val == 2) $("#bizLogin").css("display", "block");
+            else $("#bizLogin").css("display", "none");
+        }
+
+        function radioChk(vals) {
+            $(".bizReg").hide();
+            $(".memberReg").hide();
+
+            $(".progroup").each(function () {
+                $(this).removeClass("active");
+            });
+
+            $("#radio" + vals).addClass("active");
+            $("#pro").val(vals);
+            if (vals == 2) {
+                $(".bizReg").show();
+            }
+            else if (vals == 0) {
+                $(".memberReg").show();
+            }
+            else if (vals == 9) {
+                //사이버대 임시로 일단 동작은 일반인과 같게 하도록함.
+                $(".memberReg").show();
+                $("#pro").val(0);
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<section class="vbox">
+<header class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+<script src="/dhtml/top.js" type="text/javascript"></script>
+</header>
+<section class="hbox">
+<section class="m-t-lg wrapper-md animated fadeInUp">
+<div class="aside-xxl container">
+<a class="navbar-brand block"><img alt="로고" src="/img/common/logo.png" style="height:25px;"/></a>
+<section class="m-b-lg">
+<header class="wrapper text-center">
+<strong>로그인 하시려면 아래 정보를 입력하세요.</strong>
+</header>
+<form action="https://udream.sejong.ac.kr/main/loginPro.aspx" method="post">
+<div class="list-group">
+<div class="list-group-item">
+<input class="form-control no-border" name="rUserid" placeholder="아이디" type="text"/>
+</div>
+<div class="list-group-item">
+<input class="form-control no-border" name="rPW" placeholder="비밀번호" type="password"/>
+</div>
+<div class="list-group-item text-center">
+<div class="btn-group">
+<button class="btn btn-default active progroup" id="radio1" onclick="radioChk(1)" type="button">학생</button>
+<button class="btn btn-default progroup" id="radio2" onclick="radioChk(2)" type="button">기업</button>
+<button class="btn btn-default progroup" id="radio3" onclick="radioChk(3)" type="button">교직원</button>
+<button class="btn btn-default progroup" id="radio0" onclick="radioChk(0)" type="button">일반인</button>
+<button class="btn btn-default progroup" id="radio9" onclick="radioChk(9)" type="button">세종사이버대</button>
+</div>
+<input id="pro" name="pro" type="hidden" value="1"/>
+</div>
+<div class="list-group-item text-center memberReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default" onclick="go('/Main/Member/OutsiderJoinCheck.aspx')" type="button">회원가입</button>
+<button class="btn btn-default" onclick="go('/Main/Member/MemberFind.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+<div class="list-group-item text-center bizReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default hidden" onclick="go('/Biz/BizFormPre.aspx')" type="button">기업회원가입</button>
+<button class="btn btn-default" onclick="go('/Biz/BizFindID.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+<div class="line line-dashed"></div>
+</form>
+</section>
+</div>
+</section>
+</section>
+</section>
+</body>
+</html>
+'
+
+[ERROR]=====================================================================
+2019-09-20 16:50:13 :: sj20_sejong_dc
+URL :: https://gall.dcinside.com/board/lists/?id=sejong&page=1
+<class 'str'>
+driver_none
+
+[ERROR]=====================================================================
+2019-09-20 17:17:25 :: sj27_campuspick_certificate
+URL :: https://www.campuspick.com/study/list?category1=3&category2=0
+<class 'ValueError'>
+time data '2019/18/12/31 16:01:00' does not match format '%Y/%m/%d %H:%M:%S'
+
+[ERROR]=====================================================================
+2019-09-20 17:29:33 :: sj30_sejongstation_free
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KObl&lastbbsdepth=003Auzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 17:33:28 :: sj30_sejongstation_qna
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KRl2&lastbbsdepth=004kdzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 17:41:11 :: sj30_sejongstation_activity
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KObP&lastbbsdepth=000Eozzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 17:43:33 :: sj30_sejongstation_food
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KObe&lastbbsdepth=0004Jzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 17:44:26 :: sj34_everytime_all
+URL :: https://everytime.kr/377390/p/1
+<class 'urllib3.exceptions.ProtocolError'>
+('Connection aborted.', ConnectionResetError(10054, '현재 연결은 원격 호스트에 의해 강제로 끊겼습니다', None, 10054, None))
+
