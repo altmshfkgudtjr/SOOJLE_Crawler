@@ -1194,3 +1194,10 @@ URL :: https://everytime.kr/377390/p/1
 <class 'urllib3.exceptions.ProtocolError'>
 ('Connection aborted.', ConnectionResetError(10054, '현재 연결은 원격 호스트에 의해 강제로 끊겼습니다', None, 10054, None))
 
+[ERROR]=====================================================================
+2019-09-20 15:28:41 :: sj34_everytime_all
+URL :: https://everytime.kr
+<class 'selenium.common.exceptions.WebDriverException'>
+Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+

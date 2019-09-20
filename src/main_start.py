@@ -15,6 +15,13 @@ from posts_cnt import posts_cnt
 from tag_info import tag_info
 from db_health import url_health_change
 from db_connect import *
+import sys
+sys.path.insert(0,'/home/iml/SOOJLE/')
+sys.path.insert(0,'/home/iml/SOOJLE_Crawler/src/')
+sys.path.insert(0,'/home/iml/SJ_Auth')
+sys.path.insert(0,'/home/iml/SJ_AI/src')
+sys.path.insert(0,'/home/iml/IML_Toknizer/src/')
+sys.path.insert(0,'/home/iml/')
 
 #DB 연결
 database = connect_db()
@@ -22,7 +29,7 @@ db = database[1]
 client = database[0]
 
 db_manager.init_db(db)	#DB가 없으면 생성
-URLS = List[:]	#url_list에서 List를 URL으로 가져옴
+URLS = List[121:]	#url_list에서 List를 URL으로 가져옴
 
 if __name__ == '__main__':
 	print("\n\n")
