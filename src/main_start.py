@@ -2,6 +2,14 @@
 """   SooJel Project	"""
 """ BY *IML *NB *837477 """
 
+import sys
+sys.path.insert(0,'/home/iml/')
+sys.path.insert(0,'/home/iml/SOOJLE/')
+sys.path.insert(0,'/home/iml/SOOJLE_Crawler/src/')
+sys.path.insert(0,'/home/iml/SJ_Auth')
+sys.path.insert(0,'/home/iml/SJ_AI/src')
+sys.path.insert(0,'/home/iml/IML_Tokenizer/src/')
+sys.path.insert(0, '../../IML_Tokenizer/src/')
 import sj_path	#환경변수 지정
 from url_list import List
 from crawling_select import Crawling	#크롤링 전체
@@ -15,13 +23,6 @@ from posts_cnt import posts_cnt
 from tag_info import tag_info
 from db_health import url_health_change
 from db_connect import *
-import sys
-sys.path.insert(0,'/home/iml/SOOJLE/')
-sys.path.insert(0,'/home/iml/SOOJLE_Crawler/src/')
-sys.path.insert(0,'/home/iml/SJ_Auth')
-sys.path.insert(0,'/home/iml/SJ_AI/src')
-sys.path.insert(0,'/home/iml/IML_Toknizer/src/')
-sys.path.insert(0,'/home/iml/')
 
 #DB 연결
 database = connect_db()
