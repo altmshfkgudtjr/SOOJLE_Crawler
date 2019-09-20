@@ -16,8 +16,8 @@ def chromedriver():
 	options.add_argument("lang=ko_KR")
 
 	if platform().startswith("Windows"):
-		driver = webdriver.Chrome('../chromedriver.exe', chrome_options=options)
+		driver = webdriver.Chrome('../../chromedriver.exe', chrome_options=options)
 	else:
-		driver = webdriver.Chrome('home/iml/SOOJLE_Crawler/chromedriver', chrome_options=options)
+		driver = webdriver.Chrome('/home/iml/SOOJLE_Crawler/chromedriver', chrome_options=options)
 
 	return driver
