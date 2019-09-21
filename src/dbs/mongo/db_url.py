@@ -10,7 +10,9 @@ def init_url_collection(db):
 				"url": component['url'],
 				"info": component['info'],
 				"title_tag": component['title_tag'],
-				"login": component['login']
+				"login": component['login'],
+				"crawling": True,
+				"stay_cnt": 0
 			}
 			if "post_url" in component:
 				query["post_url"] = component['post_url']

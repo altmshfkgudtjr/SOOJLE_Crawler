@@ -91,6 +91,7 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["title_token"] = post_one["title"].split(" ")
 			post_one["token"] = get_tk(post_one["title"] + post_one["post"])
 			post_one["login"] = URL["login"]
+			post_one["learn"] = 0
 			if URL['info'].split("_")[1] in contest_list:
 				post_one["end_date"] = post_one['date']
 				post_one["date"] = datetime_to_mongo(now)

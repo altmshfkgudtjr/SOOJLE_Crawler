@@ -9,14 +9,17 @@ sys.path.insert(0,'../../IML_Tokenizer/src/')
 from all_login import mongo
 from pymongo import MongoClient
 from db_info import *
+from platform import platform
 
 
 #DB 및 Database 연결
 def connect_db():
 	#soojle 라는 데이터베이스에 접근
 	data = mongo()
-	client = MongoClient(data[0], int(data[1]))
-	client = MongoClient('mongodb://%s:%s@%s' %(MONGODB_ID, MONGODB_PW, MONGODB_HOST))
+	if platform().startswith("Windows"):
+		client = MongoClient(data[0], int(data[1]))
+	else:
+		client = MongoClient('mongodb://%s:%s@%s' %(MONGODB_ID, MONGODB_PW, MONGODB_HOST))
 	db = client['soojle']
 
 	return (client, db)

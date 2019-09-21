@@ -2,14 +2,6 @@
 """   SooJel Project	"""
 """ BY *IML *NB *837477 """
 
-import sys
-sys.path.insert(0,'/home/iml/')
-sys.path.insert(0,'/home/iml/SOOJLE/')
-sys.path.insert(0,'/home/iml/SOOJLE_Crawler/src/')
-sys.path.insert(0,'/home/iml/SJ_Auth')
-sys.path.insert(0,'/home/iml/SJ_AI/src')
-sys.path.insert(0,'/home/iml/IML_Tokenizer/src/')
-sys.path.insert(0, '../../IML_Tokenizer/src/')
 import sj_path	#환경변수 지정
 from url_list import List
 from crawling_select import Crawling	#크롤링 전체
@@ -63,5 +55,5 @@ if __name__ == '__main__':
 	posts_cnt(db)															# 모든 게시물 빈도 출력
 
 	print("\n\nCrawling End!\n\n")
-	db_manager.collection_indexing(db)	#인덱싱 작업화
+	#db_manager.collection_indexing(db)	#인덱싱 작업화
 	disconnect_db(client)	#DB 연결해제
