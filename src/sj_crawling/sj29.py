@@ -67,22 +67,38 @@ def Parsing_post_data(driver, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 	
+	try:
+		driver.get(post_url)
 
-	driver.get(post_url)
+		time.sleep(0.5) #마땅한 기다릴 요소가 없기에 time.sleep(0.5)를 해준다. 네트워크 및 컴퓨터 사양에 따라 ~3까지 증감시킬 것.
+		html = driver.page_source
+		bs = BeautifulSoup(html, 'html.parser')
+		
+		title = bs.find("li", {"class": "vi_subject vi_title"}).text.strip()
+		author = bs.find("span", {"id": "regname"}).text.strip()
+		date = bs.find("span", {"id": "regdate"}).text.strip()
+		date = date + " 00:00:00"
+		date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
+		post = bs.find("li", {"id": "contents"}).text.strip()
+		post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
+		tag_done = tag.tagging(URL, title)
+		img = 1
+	except:
+		driver.get(post_url)
 
-	time.sleep(0.5) #마땅한 기다릴 요소가 없기에 time.sleep(0.5)를 해준다. 네트워크 및 컴퓨터 사양에 따라 ~3까지 증감시킬 것.
-	html = driver.page_source
-	bs = BeautifulSoup(html, 'html.parser')
-	
-	title = bs.find("li", {"class": "vi_subject vi_title"}).text.strip()
-	author = bs.find("span", {"id": "regname"}).text.strip()
-	date = bs.find("span", {"id": "regdate"}).text.strip()
-	date = date + " 00:00:00"
-	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("li", {"id": "contents"}).text.strip()
-	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
-	tag_done = tag.tagging(URL, title)
-	img = 1
+		time.sleep(0.5) #마땅한 기다릴 요소가 없기에 time.sleep(0.5)를 해준다. 네트워크 및 컴퓨터 사양에 따라 ~3까지 증감시킬 것.
+		html = driver.page_source
+		bs = BeautifulSoup(html, 'html.parser')
+		
+		title = bs.find("li", {"class": "vi_subject vi_title"}).text.strip()
+		author = bs.find("span", {"id": "regname"}).text.strip()
+		date = bs.find("span", {"id": "regdate"}).text.strip()
+		date = date + " 00:00:00"
+		date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
+		post = bs.find("li", {"id": "contents"}).text.strip()
+		post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
+		tag_done = tag.tagging(URL, title)
+		img = 1
 		
 
 	#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[],'fav_cnt':0,'view':0} 같은 형식

@@ -92,9 +92,16 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			title = bs_post.find("article").find("h1").text.strip()
 			author = bs_post.find("p", {"class": "profile"}).text.strip()
 			date =  bs_post.find("p", {"class": "info"}).find("span").text.strip()
-			now_year = datetime.datetime.now().strftime("%Y")
-			date = now_year + "/" + date + ":00"
-			date = str(datetime.datetime.strptime(date, "%Y/%m/%d %H:%M:%S"))
+			if date.find("오늘") != -1:
+				date = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+			elif len(date.split("/")) != 3:
+				now_year = datetime.datetime.now().strftime("%Y")
+				date = now_year + "/" + date + ":00"
+				date = str(datetime.datetime.strptime(date, "%Y/%m/%d %H:%M:%S"))
+			else:
+				date = "20" + date + ":00"
+				date = str(datetime.datetime.strptime(date, "%Y/%m/%d %H:%M:%S"))
+			
 			phrase = bs_post.find("p", {'class': "text"}).text.strip()
 			phrase = post_wash(phrase)		#post 의 공백을 전부 제거하기 위함
 			tag_done = tag.tagging(URL, title)

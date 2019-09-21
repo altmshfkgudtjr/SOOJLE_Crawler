@@ -76,7 +76,7 @@ def db_manager(URL, post_data_prepare, db):
 	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 same_cnt++
 	for post_one in post_data_prepare:
 		#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
-		hash_before = post_one['title'] + post_one['author'] + post_one['post']
+		hash_before = post_one['title'] + post_one['post']
 		hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
 		if db.posts.find_one({"hashed": hash_done}) != None:
 			continue
@@ -85,13 +85,15 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["hashed"] = hash_done
 			post_one["date"] = datetime_to_mongo(post_one['date'])
 			post_one["post"] = post_one["post"][:200]
-			post_one["info"] = URL['info'].split("_")[1]
+			if URL['info'].split("_")[1] != 'everytime':
+				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
 			post_one["view"] = 0
 			post_one["fav_cnt"] = 0
 			post_one["title_token"] = post_one["title"].split(" ")
 			post_one["token"] = get_tk(post_one["title"] + post_one["post"])
 			post_one["login"] = URL["login"]
 			post_one["learn"] = 0
+			del post_one["author"]
 			if URL['info'].split("_")[1] in contest_list:
 				post_one["end_date"] = post_one['date']
 				post_one["date"] = datetime_to_mongo(now)

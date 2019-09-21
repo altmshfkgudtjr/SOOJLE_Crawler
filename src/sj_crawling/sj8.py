@@ -5,7 +5,6 @@ from post_wash import post_wash
 import datetime
 from date_cut import date_cut
 import tag
-import udream
 from img_size import img_size
 
 
@@ -25,7 +24,8 @@ def Parsing_post_data(bs, URL):
 	post_data_prepare = []
 	end_date = date_cut(URL['info'])
 
-	posts = bs.find("div", {"class": "list article mt10"}).findAll("div", {"class": "item article"})	#tr묶음
+	posts = bs.findAll("div", {"class": "item article"})
+
 	for post in posts:
 		post_infoes = post.findAll("a")	#td 묶음
 
@@ -41,7 +41,10 @@ def Parsing_post_data(bs, URL):
 			date = date + " 00:00:00"
 		except:
 			title = post_infoes[0].text.strip()
-			author = post.find("strong").text.strip()
+			try:
+				author = post.find("strong").text.strip()
+			except:
+				author = "0"
 			if author.find("관리자") != -1:
 				author = "0"
 			date = post.find("span", {"class": "date"})
@@ -53,7 +56,10 @@ def Parsing_post_data(bs, URL):
 		except:
 			date = datetime.datetime.now().strftime("%Y-%m-%d")
 			date = date + " 00:00:00"
-		phrase = post_infoes[1].text.strip()
+		try:
+			phrase = post_infoes[1].text.strip()
+		except:
+			phrase = "0"
 		phrase = post_wash(phrase)
 		tag_done = tag.tagging(URL, title)
 		url = post.find("a")["href"]

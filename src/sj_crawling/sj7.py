@@ -46,24 +46,30 @@ def Parsing_post_data(bs, post_url, URL):
 	title = bs.find("div", {"class": "prop article bt1"}).find("div", {"class": "subject"}).text.strip()
 	date = bs.find("span", {"class": "date"}).text
 	date = date + " 00:00:00"
-	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
+	try:
+		date = datetime.datetime.strftime(date, "%Y-%m-%d %H:%M:%S")
+	except:
+		date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	post = bs.find("div", {"class": "phrase"}).text.strip()
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
-	img = bs.find("div", {"class": "phrase"}).find("img")['src']		#게시글의 첫번째 이미지를 가져옴.
-	if 1000 <= len(img):
-		img = 1
-	else:
-		if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
-			pass
-		elif img.startswith("//"):
-			img = "http:" + img
-		else:
-			img = domain + img
-	if img != 1:
-		if img_size(img):
-			pass
-		else:
+	try:
+		img = bs.find("div", {"class": "phrase"}).find("img")['src']		#게시글의 첫번째 이미지를 가져옴.
+		if 1000 <= len(img):
 			img = 1
+		else:
+			if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
+				pass
+			elif img.startswith("//"):
+				img = "http:" + img
+			else:
+				img = domain + img
+		if img != 1:
+			if img_size(img):
+				pass
+			else:
+				img = 1
+	except:
+		img = 1
 	tag_done = tag.tagging(URL, title)
 
 	#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[], img:1, 'view':0} 같은 형식

@@ -17,7 +17,7 @@ def url_health_check(target_url, db):
 	if target_obj["stay_cnt"] > 0:
 		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"stay_cnt": target_obj["stay_cnt"] - 1}})
 	else:
-		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"crawling": False, "stay_cnt": 10}})
+		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"crawling": False, "stay_cnt": 5}})
 	print("\n:::: THIS URL CAN NOT CRAWLED! ::::\n")
 
 # 만약 stay_cnt 가 0 인 것이 있으면 이제부터 긁을 것

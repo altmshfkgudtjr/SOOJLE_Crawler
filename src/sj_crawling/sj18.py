@@ -15,7 +15,10 @@ def Parsing_list_url(URL, bs):
 		if bs.find("ol", {"class": "bd_lst bd_zine zine zine1 img_load"}) is not None:
 			posts = bs.find("ol", {"class": "bd_lst bd_zine zine zine1 img_load"}).findAll("li")
 			for post in posts:
-				url = post.find("a")['href']
+				try:
+					url = post.find("a")['href']
+				except:
+					break
 				url = domain + url
 				List.append(url)
 	else:

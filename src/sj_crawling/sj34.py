@@ -70,15 +70,6 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
-	'''
-	if URL['info'].split("_")[2] == 'free' or URL['info'].split("_")[2] == 'notice' or URL['info'].split("_")[2] == 'jobinfo' or URL['info'].split("_")[2] == 'promotion'\
-or URL['info'].split("_")[2] == 'club' or URL['info'].split("_")[2] == 'trade':
-		title = bs.find("h2", {"class": "large"}).text.strip()
-	else:
-		title = "!@#$soojle-notitle" + bs.find("p", {'class': "large"}).text.strip()
-		if len(title) >= 300:
-			title = title[:299]
-	'''
 	title = bs.find("p", {'class': "large"}).text.strip()
 	author = "0"
 	date = bs.find("time").text.strip()
@@ -114,9 +105,10 @@ or URL['info'].split("_")[2] == 'club' or URL['info'].split("_")[2] == 'trade':
 	post_data['author'] = author.upper()
 	post_data['date'] = date
 	post_data['post'] = post.lower()
-	post_data['tag'] = tag_done 	# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
+	post_data['tag'] = tag_done.append(board_tag)
 	post_data['img'] = img
-	post_data['url'] = post_url
+	post_data['url'] = post_urls
+	post_data['info'] = URL['info'].split("_")[1] + "_" + board_tag
 
 	return_data.append(post_data)
 	return_data.append(title)

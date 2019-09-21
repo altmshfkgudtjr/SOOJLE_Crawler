@@ -15,6 +15,10 @@ from posts_cnt import posts_cnt
 from tag_info import tag_info
 from db_health import url_health_change
 from db_connect import *
+from datetime import datetime, timedelta
+from timeLogWrite import time_write
+#프로그램 시작시간
+start_time = datetime.now()
 
 #DB 연결
 database = connect_db()
@@ -57,3 +61,7 @@ if __name__ == '__main__':
 	print("\n\nCrawling End!\n\n")
 	#db_manager.collection_indexing(db)	#인덱싱 작업화
 	disconnect_db(client)	#DB 연결해제
+
+#프로그램 종료시간
+end_time = datetime.now()
+time_write(start_time, end_time)

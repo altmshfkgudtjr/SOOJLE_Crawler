@@ -11,7 +11,10 @@ from img_size import img_size
 def Parsing_list_url(URL, bs):
 	List = []
 	domain = Domain_check(URL['url'])
-	posts = bs.find("table", {"class": "bd_lst bd_tb_lst bd_tb"}).find("tbody").findAll("tr")
+	try:
+		posts = bs.find("table", {"class": "bd_lst bd_tb_lst bd_tb"}).find("tbody").findAll("tr")
+	except:
+		posts = []
 	for post in posts:
 		url = post.find("td", {"class": "title"}).find("a")['href']
 		url = domain + url

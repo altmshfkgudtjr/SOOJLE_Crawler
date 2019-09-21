@@ -27,7 +27,10 @@ def Parsing_post_data(bs, URL):
 	try:
 		posts = bs.findAll("div", {"class": "article-board"})[1].find("tbody").findAll("tr")
 	except:
-		posts = bs.findAll("div", {"class": "article-board"})[1].findAll("tr")
+		try:
+			posts = bs.findAll("div", {"class": "article-board"})[1].findAll("tr")
+		except:
+			posts = []
 
 	for post in posts:
 		post_data = {}
