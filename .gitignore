@@ -192,3 +192,4 @@ $RECYCLE.BIN/
 #Ignore file by NB
 all_login.py
 db_info.py
+crawler_log.log
