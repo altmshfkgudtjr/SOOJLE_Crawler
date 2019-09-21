@@ -1201,3 +1201,1172 @@ URL :: https://everytime.kr
 Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
 
 
+[ERROR]=====================================================================
+2019-09-20 16:00:27 :: sj34_everytime_all
+URL :: https://everytime.kr
+<class 'selenium.common.exceptions.WebDriverException'>
+Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+[ERROR]=====================================================================
+2019-09-20 16:18:18 :: sj34_everytime_all
+URL :: https://everytime.kr/377390/v/89085591
+<class 'urllib3.exceptions.MaxRetryError'>
+HTTPConnectionPool(host='127.0.0.1', port=38441): Max retries exceeded with url: /session/2151e71505305a563765898cf0a22cd6/element (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f3d509e3668>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+[ERROR]=====================================================================
+2019-09-20 16:59:28 :: sj2_udream_notice
+URL :: http://udream.sejong.ac.kr/Community/Notice/NoticeList.aspx?rp=1
+<class 'requests.exceptions.InvalidSchema'>
+No connection adapters were found for '<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+<title></title>
+<link href="/dhtml/share.css" rel="stylesheet"/>
+<script src="/dhtml/common.js" type="text/javascript"></script>
+<script src="/app/system/hcontrol.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            radioChk($("#pro").val());
+        });
+
+        var chkSsl = "https://udream.sejong.ac.kr";
+        if (chkSsl.length > 0) {
+            if (document.location.href.indexOf("https") == -1) {
+                document.location.href = chkSsl + "/main/login.aspx";
+            }
+        }
+
+        function loginFunc(val) {
+            if (val == 2) $("#bizLogin").css("display", "block");
+            else $("#bizLogin").css("display", "none");
+        }
+
+        function radioChk(vals) {
+            $(".bizReg").hide();
+            $(".memberReg").hide();
+
+            $(".progroup").each(function () {
+                $(this).removeClass("active");
+            });
+
+            $("#radio" + vals).addClass("active");
+            $("#pro").val(vals);
+            if (vals == 2) {
+                $(".bizReg").show();
+            }
+            else if (vals == 0) {
+                $(".memberReg").show();
+            }
+            else if (vals == 9) {
+                //사이버대 임시로 일단 동작은 일반인과 같게 하도록함.
+                $(".memberReg").show();
+                $("#pro").val(0);
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<section class="vbox">
+<header class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+<script src="/dhtml/top.js" type="text/javascript"></script>
+</header>
+<section class="hbox">
+<section class="m-t-lg wrapper-md animated fadeInUp">
+<div class="aside-xxl container">
+<a class="navbar-brand block"><img alt="로고" src="/img/common/logo.png" style="height:25px;"/></a>
+<section class="m-b-lg">
+<header class="wrapper text-center">
+<strong>로그인 하시려면 아래 정보를 입력하세요.</strong>
+</header>
+<form action="https://udream.sejong.ac.kr/main/loginPro.aspx" method="post">
+<div class="list-group">
+<div class="list-group-item">
+<input class="form-control no-border" name="rUserid" placeholder="아이디" type="text"/>
+</div>
+<div class="list-group-item">
+<input class="form-control no-border" name="rPW" placeholder="비밀번호" type="password"/>
+</div>
+<div class="list-group-item text-center">
+<div class="btn-group">
+<button class="btn btn-default active progroup" id="radio1" onclick="radioChk(1)" type="button">학생</button>
+<button class="btn btn-default progroup" id="radio2" onclick="radioChk(2)" type="button">기업</button>
+<button class="btn btn-default progroup" id="radio3" onclick="radioChk(3)" type="button">교직원</button>
+<button class="btn btn-default progroup" id="radio0" onclick="radioChk(0)" type="button">일반인</button>
+<button class="btn btn-default progroup" id="radio9" onclick="radioChk(9)" type="button">세종사이버대</button>
+</div>
+<input id="pro" name="pro" type="hidden" value="1"/>
+</div>
+<div class="list-group-item text-center memberReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default" onclick="go('/Main/Member/OutsiderJoinCheck.aspx')" type="button">회원가입</button>
+<button class="btn btn-default" onclick="go('/Main/Member/MemberFind.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+<div class="list-group-item text-center bizReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default hidden" onclick="go('/Biz/BizFormPre.aspx')" type="button">기업회원가입</button>
+<button class="btn btn-default" onclick="go('/Biz/BizFindID.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+<div class="line line-dashed"></div>
+</form>
+</section>
+</div>
+</section>
+</section>
+</section>
+</body>
+</html>
+'
+
+[ERROR]=====================================================================
+2019-09-20 16:59:30 :: sj3_udream_jobinfo
+URL :: https://udream.sejong.ac.kr/Recruit/RecruitList.aspx?rp=1
+<class 'requests.exceptions.InvalidSchema'>
+No connection adapters were found for '<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+<title></title>
+<link href="/dhtml/share.css" rel="stylesheet"/>
+<script src="/dhtml/common.js" type="text/javascript"></script>
+<script src="/app/system/hcontrol.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            radioChk($("#pro").val());
+        });
+
+        var chkSsl = "https://udream.sejong.ac.kr";
+        if (chkSsl.length > 0) {
+            if (document.location.href.indexOf("https") == -1) {
+                document.location.href = chkSsl + "/main/login.aspx";
+            }
+        }
+
+        function loginFunc(val) {
+            if (val == 2) $("#bizLogin").css("display", "block");
+            else $("#bizLogin").css("display", "none");
+        }
+
+        function radioChk(vals) {
+            $(".bizReg").hide();
+            $(".memberReg").hide();
+
+            $(".progroup").each(function () {
+                $(this).removeClass("active");
+            });
+
+            $("#radio" + vals).addClass("active");
+            $("#pro").val(vals);
+            if (vals == 2) {
+                $(".bizReg").show();
+            }
+            else if (vals == 0) {
+                $(".memberReg").show();
+            }
+            else if (vals == 9) {
+                //사이버대 임시로 일단 동작은 일반인과 같게 하도록함.
+                $(".memberReg").show();
+                $("#pro").val(0);
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<section class="vbox">
+<header class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+<script src="/dhtml/top.js" type="text/javascript"></script>
+</header>
+<section class="hbox">
+<section class="m-t-lg wrapper-md animated fadeInUp">
+<div class="aside-xxl container">
+<a class="navbar-brand block"><img alt="로고" src="/img/common/logo.png" style="height:25px;"/></a>
+<section class="m-b-lg">
+<header class="wrapper text-center">
+<strong>로그인 하시려면 아래 정보를 입력하세요.</strong>
+</header>
+<form action="https://udream.sejong.ac.kr/main/loginPro.aspx" method="post">
+<div class="list-group">
+<div class="list-group-item">
+<input class="form-control no-border" name="rUserid" placeholder="아이디" type="text"/>
+</div>
+<div class="list-group-item">
+<input class="form-control no-border" name="rPW" placeholder="비밀번호" type="password"/>
+</div>
+<div class="list-group-item text-center">
+<div class="btn-group">
+<button class="btn btn-default active progroup" id="radio1" onclick="radioChk(1)" type="button">학생</button>
+<button class="btn btn-default progroup" id="radio2" onclick="radioChk(2)" type="button">기업</button>
+<button class="btn btn-default progroup" id="radio3" onclick="radioChk(3)" type="button">교직원</button>
+<button class="btn btn-default progroup" id="radio0" onclick="radioChk(0)" type="button">일반인</button>
+<button class="btn btn-default progroup" id="radio9" onclick="radioChk(9)" type="button">세종사이버대</button>
+</div>
+<input id="pro" name="pro" type="hidden" value="1"/>
+</div>
+<div class="list-group-item text-center memberReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default" onclick="go('/Main/Member/OutsiderJoinCheck.aspx')" type="button">회원가입</button>
+<button class="btn btn-default" onclick="go('/Main/Member/MemberFind.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+<div class="list-group-item text-center bizReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default hidden" onclick="go('/Biz/BizFormPre.aspx')" type="button">기업회원가입</button>
+<button class="btn btn-default" onclick="go('/Biz/BizFindID.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+<div class="line line-dashed"></div>
+</form>
+</section>
+</div>
+</section>
+</section>
+</section>
+</body>
+</html>
+'
+
+[ERROR]=====================================================================
+2019-09-20 16:59:32 :: sj4_udream_workinfo
+URL :: http://udream.sejong.ac.kr/WorkCenter/WorkRecruit.aspx?rp=1
+<class 'requests.exceptions.InvalidSchema'>
+No connection adapters were found for '<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+<title></title>
+<link href="/dhtml/share.css" rel="stylesheet"/>
+<script src="/dhtml/common.js" type="text/javascript"></script>
+<script src="/app/system/hcontrol.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            radioChk($("#pro").val());
+        });
+
+        var chkSsl = "https://udream.sejong.ac.kr";
+        if (chkSsl.length > 0) {
+            if (document.location.href.indexOf("https") == -1) {
+                document.location.href = chkSsl + "/main/login.aspx";
+            }
+        }
+
+        function loginFunc(val) {
+            if (val == 2) $("#bizLogin").css("display", "block");
+            else $("#bizLogin").css("display", "none");
+        }
+
+        function radioChk(vals) {
+            $(".bizReg").hide();
+            $(".memberReg").hide();
+
+            $(".progroup").each(function () {
+                $(this).removeClass("active");
+            });
+
+            $("#radio" + vals).addClass("active");
+            $("#pro").val(vals);
+            if (vals == 2) {
+                $(".bizReg").show();
+            }
+            else if (vals == 0) {
+                $(".memberReg").show();
+            }
+            else if (vals == 9) {
+                //사이버대 임시로 일단 동작은 일반인과 같게 하도록함.
+                $(".memberReg").show();
+                $("#pro").val(0);
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<section class="vbox">
+<header class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+<script src="/dhtml/top.js" type="text/javascript"></script>
+</header>
+<section class="hbox">
+<section class="m-t-lg wrapper-md animated fadeInUp">
+<div class="aside-xxl container">
+<a class="navbar-brand block"><img alt="로고" src="/img/common/logo.png" style="height:25px;"/></a>
+<section class="m-b-lg">
+<header class="wrapper text-center">
+<strong>로그인 하시려면 아래 정보를 입력하세요.</strong>
+</header>
+<form action="https://udream.sejong.ac.kr/main/loginPro.aspx" method="post">
+<div class="list-group">
+<div class="list-group-item">
+<input class="form-control no-border" name="rUserid" placeholder="아이디" type="text"/>
+</div>
+<div class="list-group-item">
+<input class="form-control no-border" name="rPW" placeholder="비밀번호" type="password"/>
+</div>
+<div class="list-group-item text-center">
+<div class="btn-group">
+<button class="btn btn-default active progroup" id="radio1" onclick="radioChk(1)" type="button">학생</button>
+<button class="btn btn-default progroup" id="radio2" onclick="radioChk(2)" type="button">기업</button>
+<button class="btn btn-default progroup" id="radio3" onclick="radioChk(3)" type="button">교직원</button>
+<button class="btn btn-default progroup" id="radio0" onclick="radioChk(0)" type="button">일반인</button>
+<button class="btn btn-default progroup" id="radio9" onclick="radioChk(9)" type="button">세종사이버대</button>
+</div>
+<input id="pro" name="pro" type="hidden" value="1"/>
+</div>
+<div class="list-group-item text-center memberReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default" onclick="go('/Main/Member/OutsiderJoinCheck.aspx')" type="button">회원가입</button>
+<button class="btn btn-default" onclick="go('/Main/Member/MemberFind.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+<div class="list-group-item text-center bizReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default hidden" onclick="go('/Biz/BizFormPre.aspx')" type="button">기업회원가입</button>
+<button class="btn btn-default" onclick="go('/Biz/BizFindID.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+<div class="line line-dashed"></div>
+</form>
+</section>
+</div>
+</section>
+</section>
+</section>
+</body>
+</html>
+'
+
+[ERROR]=====================================================================
+2019-09-20 16:59:34 :: sj5_udream_workyoung
+URL :: http://udream.sejong.ac.kr/WorkCenter/WorkIntern.aspx?rp=1
+<class 'requests.exceptions.InvalidSchema'>
+No connection adapters were found for '<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+<title></title>
+<link href="/dhtml/share.css" rel="stylesheet"/>
+<script src="/dhtml/common.js" type="text/javascript"></script>
+<script src="/app/system/hcontrol.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            radioChk($("#pro").val());
+        });
+
+        var chkSsl = "https://udream.sejong.ac.kr";
+        if (chkSsl.length > 0) {
+            if (document.location.href.indexOf("https") == -1) {
+                document.location.href = chkSsl + "/main/login.aspx";
+            }
+        }
+
+        function loginFunc(val) {
+            if (val == 2) $("#bizLogin").css("display", "block");
+            else $("#bizLogin").css("display", "none");
+        }
+
+        function radioChk(vals) {
+            $(".bizReg").hide();
+            $(".memberReg").hide();
+
+            $(".progroup").each(function () {
+                $(this).removeClass("active");
+            });
+
+            $("#radio" + vals).addClass("active");
+            $("#pro").val(vals);
+            if (vals == 2) {
+                $(".bizReg").show();
+            }
+            else if (vals == 0) {
+                $(".memberReg").show();
+            }
+            else if (vals == 9) {
+                //사이버대 임시로 일단 동작은 일반인과 같게 하도록함.
+                $(".memberReg").show();
+                $("#pro").val(0);
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<section class="vbox">
+<header class="bg-white header header-md navbar navbar-fixed-top-xs box-shadow">
+<script src="/dhtml/top.js" type="text/javascript"></script>
+</header>
+<section class="hbox">
+<section class="m-t-lg wrapper-md animated fadeInUp">
+<div class="aside-xxl container">
+<a class="navbar-brand block"><img alt="로고" src="/img/common/logo.png" style="height:25px;"/></a>
+<section class="m-b-lg">
+<header class="wrapper text-center">
+<strong>로그인 하시려면 아래 정보를 입력하세요.</strong>
+</header>
+<form action="https://udream.sejong.ac.kr/main/loginPro.aspx" method="post">
+<div class="list-group">
+<div class="list-group-item">
+<input class="form-control no-border" name="rUserid" placeholder="아이디" type="text"/>
+</div>
+<div class="list-group-item">
+<input class="form-control no-border" name="rPW" placeholder="비밀번호" type="password"/>
+</div>
+<div class="list-group-item text-center">
+<div class="btn-group">
+<button class="btn btn-default active progroup" id="radio1" onclick="radioChk(1)" type="button">학생</button>
+<button class="btn btn-default progroup" id="radio2" onclick="radioChk(2)" type="button">기업</button>
+<button class="btn btn-default progroup" id="radio3" onclick="radioChk(3)" type="button">교직원</button>
+<button class="btn btn-default progroup" id="radio0" onclick="radioChk(0)" type="button">일반인</button>
+<button class="btn btn-default progroup" id="radio9" onclick="radioChk(9)" type="button">세종사이버대</button>
+</div>
+<input id="pro" name="pro" type="hidden" value="1"/>
+</div>
+<div class="list-group-item text-center memberReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default" onclick="go('/Main/Member/OutsiderJoinCheck.aspx')" type="button">회원가입</button>
+<button class="btn btn-default" onclick="go('/Main/Member/MemberFind.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+<div class="list-group-item text-center bizReg" style="display:none;">
+<div class="btn-group">
+<button class="btn btn-default hidden" onclick="go('/Biz/BizFormPre.aspx')" type="button">기업회원가입</button>
+<button class="btn btn-default" onclick="go('/Biz/BizFindID.aspx')" type="button">아이디/패스워드 찾기</button>
+</div>
+</div>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+<div class="line line-dashed"></div>
+</form>
+</section>
+</div>
+</section>
+</section>
+</section>
+</body>
+</html>
+'
+
+[ERROR]=====================================================================
+2019-09-20 17:01:54 :: sj7_promotion_article
+URL :: http://www.sejongpr.ac.kr/sejongnewspaperlist.do?currentPage=29
+<class 'TypeError'>
+'NoneType' object is not subscriptable
+
+[ERROR]=====================================================================
+2019-09-20 17:03:23 :: sj7_promotion_prism
+URL :: http://www.sejongpr.ac.kr/sejongnewspaperlist.do?boardType=2&currentPage=76
+<class 'TypeError'>
+'NoneType' object is not subscriptable
+
+[ERROR]=====================================================================
+2019-09-20 17:04:14 :: sj7_promotion_report
+URL :: http://www.sejongpr.ac.kr/sejongnewspaperlist.do?boardType=4&currentPage=45
+<class 'TypeError'>
+'NoneType' object is not subscriptable
+
+[ERROR]=====================================================================
+2019-09-20 17:04:38 :: sj7_promotion_speech
+URL :: http://www.sejongpr.ac.kr/sejongnewspaperlist.do?boardType=26&currentPage=16
+<class 'TypeError'>
+'NoneType' object is not subscriptable
+
+[ERROR]=====================================================================
+2019-09-20 17:35:22 :: sj8_promotion_media
+URL :: http://www.sejongpr.ac.kr/sejongnewspaperlist.do?boardType=5&currentPage=77
+<class 'AttributeError'>
+'NoneType' object has no attribute 'text'
+
+[ERROR]=====================================================================
+2019-09-20 17:42:53 :: sj13_computer_event
+URL :: http://ce.sejong.ac.kr/index.php?mid=contest&page=6
+<class 'AttributeError'>
+'NoneType' object has no attribute 'find'
+
+[ERROR]=====================================================================
+2019-09-20 17:43:44 :: sj13_computer_job
+URL :: http://ce.sejong.ac.kr/index.php?mid=job&page=10
+<class 'AttributeError'>
+'NoneType' object has no attribute 'find'
+
+[ERROR]=====================================================================
+2019-09-20 17:45:02 :: sj16_navercafe_foreigner
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=24196743&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=74
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:05 :: sj16_navercafe_music
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=27389285&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=2
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:07 :: sj16_navercafe_animation
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=27460434&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=1
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:09 :: sj16_navercafe_math
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=26913200&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=2
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:11 :: sj16_navercafe_korean
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=25399964&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=1
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:13 :: sj16_navercafe_environmentenergy
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=26106419&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=1
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:15 :: sj16_navercafe_chemistry
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=27933276&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=1
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:17 :: sj16_navercafe_sjnanuri
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=25721790&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=1
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:19 :: sj16_navercafe_eleinfoengineer
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=28918157&search.boardtype=L&search.questionTab=A&search.totalCount=103&search.page=1
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:21 :: sj16_navercafe_imc
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=29017374&search.boardtype=L&search.questionTab=A&search.totalCount=52&search.page=1
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:45:23 :: sj16_navercafe_club
+URL :: https://cafe.naver.com/ArticleList.nhn?search.clubid=28987205&search.boardtype=L&search.questionTab=A&search.totalCount=151&search.page=1
+<class 'IndexError'>
+list index out of range
+
+[ERROR]=====================================================================
+2019-09-20 17:46:12 :: sj17_counselor_free
+URL :: http://counsel.sejong.ac.kr/index.php?mid=menu052&page=5
+<class 'AttributeError'>
+'NoneType' object has no attribute 'findAll'
+
+[ERROR]=====================================================================
+2019-09-20 18:00:33 :: sj18_skbs_news
+URL :: http://www.skbs.kr/index.php?mid=skbsnews&page=4
+<class 'TypeError'>
+'NoneType' object is not subscriptable
+
+[ERROR]=====================================================================
+2019-09-20 18:05:21 :: sj20_sejong_dc
+URL :: https://gall.dcinside.com/board/lists/?id=sejong&page=1
+<class 'str'>
+driver_none
+
+[ERROR]=====================================================================
+2019-09-20 19:11:00 :: sj27_campuspick_certificate
+URL :: https://www.campuspick.com/study/list?category1=3&category2=0
+<class 'ValueError'>
+time data '2019/18/12/31 16:01:00' does not match format '%Y/%m/%d %H:%M:%S'
+
+[ERROR]=====================================================================
+2019-09-20 19:23:39 :: sj29_sejong_dormitory
+URL :: https://happydorm.sejong.ac.kr/sejong/bbs/getGolist.kmc?bbs_locgbn=SJ&bbs_id=notice&pPage=32
+<class 'AttributeError'>
+'NoneType' object has no attribute 'find'
+
+[ERROR]=====================================================================
+2019-09-20 19:26:33 :: sj30_sejongstation_notice
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KOYa&lastbbsdepth=000vLzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 19:31:09 :: sj30_sejongstation_free
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KObl&lastbbsdepth=003Auzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 19:37:25 :: sj30_sejongstation_qna
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KRl2&lastbbsdepth=004kdzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 19:44:50 :: sj30_sejongstation_activity
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KObP&lastbbsdepth=000Eozzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 19:46:44 :: sj30_sejongstation_club
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=il3i&lastbbsdepth=0001Kzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 19:48:40 :: sj30_sejongstation_study
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KOdc&lastbbsdepth=0006Mzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 19:50:36 :: sj30_sejongstation_food
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KObe&lastbbsdepth=0004Jzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-20 19:53:18 :: sj30_sejongstation_trade
+URL :: http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KOco&lastbbsdepth=001VHzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=1
+<class 'selenium.common.exceptions.TimeoutException'>
+Message: 
+
+
+[ERROR]=====================================================================
+2019-09-21 00:16:50 :: sj34_everytime_all
+URL :: https://everytime.kr/377390/v/87054764
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:16:52 :: sj34_everytime_all
+URL :: https://everytime.kr/377390/p/344
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:16:54 :: sj34_everytime_all
+URL :: https://everytime.kr/258755/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:16:56 :: sj34_everytime_all
+URL :: https://everytime.kr/385977/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:16:58 :: sj34_everytime_all
+URL :: https://everytime.kr/385889/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:00 :: sj34_everytime_all
+URL :: https://everytime.kr/377482/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:02 :: sj34_everytime_all
+URL :: https://everytime.kr/367450/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:04 :: sj34_everytime_all
+URL :: https://everytime.kr/258757/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:06 :: sj34_everytime_all
+URL :: https://everytime.kr/389027/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:08 :: sj34_everytime_all
+URL :: https://everytime.kr/391378/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:10 :: sj34_everytime_all
+URL :: https://everytime.kr/419439/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:12 :: sj34_everytime_all
+URL :: https://everytime.kr/390999/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:14 :: sj34_everytime_all
+URL :: https://everytime.kr/389287/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:16 :: sj34_everytime_all
+URL :: https://everytime.kr/435560/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:18 :: sj34_everytime_all
+URL :: https://everytime.kr/399074/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:20 :: sj34_everytime_all
+URL :: https://everytime.kr/393410/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:22 :: sj34_everytime_all
+URL :: https://everytime.kr/424353/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:24 :: sj34_everytime_all
+URL :: https://everytime.kr/445121/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:26 :: sj34_everytime_all
+URL :: https://everytime.kr/420333/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:28 :: sj34_everytime_all
+URL :: https://everytime.kr/387226/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:30 :: sj34_everytime_all
+URL :: https://everytime.kr/445324/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:32 :: sj34_everytime_all
+URL :: https://everytime.kr/425521/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:34 :: sj34_everytime_all
+URL :: https://everytime.kr/421845/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:36 :: sj34_everytime_all
+URL :: https://everytime.kr/426831/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:38 :: sj34_everytime_all
+URL :: https://everytime.kr/446172/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:40 :: sj34_everytime_all
+URL :: https://everytime.kr/446087/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:42 :: sj34_everytime_all
+URL :: https://everytime.kr/445899/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:44 :: sj34_everytime_all
+URL :: https://everytime.kr/445612/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:46 :: sj34_everytime_all
+URL :: https://everytime.kr/445600/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:48 :: sj34_everytime_all
+URL :: https://everytime.kr/445121/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:50 :: sj34_everytime_all
+URL :: https://everytime.kr/444700/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:52 :: sj34_everytime_all
+URL :: https://everytime.kr/444646/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:54 :: sj34_everytime_all
+URL :: https://everytime.kr/443924/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:56 :: sj34_everytime_all
+URL :: https://everytime.kr/443852/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:17:58 :: sj34_everytime_all
+URL :: https://everytime.kr/443187/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:00 :: sj34_everytime_all
+URL :: https://everytime.kr/443054/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:02 :: sj34_everytime_all
+URL :: https://everytime.kr/442603/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:04 :: sj34_everytime_all
+URL :: https://everytime.kr/442553/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:06 :: sj34_everytime_all
+URL :: https://everytime.kr/442479/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:08 :: sj34_everytime_all
+URL :: https://everytime.kr/442393/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:10 :: sj34_everytime_all
+URL :: https://everytime.kr/442208/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:12 :: sj34_everytime_all
+URL :: https://everytime.kr/442080/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:14 :: sj34_everytime_all
+URL :: https://everytime.kr/441783/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:16 :: sj34_everytime_all
+URL :: https://everytime.kr/441485/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:18 :: sj34_everytime_all
+URL :: https://everytime.kr/441434/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:20 :: sj34_everytime_all
+URL :: https://everytime.kr/441275/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:22 :: sj34_everytime_all
+URL :: https://everytime.kr/441121/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:24 :: sj34_everytime_all
+URL :: https://everytime.kr/440195/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:26 :: sj34_everytime_all
+URL :: https://everytime.kr/439986/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:28 :: sj34_everytime_all
+URL :: https://everytime.kr/439732/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:30 :: sj34_everytime_all
+URL :: https://everytime.kr/439390/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:32 :: sj34_everytime_all
+URL :: https://everytime.kr/439052/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:34 :: sj34_everytime_all
+URL :: https://everytime.kr/439025/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:36 :: sj34_everytime_all
+URL :: https://everytime.kr/438678/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:39 :: sj34_everytime_all
+URL :: https://everytime.kr/438556/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:41 :: sj34_everytime_all
+URL :: https://everytime.kr/438448/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:43 :: sj34_everytime_all
+URL :: https://everytime.kr/438373/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:45 :: sj34_everytime_all
+URL :: https://everytime.kr/438116/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:47 :: sj34_everytime_all
+URL :: https://everytime.kr/437691/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:49 :: sj34_everytime_all
+URL :: https://everytime.kr/437533/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:51 :: sj34_everytime_all
+URL :: https://everytime.kr/437203/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:53 :: sj34_everytime_all
+URL :: https://everytime.kr/436862/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:55 :: sj34_everytime_all
+URL :: https://everytime.kr/436549/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:57 :: sj34_everytime_all
+URL :: https://everytime.kr/436428/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:18:59 :: sj34_everytime_all
+URL :: https://everytime.kr/436285/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:01 :: sj34_everytime_all
+URL :: https://everytime.kr/435822/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:03 :: sj34_everytime_all
+URL :: https://everytime.kr/435223/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:05 :: sj34_everytime_all
+URL :: https://everytime.kr/434910/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:07 :: sj34_everytime_all
+URL :: https://everytime.kr/433508/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:09 :: sj34_everytime_all
+URL :: https://everytime.kr/433193/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:11 :: sj34_everytime_all
+URL :: https://everytime.kr/433023/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:13 :: sj34_everytime_all
+URL :: https://everytime.kr/432956/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:15 :: sj34_everytime_all
+URL :: https://everytime.kr/432774/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
+[ERROR]=====================================================================
+2019-09-21 00:19:17 :: sj34_everytime_all
+URL :: https://everytime.kr/432236/p/1
+<class 'selenium.common.exceptions.InvalidSessionIdException'>
+Message: invalid session id
+
+
