@@ -16,6 +16,8 @@ def Parsing_list_url(URL, bs):
 	posts = bs.find("tbody").findAll("tr")
 	for post in posts:
 		url = post.find("a")['href']
+		if url.startswith("http"):
+			continue
 		url = domain + url
 		List.append(url)
 	return List
