@@ -13,6 +13,7 @@ from img_size import img_size
 from date_cut import date_cut
 from datetime import datetime
 from db_manager import push_lastly_post
+import time
 
 
 
@@ -114,6 +115,7 @@ def Parsing_list_url(URL, page_url, lastly_post, db):
 				num += 1
 
 	data = (driver, List)
+	time.sleep(2)
 	return data
 
 
@@ -174,6 +176,7 @@ def Parsing_post_data(driver, post_url, URL):
 	return_data.append(post_data)
 	return_data.append(title)
 	return_data.append(date)
+	time.sleep(2)
 	return return_data
 
 
