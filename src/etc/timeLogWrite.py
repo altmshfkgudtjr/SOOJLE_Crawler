@@ -18,6 +18,6 @@ def time_write(start_time, end_time):
 	f_data = ":::: CRAWLER TIME INFO ::::\n"
 	f_data += "START : " + start_time + "\n"
 	f_data += "END   : " + end_time + "\n"
-	f_data += "RUN   : " + running_time + "\n\n\n\n"
+	f_data += "RUN   : " + str(running_time) + "\n\n\n\n"
 	f.write(f_data)
 	f.close()
