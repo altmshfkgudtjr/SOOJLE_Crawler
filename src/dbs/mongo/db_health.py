@@ -19,18 +19,27 @@ def url_health_check(target_url, db):
 	else:
 		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"crawling": False, "stay_cnt": 5}})
 	print("\n:::: THIS URL CAN NOT CRAWLED! ::::\n")
-
-# 만약 stay_cnt 가 0 인 것이 있으면 이제부터 긁을 것
-def url_health_change(db):
-	#soojle 라는 데이터베이스에 접근
-	db_url_list = db.url.find({}, {"crawling":1, "stay_cnt":1})
-	for db_url in db_url_list:
-		if "crawling" not in db_url:
-			continue
-		elif db_url['crawling'] == False and db_url['stay_cnt'] == 0:
-			target_id = db_url['_id']
-			db.url.update_one({"_id": target_id}, {"crawling": True})
-	print(":::: URL HEALTH CHECK Complete! ::::")
-
+	
 def all_url_Crawling_True(db):
 	db.url.update_many({}, {"$set", {"crawling": True, "stay_cnt": 0}})
+
+#Crawling 가능 여부 check
+def is_crawling(db, target_crawler):
+	print(":::: URL HEALTH CHECKING... ::::")
+	try:
+		target = db.url.find_one({"info": target_crawler}, {"crawling": 1, "stay_cnt": 1})
+		target_id = target["_id"]
+	except:
+		target_id = None
+	if target_id == None:
+		print(":::: URL HEALTH DONE! - NONE ::::")
+		return True
+	if target["crawling"] == False and target["stay_cnt"] == 0:
+		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"crawling": True}})
+	elif target["crawling"] == False and target["stay_cnt"] > 0:
+		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"stay_cnt": target["stay_cnt"] - 1}})
+	else:
+		print(":::: URL HEALTH DONE! - POSSIBLE ::::")
+		return True
+	print(":::: URL HEALTH DONE! - IMPOSSIBLE ::::")
+	return False

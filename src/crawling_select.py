@@ -7,6 +7,7 @@ from db_manager import get_lastly_post
 from db_manager import push_lastly_post
 from date_cut import date_cut
 from error_handler import error_handler
+from db_health import is_crawling
 import time
 import sj1, sj2, sj3, sj4, sj5, sj6, sj7, sj8, sj9, sj10, sj11, sj12, sj13, sj14, sj15, sj16, sj17, sj18,\
  sj19, sj20, sj21, sj23, sj24, sj25, sj26, sj27, sj28, sj29, sj30, sj31, sj32, sj33, sj34, sj35, sj36, sj37,\
@@ -27,6 +28,10 @@ def Crawling(URL, db):
 
 	#현재 크롤링하는 게시판 info 출력
 	print("Target : ", URL['info'])
+
+	#크롤링 유무판단
+	if is_crawling(db, URL['info']) == False:
+		return
 
 	while True:
 		if crawling_name in ["sj23", "sj26", "sj27", "sj28", "sj30"]:

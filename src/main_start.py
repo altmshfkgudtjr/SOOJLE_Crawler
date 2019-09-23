@@ -13,7 +13,6 @@ from datetime import datetime
 from info_id import post_info
 from posts_cnt import posts_cnt
 from tag_info import tag_info
-from db_health import url_health_change
 from db_connect import *
 from datetime import datetime, timedelta
 from timeLogWrite import time_write
@@ -42,8 +41,6 @@ if __name__ == '__main__':
 	#date 테이블 생성 밎 dictionary 화
 	init_date_collection(db)
 	date_init(db)
-	#url health check 변경
-	url_health_change(db)
 
 	print("\n\nCrawling Start!\n\n")
 

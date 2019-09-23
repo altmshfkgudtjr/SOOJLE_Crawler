@@ -4,7 +4,7 @@ import time
 from platform import platform
 
 def error_handler(e, URL, page_url, db):
-	# 앞으로 10번동안 이 사이트 크롤링 일시중지
+	# 앞으로 5번동안 이 사이트 크롤링 일시중지
 	url_health_check(URL['url'], db)
 	log_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	log_info = URL['info']

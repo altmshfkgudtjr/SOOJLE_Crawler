@@ -61,6 +61,8 @@ def db_manager(URL, post_data_prepare, db):
 		elif URL['info'].split('_')[0] == 'sj20' or  URL['info'].split('-')[0] == 'sj34':
 			if filtering.filter_hardcore(post['title'] + post['post']):
 				print("Harmful Post ---- ", post['title'])
+			else:
+				temp.append(post)
 		else:
 			temp.append(post)
 	post_data_prepare = temp
