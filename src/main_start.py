@@ -2,6 +2,7 @@
 """   SooJel Project	"""
 """ BY *IML *NB *837477 """
 
+import sys
 import sj_path	#환경변수 지정
 from url_list import List
 from crawling_select import Crawling	#크롤링 전체
@@ -16,6 +17,17 @@ from tag_info import tag_info
 from db_connect import *
 from datetime import datetime, timedelta
 from timeLogWrite import time_write
+
+#시작위치 및 끝 위치 입력 설정
+ST_NUM = None
+END_NUM = None
+if len(sys.argv) > 1:
+	try:
+		ST_NUM = int(sys.argv[1])
+		END_NUM = int(sys.argv[2])
+	except:
+		print(":::: WRONG INPUT ::::\n\n\n")
+
 #프로그램 시작시간
 start_time = datetime.now()
 
@@ -25,7 +37,15 @@ db = database[1]
 client = database[0]
 
 db_manager.init_db(db)	#DB가 없으면 생성
-URLS = List[:]	#url_list에서 List를 URL으로 가져옴
+#url_list에서 List를 URL으로 가져옴
+if ST_NUM == None and END_NUM == None:
+	URLS = List[:]
+elif ST_NUM != None and END_NUM == None:
+	URLS = List[ST_NUM:]
+elif ST_NUM == None and END_NUM != None:
+	URLS = List[:END_NUM]
+else:
+	URLS = List[ST_NUM:END_NUM]
 
 if __name__ == '__main__':
 	print("\n\n")

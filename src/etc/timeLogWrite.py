@@ -12,9 +12,9 @@ def time_write(start_time, end_time):
 	print("RUN   : ", running_time)
 	print("\n\n\n\n")
 	if platform().startswith("Windows"):
-		f = open("/home/iml/log/crawler_time.log", 'a')
-	else:
 		f = open("crawler_time.log", 'a')
+	else:
+		f = open("/home/iml/log/crawler_time.log", 'a')
 	f_data = ":::: CRAWLER TIME INFO ::::\n"
 	f_data += "START : " + start_time + "\n"
 	f_data += "END   : " + end_time + "\n"
