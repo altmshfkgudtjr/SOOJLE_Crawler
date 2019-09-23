@@ -5,7 +5,6 @@ def time_write(start_time, end_time):
 	running_time = end_time - start_time
 	start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
 	end_time = end_time.strftime("%Y-%m-%d %H:%M:%S")
-	running_time = running_time.strftime("%Y-%m-%d %H:%M:%S")
 
 	print(":::: CRAWLER TIME INFO ::::")
 	print("START : ", start_time)
