@@ -26,7 +26,7 @@ def Parsing_list_url(URL, bs):
 
 #포스트 url을 받으면, 그 포스트의 정보를 dictionary 형태로 반환
 def Parsing_post_data(bs, post_url, URL):
-	time.sleep(2)
+	time.sleep(1)
 	return_data = []
 	post_data = {}
 	domain = Domain_check(URL['url'])
