@@ -23,7 +23,7 @@ def Parsing_post_data(post_url, URL):
 
 
 	#udream 로그인하는 함수
-	s = udream.login(post_url)
+	s = udream.login()
 	
 	page = s.get(post_url).text
 	bs = BeautifulSoup(page, "html.parser")

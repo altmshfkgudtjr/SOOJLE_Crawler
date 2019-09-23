@@ -14,8 +14,7 @@ def Parsing_list_url(URL, page_url):
 	domain = Domain_check(URL['url'])
 
 	#udream 로그인하는 함수
-	s = udream.login(page_url)
-
+	s = udream.login()
 	
 	page = s.get(page_url).text
 	bs = BeautifulSoup(page, "html.parser")

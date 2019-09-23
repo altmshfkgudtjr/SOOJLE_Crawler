@@ -12,7 +12,7 @@ def Parsing_list_url(URL, page_url):
 	List = []
 
 	#udream 로그인하는 함수
-	s = udream.login(page_url)
+	s = udream.login()
 
 	page = s.get(page_url).text
 	bs = BeautifulSoup(page, "lxml")	#html.parser 오류 lxml 로 가져온다.

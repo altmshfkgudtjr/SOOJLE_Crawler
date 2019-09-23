@@ -25,7 +25,7 @@ db = database[1]
 client = database[0]
 
 db_manager.init_db(db)	#DB가 없으면 생성
-URLS = List[0:1]	#url_list에서 List를 URL으로 가져옴
+URLS = List[:]	#url_list에서 List를 URL으로 가져옴
 
 if __name__ == '__main__':
 	print("\n\n")

@@ -8,7 +8,7 @@ ID = login_data[0]
 PW = login_data[1]
 
 #로그인 하는 cord
-def login(page_url):
+def login():
 	data = {"rUserid":ID, "rPW":PW, "pro":"1"}
 	s = requests.Session()
 	# url 에 로그인 데이터를 넘겨줌
