@@ -25,6 +25,8 @@ def Crawling(URL, db):
 	if crawling_name in ["sj34"]:		# 동적 게시판 예외
 		sj34.everytime_all_board(URL, end_date, db)
 		return
+	if crawling_name in ["sj20"]:		# 제외 게시판
+		return;
 
 	#현재 크롤링하는 게시판 info 출력
 	print("Target : ", URL['info'])
