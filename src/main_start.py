@@ -2,7 +2,6 @@
 """   SooJel Project	"""
 """ BY *IML *NB *837477 """
 
-import sys
 import sj_path	#환경변수 지정
 from url_list import List
 from crawling_select import Crawling	#크롤링 전체
