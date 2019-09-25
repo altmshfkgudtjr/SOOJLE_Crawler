@@ -135,6 +135,8 @@ def Crawling(URL, db):
 					pass
 				#post_data_prepare이 완성되지 않은 경우---------------------------------------------------------------------
 				else:
+					if get_post_data == None:	#잘못된 포스트 데이터인 경우
+						continue
 					title = get_post_data[1]
 					date = get_post_data[2]
 		
