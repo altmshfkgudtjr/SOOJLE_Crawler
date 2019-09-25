@@ -29,36 +29,39 @@ def Parsing_list_url(URL, bs):
 
 #포스트 url을 받으면, 그 포스트의 정보를 dictionary 형태로 반환
 def Parsing_post_data(bs, post_url, URL):
-	time.sleep(2)	#서버과부하를 막기위한 조치
-	return_data = []
-	post_data = {}
-	domain = Domain_check(URL['url'])
+	try:
+		time.sleep(2)	#서버과부하를 막기위한 조치
+		return_data = []
+		post_data = {}
+		domain = Domain_check(URL['url'])
 
-	author = bs.find("div", {"class": "sumTit"}).find("h3").find("span").text.strip()
-	title = bs.find("div", {"class": "sumTit"}).find("h3").text.strip().replace(author, "").strip()
-	if author.find("관리자") != -1:
-		author = "0"
-	date = bs.find("dl", {"class": "date"}).findAll("dd")[1].find("span").text.strip()
-	date = date + " 00:00:00"
-	date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
-	post = bs.find("div", {"class": "tbRow clear"}).text.strip()
-	post = post_wash(post)
-	tag_done = tag.tagging(URL, title)
-	img = 1
+		author = bs.find("div", {"class": "sumTit"}).find("h3").find("span").text.strip()
+		title = bs.find("div", {"class": "sumTit"}).find("h3").text.strip().replace(author, "").strip()
+		if author.find("관리자") != -1:
+			author = "0"
+		date = bs.find("dl", {"class": "date"}).findAll("dd")[1].find("span").text.strip()
+		date = date + " 00:00:00"
+		date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
+		post = bs.find("div", {"class": "tbRow clear"}).text.strip()
+		post = post_wash(post)
+		tag_done = tag.tagging(URL, title)
+		img = 1
 
-	#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[],'fav_cnt':0,'view':0} 같은 형식
-	post_data['title'] = title.upper()
-	post_data['author'] = author.upper()
-	post_data['date'] = date
-	post_data['post'] = post.lower()
-	post_data['tag'] = tag_done 	# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
-	post_data['img'] = img
-	post_data['url'] = post_url
+		#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[],'fav_cnt':0,'view':0} 같은 형식
+		post_data['title'] = title.upper()
+		post_data['author'] = author.upper()
+		post_data['date'] = date
+		post_data['post'] = post.lower()
+		post_data['tag'] = tag_done 	# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
+		post_data['img'] = img
+		post_data['url'] = post_url
 
-	return_data.append(post_data)
-	return_data.append(title)
-	return_data.append(date)
-	return return_data
+		return_data.append(post_data)
+		return_data.append(title)
+		return_data.append(date)
+		return return_data
+	except:
+		return None
 
 
 
