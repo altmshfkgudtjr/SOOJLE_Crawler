@@ -28,6 +28,7 @@ def Parsing_list_url(URL, page_url):
 	driver = chromedriver()
 	driver.get(page_url)
 	WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.li_list")))
+	time.sleep(2)
 	'''
 	for i in range(int(num)):
 		driver.find_element_by_xpath('//*[@id="paging"]/li[4]/a').click()
