@@ -194,11 +194,18 @@ def everytime_all_board(URL, end_date, db):
 	# 동적 게시판들 반복문
 	for board in board_list:
 		page = 1
+		page_flag = 0
 		board_url = board['url']
 		page_url = Change_page(board_url, page)	#현재 페이지 포스트 url 반환
 		print("\nTarget : ", URL['info'], " :: ", board['tag'])
 		# 페이지 반복문
 		while True:
+			if page_flag == 50:
+				page_flag = 0
+				driver.quit()
+				time.sleep(3)
+				driver = chromedriver()
+				driver = everytime.login(driver)
 			try:
 				print("page_url :::: ", page_url)	#현재 url 출력
 				print("Page : ", page)				#현재 페이지 출력
@@ -225,8 +232,10 @@ def everytime_all_board(URL, end_date, db):
 				print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
 				#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지
 				if add_cnt == 0:
+					page_flag = 0
 					break
 				else:
+					page_flag += 1
 					page += 1
 					page_url = Change_page(board_url, page)
 			except Exception as e:
@@ -234,3 +243,5 @@ def everytime_all_board(URL, end_date, db):
 				break
 	#드라이버 연결 해제
 	driver.quit()
+	#chromedriver.exe close
+	driver.Dispose();

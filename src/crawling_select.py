@@ -16,6 +16,7 @@ import sj1, sj2, sj3, sj4, sj5, sj6, sj7, sj8, sj9, sj10, sj11, sj12, sj13, sj14
 
 
 def Crawling(URL, db):
+	driver = None
 	info_name = URL['info'].split('_')
 	crawling_name = info_name[0]	#게시판 크롤링 선택
 	page = 1
@@ -55,7 +56,7 @@ def Crawling(URL, db):
 				driver = data[0]
 				post_urls = data[1]
 			elif crawling_name in ["sj30"]:#---------------------------세종대역 예외처리
-				data = eval(crawling_name + '.Parsing_list_url(URL, page_url, lastly_post, db)')
+				data = eval(crawling_name + '.Parsing_list_url(URL, page_url, lastly_post, db, driver)')
 				driver = data[0]
 				post_urls = data[1]
 			#Requests를 쓰는 경우----------------------------------------------------------------------------------------------

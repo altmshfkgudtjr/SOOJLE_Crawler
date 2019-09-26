@@ -18,29 +18,24 @@ import time
 
 
 #게시판 page_url 을 받으면, 그 페이지의 포스트 url 들을 반환
-def Parsing_list_url(URL, page_url, lastly_post, db):
+def Parsing_list_url(URL, page_url, lastly_post, db, driver):
 	List = []
 	domain = Domain_check(URL['url'])
 	end_date = date_cut(URL['info'])
 	lastly_num = 0		#한번만 실행하기위한 조건변수
 	#lastly_post = get_lastly_post(URL)	#lastly_post 가져온다
-
-	#만약 driver이 켜져있으면 끄고, 없으면 그냥 진행
 	try:
-		driver.quit()
+		driver.get(page_url)
 	except:
-		pass
-
-	driver = chromedriver()
-	#다음 로그인함수
-	driver = daum.login(driver)
+		driver = chromedriver()
+		driver = daum.login(driver)
+		driver.get(page_url)
 
 	#페이지 구조 변경 예외
 	if URL['info'] == "sj30_sejongstation_news":
 		data = (driver, List)
 		return data
-		
-	driver.get(page_url)
+	
 	try:
 		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
 	except:
