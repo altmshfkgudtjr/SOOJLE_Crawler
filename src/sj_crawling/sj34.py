@@ -36,10 +36,7 @@ def Parsing_list_url(main_url, page_url, driver, db):
 			url = post.find("a")['href']
 			url = domain + url
 			List.append(url)
-
-	data = (driver, List)
-
-	return data
+	return List
 
 
 
@@ -166,13 +163,10 @@ def everytime_all_board(URL, end_date, db):
 	except Exception as e:
 		error_handler(e, URL, main_url, db)
 		return;
-
-
 	WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "a.article")))
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
-
-	# 에브리타임 상단 동적 게시판 긁기
+	# 에브리타임 상단 동적 게시판 긁기=============================================================================
 	board_group_list = bs.find("div", {"id": "submenu"}).findAll('div', {"class": "group"})
 	for board_group in board_group_list:
 		board_li_list = board_group.find("ul").findAll("li")
@@ -196,66 +190,47 @@ def everytime_all_board(URL, end_date, db):
 			board_li_dic['tag'] = board_a.find("h3").text
 			board_li_dic['url'] = main_url + board_a.get('href')
 			board_list.append(board_li_dic)
-	
-		# 동적 게시판들 반복문
-		for board in board_list:
-			page = 1
-			board_url = board['url']
-			page_url = Change_page(board_url, page)	#현재 페이지 포스트 url 반환
-			print("\nTarget : ", URL['info'], " :: ", board['tag'])
-			bug_cnt = 0
-
-			# 페이지 반복문
-			while True:
-				if bug_cnt == 2:
-					bug_cnt = 0
+	#===========================================================================================================
+	# 동적 게시판들 반복문
+	for board in board_list:
+		page = 1
+		board_url = board['url']
+		page_url = Change_page(board_url, page)	#현재 페이지 포스트 url 반환
+		print("\nTarget : ", URL['info'], " :: ", board['tag'])
+		# 페이지 반복문
+		while True:
+			try:
+				print("page_url :::: ", page_url)	#현재 url 출력
+				print("Page : ", page)				#현재 페이지 출력
+				post_urls = Parsing_list_url(main_url, page_url, driver, db)
+				# everytime 고질병 문제 고려, 재시도
+				if len(post_urls) == 0:
+					time.sleep(2)
+					post_urls = Parsing_list_url(main_url, page_url, driver, db)
+				post_data_prepare = []
+				# 포스트 반복문
+				for post_url in post_urls:
+					get_post_data = Parsing_post_data(driver, post_url, URL, board['tag'], db)
+					if get_post_data == "error":
+						break
+					title = get_post_data[1]
+					date = get_post_data[2]
+					print(date, "::::", title)	#현재 크롤링한 포스트의 date, title 출력
+					#게시물의 날짜가 end_date 보다 옛날 글이면 continue, 최신 글이면 append
+					if str(date) <= end_date:
+						continue
+					else:
+						post_data_prepare.append(get_post_data[0])
+				add_cnt = db_manager(URL, post_data_prepare, db)
+				print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
+				#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지
+				if add_cnt == 0:
 					break
 				else:
-					try:
-						print("page_url :::: ", page_url)	#현재 url 출력
-						print("Page : ", page)				#현재 페이지 출력
-			
-						data = Parsing_list_url(main_url, page_url, driver, db)
-						driver = data[0]
-						post_urls = data[1]
-						# everytime 고질병 문제 고려, 재시도
-						if len(post_urls) == 0:
-							time.sleep(2)
-							data = Parsing_list_url(main_url, page_url, driver, db)
-							driver = data[0]
-							post_urls = data[1]
-			
-						post_data_prepare = []
-						# 포스트 반복문
-						for post_url in post_urls:
-							get_post_data = Parsing_post_data(driver, post_url, URL, board['tag'], db)
-							if get_post_data == "error":
-								break
-							title = get_post_data[1]
-							date = get_post_data[2]
-				
-							print(date, "::::", title)	#현재 크롤링한 포스트의 date, title 출력
-				
-							#게시물의 날짜가 end_date 보다 옛날 글이면 continue, 최신 글이면 append
-							if str(date) <= end_date:
-								continue
-							else:
-								post_data_prepare.append(get_post_data[0])
-			
-						add_cnt = db_manager(URL, post_data_prepare, db)
-						print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
-			
-						#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지
-						if add_cnt == 0:
-							bug_cnt += 1
-							driver.quit()
-							driver = chromedriver()
-							driver = everytime.login(driver)
-							time.sleep(5)
-						else:
-							bug_cnt = 0
-							page += 1
-							page_url = Change_page(board_url, page)
-					except Exception as e:
-						error_handler(e, URL, page_url, db)
-						break
+					page += 1
+					page_url = Change_page(board_url, page)
+			except Exception as e:
+				error_handler(e, URL, page_url, db)
+				break
+	#드라이버 연결 해제
+	driver.quit()
