@@ -13,8 +13,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from img_size import img_size
 from error_handler import error_handler
+from tknizer import get_tk
 
-
+SJ34_DELETE_TAGS = ["갤러리", "게시판"]
 
 #게시판 page_url 을 받으면, 그 페이지의 포스트 url 들을 반환
 def Parsing_list_url(main_url, page_url, driver, db):
@@ -102,7 +103,10 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 	post_data['author'] = author.upper()
 	post_data['date'] = date
 	post_data['post'] = post.lower()
-	post_data['tag'] = tag_done.append(board_tag)
+	for remove_tag in SJ34_DELETE_TAGS:
+		board_tag = board_tag.replace(remove_tag, "")
+	tag_done.append(board_tag)
+	post_data['tag'] = tag_done
 	post_data['img'] = img
 	post_data['url'] = post_url
 	post_data['info'] = URL['info'].split("_")[1] + "_" + board_tag
@@ -243,5 +247,3 @@ def everytime_all_board(URL, end_date, db):
 				break
 	#드라이버 연결 해제
 	driver.quit()
-	#chromedriver.exe close
-	driver.Dispose();
