@@ -175,7 +175,7 @@ def everytime_all_board(URL, end_date, db):
 	board_group_list = bs.find("div", {"id": "submenu"}).findAll('div', {"class": "group"})
 	for board_group in board_group_list:
 		board_li_list = board_group.find("ul").findAll("li")
-		for board_li in board_li_list[:-1]:
+		for board_li in board_li_list:
 			board_li_dic = {}
 			board_li_dic['tag'] = board_li.find("a").text
 			board_li_dic['url'] = main_url + board_li.find("a")['href']
