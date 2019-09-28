@@ -43,14 +43,14 @@ def Parsing_post_data(bs, post_url, URL):
 	return_data = []
 	post_data = {}
 
-	title = bs.find("div", {"class": "prop article bt1"}).find("div", {"class": "subject"}).text.strip()
+	title = bs.find("div", {"class": "prop article bt1"}).find("div", {"class": "subject"}).get_text(" ", strip = True)
 	date = bs.find("span", {"class": "date"}).text
 	date = date + " 00:00:00"
 	try:
 		date = datetime.datetime.strftime(date, "%Y-%m-%d %H:%M:%S")
 	except:
 		date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-	post = bs.find("div", {"class": "phrase"}).text.strip()
+	post = bs.find("div", {"class": "phrase"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	try:
 		img = bs.find("div", {"class": "phrase"}).find("img")['src']		#게시글의 첫번째 이미지를 가져옴.

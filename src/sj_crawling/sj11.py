@@ -28,14 +28,14 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 
-	title = bs.find("div", {"class": "originalContent"}).find("div", {"class": "title"}).text.strip()
+	title = bs.find("div", {"class": "originalContent"}).find("div", {"class": "title"}).get_text(" ", strip = True)
 	author = bs.find("div", {"class": "originalContent"}).find("div", {"class": "userInfo"}).text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
 	date = bs.find("div", {"class": "originalContent"}).find("div", {"class": "dateAndCount"}).find("strong").text.strip()
 	date = date + " 00:00:00"
 	date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
-	post = bs.find("div", {"class": "contentBody"}).find("div").text.strip()
+	post = bs.find("div", {"class": "contentBody"}).find("div").get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	if bs.find("div", {"class": "contentBody"}).find("img") is None:
 		img = 1

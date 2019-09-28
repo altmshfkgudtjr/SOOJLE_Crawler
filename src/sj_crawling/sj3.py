@@ -36,14 +36,14 @@ def Parsing_post_data(bs, post_url, URL):
 	return_data = []
 	post_data = {}
 
-	title = bs.find("header", {"class": "header b-b bg-light h2"}).find("span").text.strip()
+	title = bs.find("header", {"class": "header b-b bg-light h2"}).find("span").get_text(" ", strip = True)
 	author = bs.find("div", {"class": "col-xs-10 lbb"}).text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
 	date = bs.find("span", {"name": "Edate"}).text
 	date = date + " 00:00:00"
 	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("section", {"class": "wrapper-lg"}).text
+	post = bs.find("section", {"class": "wrapper-lg"}).get_text(" ", strip = True)
 	post = post_wash(post)
 	tag_done = tag.tagging(URL, title)
 	img = 1

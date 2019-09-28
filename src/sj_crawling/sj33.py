@@ -30,12 +30,12 @@ def Parsing_post_data(bs, post_url, URL):
 	domain = Domain_check(URL['url'])
 
 	titles = bs.find("tbody").find("tr").findAll("td")
-	title = titles[1].text.strip()
+	title = titles[1].get_text(" ", strip = True)
 	author = "0"
 	date = titles[3].text.strip()
 	date = date + " 00:00:00"
 	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("td", {"class": "board_content"}).text.strip()
+	post = bs.find("td", {"class": "board_content"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	img = 1
 	tag_done = tag.tagging(URL, title)

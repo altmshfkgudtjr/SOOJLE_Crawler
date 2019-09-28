@@ -65,7 +65,7 @@ def Parsing_list_url(URL, page_url, lastly_post, db, driver):
 		for post in posts:
 			if post.find("td", {"class": "num"}).find("img") != None:
 				continue
-			title = post.find("td", {"class": "subject"}).find("a").text.strip()
+			title = post.find("td", {"class": "subject"}).find("a").get_text(" ", strip = True)
 			date = post.find("td", {"class": "date"}).text.strip()
 			if date.find(":") != -1:
 				now = datetime.now().strftime("%Y-%m-%d")
@@ -89,7 +89,7 @@ def Parsing_list_url(URL, page_url, lastly_post, db, driver):
 			for post in posts:
 				if post.find("td", {"class": "num"}).find("img") != None:
 					continue
-				title = post.find("td", {"class": "subject"}).find("a").text.strip()
+				title = post.find("td", {"class": "subject"}).find("a").get_text(" ", strip = True)
 				date = post.find("td", {"class": "date"}).text.strip()
 				if date.find(":") != -1:
 					now = datetime.now().strftime("%Y-%m-%d")

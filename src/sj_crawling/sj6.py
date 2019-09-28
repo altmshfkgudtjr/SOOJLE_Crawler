@@ -35,13 +35,13 @@ def Parsing_post_data(bs, post_url, URL):
 
 	tds = bs.findAll("span", {"class": "boardTd"})
 
-	title = tds[0].text.strip()
+	title = tds[0].get_text(" ", strip = True)
 	author = tds[1].text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
 	date = tds[2].text.strip()
 	date = str(datetime.datetime.strptime(date, "%Y/%m/%d %H:%M:%S"))
-	post = bs.find("div", {"class": "xed"}).text.strip()
+	post = bs.find("div", {"class": "xed"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	tag_done = tag.tagging(URL, title)
 

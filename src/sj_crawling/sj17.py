@@ -30,12 +30,12 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 
-	title = bs.find("div", {"class": "top_area ngeb"}).find("a").text.strip()
+	title = bs.find("div", {"class": "top_area ngeb"}).find("a").get_text(" ", strip = True)
 	author = "0" #모든 글의 author 가 "admin" 이라서 그냥 0 박음. 혼동을 피하기위한 조치
 	date = bs.find("div", {"class": "rd rd_nav_style2 clear"}).find("div", {"class": "fr"}).find("span").text.strip()
 	date = date + ":00"
 	date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
-	post = bs.find("div", {"class": "rd_body clear"}).text.strip()
+	post = bs.find("div", {"class": "rd_body clear"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	if bs.find("div", {"class": "rd_body clear"}).find("img") is None:
 		img = 1

@@ -31,7 +31,7 @@ def Parsing_post_data(bs, post_url, URL):
 		post_data = {}
 		domain = Domain_check(URL['url'])
 
-		title = bs.find("span", {"class": "txt_jobfair"}).text.strip()
+		title = bs.find("span", {"class": "txt_jobfair"}).get_text(" ", strip = True)
 		author = bs.find("span", {"class": "tit_company_name"}).text.strip()
 		date = bs.find("p", {"class": 'info'}).find("span").text.strip()
 		date = date + " 00:00:00"
@@ -39,7 +39,7 @@ def Parsing_post_data(bs, post_url, URL):
 		post = ""
 		posts = bs.findAll("dl", {"class": "qna_list"})
 		for posts_one in posts:
-			post += posts_one.text.strip()
+			post += posts_one.text.get_text(" ", strip = True)
 		post = post_wash(post)
 		tag_done = tag.tagging(URL, title)
 		img = 1

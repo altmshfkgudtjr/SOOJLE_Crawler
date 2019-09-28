@@ -34,13 +34,13 @@ def Parsing_post_data(post_url, URL):
 		post_infoes = post.findAll("td")	#td 묶음
 
 		post_data = {}
-		title = post_infoes[0].text
+		title = post_infoes[0].get_text(" ", strip = True)
 		author = post_infoes[0].find("div").text
 		if author.find("관리자") != -1:
 			author = "0"
 		date = post_infoes[4].text + " 00:00:00"
 		date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-		post = post_infoes[1].text + post_infoes[2].text + post_infoes[3].text + "~" + post_infoes[4].text
+		post = post_infoes[1].get_text(" ", strip = True) + post_infoes[2].get_text(" ", strip = True) + post_infoes[3].get_text(" ", strip = True) + "~" + post_infoes[4].get_text(" ", strip = True)
 		post = post_wash(post)
 		tag_done = tag.tagging(URL, title)
 		post = post[:200]

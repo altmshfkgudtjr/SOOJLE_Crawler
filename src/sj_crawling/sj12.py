@@ -37,11 +37,11 @@ def Parsing_post_data(bs, post_url, URL):
 	driver = URLparser_UTF8(url)
 	bs = BeautifulSoup(driver, 'html.parser')
 
-	title = bs.find("div", {"id": "contents"}).find("div", {"class": "vi_subj"}).text.strip()
+	title = bs.find("div", {"id": "contents"}).find("div", {"class": "vi_subj"}).get_text(" ", strip = True)
 	author = "0"
 	date = "20" + date + " 00:00:00"
 	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("div", {"class": "vi_cont"}).text.strip()
+	post = bs.find("div", {"class": "vi_cont"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	if bs.find("div", {"class": "vi_cont"}).find("img") is None:
 		img = 1

@@ -75,12 +75,12 @@ def Parsing_post_data(driver, post_url, URL):
 		html = driver.page_source
 		bs = BeautifulSoup(html, 'html.parser')
 		
-		title = bs.find("li", {"class": "vi_subject vi_title"}).text.strip()
+		title = bs.find("li", {"class": "vi_subject vi_title"}).get_text(" ", strip = True)
 		author = bs.find("span", {"id": "regname"}).text.strip()
 		date = bs.find("span", {"id": "regdate"}).text.strip()
 		date = date + " 00:00:00"
 		date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-		post = bs.find("li", {"id": "contents"}).text.strip()
+		post = bs.find("li", {"id": "contents"}).get_text(" ", strip = True)
 		post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 		tag_done = tag.tagging(URL, title)
 		img = 1

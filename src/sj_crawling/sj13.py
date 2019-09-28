@@ -32,14 +32,14 @@ def Parsing_post_data(bs, post_url, URL):
 
 	spanes = bs.find("div", {"class": "top_area ngeb"}).findAll("span")
 
-	title = bs.find("div", {"class": "top_area ngeb"}).find("a").text.strip()
+	title = bs.find("div", {"class": "top_area ngeb"}).find("a").get_text(" ", strip = True)
 	author = bs.find("div", {"class": "btm_area clear"}).find("a").text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
 	date = spanes[0].text.strip()
 	date = date + ":16"
 	date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
-	post = bs.find("div", {"class": "rd_body clear"}).text.strip()
+	post = bs.find("div", {"class": "rd_body clear"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	if bs.find("div", {"class": "rd_body clear"}).find("img") is None:
 		img = 1

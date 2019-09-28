@@ -89,7 +89,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			html_post = driver.page_source
 			bs_post = BeautifulSoup(html_post, 'html.parser')
 
-			title = bs_post.find("article").find("h1").text.strip()
+			title = bs_post.find("article").find("h1").get_text(" ", strip = True)
 			author = bs_post.find("p", {"class": "profile"}).text.strip()
 			date =  bs_post.find("p", {"class": "info"}).find("span").text.strip()
 			if date.find("오늘") != -1:
@@ -102,7 +102,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 				date = "20" + date + ":00"
 				date = str(datetime.datetime.strptime(date, "%Y/%m/%d %H:%M:%S"))
 			
-			phrase = bs_post.find("p", {'class': "text"}).text.strip()
+			phrase = bs_post.find("p", {'class': "text"}).get_text(" ", strip = True)
 			phrase = post_wash(phrase)		#post 의 공백을 전부 제거하기 위함
 			tag_done = tag.tagging(URL, title)
 			img = 8

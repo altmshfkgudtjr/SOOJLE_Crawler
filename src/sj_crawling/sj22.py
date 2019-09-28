@@ -78,14 +78,14 @@ def Parsing_post_data(driver, post_url, URL):
 or URL['info'].split("_")[2] == 'club' or URL['info'].split("_")[2] == 'trade':
 		title = bs.find("h2", {"class": "large"}).text.strip()
 	else:
-		title = "!@#$soojle-notitle" + bs.find("p", {'class': "large"}).text.strip()
+		title = "!@#$soojle-notitle" + bs.find("p", {'class': "large"}).get_text(" ", strip = True)
 		if len(title) >= 300:
 			title = title[:299]
 
 	author = "0"
 	date = bs.find("time").text.strip()
 	date = everytime_time(date)
-	post = bs.find("p", {'class': "large"}).text.strip()
+	post = bs.find("p", {'class': "large"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	tag_done = tag.tagging(URL, title)
 	if bs.find("figure", {"class": "attach"}) is not None:

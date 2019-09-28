@@ -35,7 +35,7 @@ def Parsing_post_data(bs, URL):
 	for post in posts:
 		post_data = {}
 		if post.find("td", {"class": "td_article"}) is not None:
-			title = post.find("td", {"class": "td_article"}).find("a", {"class": "article"}).text.strip()
+			title = post.find("td", {"class": "td_article"}).find("a", {"class": "article"}).get_text(" ", strip = True)
 			if post.find("td", {"class": "td_article"}).find("a", {"class": "article"}).find("span") != -1:
 				title_plus = post.find("td", {"class": "td_article"}).find("a", {"class": "article"}).find("span")
 				if title_plus is None:

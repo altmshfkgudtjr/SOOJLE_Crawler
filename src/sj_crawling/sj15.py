@@ -30,13 +30,13 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 
-	title = bs.find("td", {"class": "subject-value"}).text.strip()
+	title = bs.find("td", {"class": "subject-value"}).get_text(" ", strip = True)
 	author = bs.find("td", {"class": "writer"}).text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
 	date = bs.find("td", {"class": "date"}).text.strip()
 	date = str(datetime.datetime.strptime(date, "%Y.%m.%d  %H:%M:%S"))
-	post = bs.find("tbody").text.strip()
+	post = bs.find("tbody").get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	if bs.find("tbody").find("img") is None:
 		img = 1

@@ -31,7 +31,7 @@ def Parsing_post_data(bs, URL):
 
 		post_data = {}
 		try:
-			title = post_infoes[0].text.strip()
+			title = post_infoes[0].get_text(" ", strip = True)
 			author = post.find("strong").text.strip()
 			if author.find("관리자") != -1:
 				author = "0"
@@ -40,7 +40,7 @@ def Parsing_post_data(bs, URL):
 			date = str(date).split("<")[0]
 			date = date + " 00:00:00"
 		except:
-			title = post_infoes[0].text.strip()
+			title = post_infoes[0].get_text(" ", strip = True)
 			try:
 				author = post.find("strong").text.strip()
 			except:
@@ -57,7 +57,7 @@ def Parsing_post_data(bs, URL):
 			date = datetime.datetime.now().strftime("%Y-%m-%d")
 			date = date + " 00:00:00"
 		try:
-			phrase = post_infoes[1].text.strip()
+			phrase = post_infoes[1].get_text(" ", strip = True)
 		except:
 			phrase = "0"
 		phrase = post_wash(phrase)

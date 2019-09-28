@@ -38,7 +38,7 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 
-	title = bs.find("div", {"class": "top_area ngeb"}).find("a").text.strip()
+	title = bs.find("div", {"class": "top_area ngeb"}).find("a").get_text(" ", strip = True)
 	if bs.find("div", {"class": "btm_area clear"}).find("a") is None:
 		author = "0"
 	else:
@@ -48,7 +48,7 @@ def Parsing_post_data(bs, post_url, URL):
 	date = bs.find("div", {"class": "top_area ngeb"}).find("span").text.strip()
 	date = date + ":00"
 	date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
-	post = bs.find("div", {"class": "rd_body clear"}).text
+	post = bs.find("div", {"class": "rd_body clear"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	if bs.find("div", {"class": "rd_body clear"}).find("img") is None:
 		img = 1

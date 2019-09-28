@@ -32,7 +32,7 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 
-	title = bs.find("div", {"class": "title"}).find("h4").text.strip()
+	title = bs.find("div", {"class": "title"}).find("h4").get_text(" ", strip = True)
 	author = "0"
 	dates = bs.find("div", {"data-role": "input"}).findAll("time")
 	if len(dates) < 3:
@@ -44,7 +44,7 @@ def Parsing_post_data(bs, post_url, URL):
 		date2 = date.split(")")[1].strip()
 		date = date1 + " " + date2 + ":00"
 		date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
-	post = bs.find("div", {"class": "abstract"}).find("div", {"class": "text"}).text.strip()
+	post = bs.find("div", {"class": "abstract"}).find("div", {"class": "text"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	if bs.find("meta", {"property": "og:image"})['content'] is None:
 		img = 1

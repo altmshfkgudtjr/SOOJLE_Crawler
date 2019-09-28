@@ -35,14 +35,14 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = URL['url'].split('/')[0] + '//' + URL['url'].split('/')[2]
 
-	title = bs.find("span", {"class": "on"}).text.strip()
+	title = bs.find("span", {"class": "on"}).get_text(" ", strip = True)
 	author = bs.find("table", {"class": "basic-table input-table"}).findAll("tr")[1].find("td").text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
 	date = bs.find("table", {"class": "basic-table input-table"}).findAll("tr")[3].find("td").text.strip()[:23].split('~')[1].strip()
 	date = date + " 00:00:00"
 	date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
-	post = bs.find("ul", {"class": "summary-info"}).text.strip()
+	post = bs.find("ul", {"class": "summary-info"}).get_text(" ", strip = True)
 	post = post_wash(post)
 	tag_done = tag.tagging(URL, title)
 	if bs.find("div", {"class": "poster"}).find("img") is None:

@@ -79,20 +79,20 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			html_post = driver.page_source
 			bs_post = BeautifulSoup(html_post, 'html.parser')
 
-			title = bs_post.find("div", {"class": "group"}).text.strip()
+			title = bs_post.find("div", {"class": "group"}).get_text(" ", strip = True)
 			author = bs_post.find("span", {"class": "text"}).text.strip()
 			date = bs_post.find("time").text.strip()
 			date = everytime_time(date)
 			if bs_post.find("p", {"class": "comment"}) is None:
 				
 				if bs_post.find("p", {"class": "soldout"}) is not None:
-					phrase = bs_post.find("p", {"class": "soldout"}).text.strip()
+					phrase = bs_post.find("p", {"class": "soldout"}).get_text(" ", strip = True)
 				else:
 					phrase_vocas = bs_post.findAll("span", {"class": "text"})
-					phrase = phrase_vocas[1].text.strip()
+					phrase = phrase_vocas[1].get_text(" ", strip = True)
 				phrase = post_wash(phrase)
 			else:
-				phrase = bs_post.find("p", {"class": "comment"}).text.strip()
+				phrase = bs_post.find("p", {"class": "comment"}).get_text(" ", strip = True)
 				phrase = post_wash(phrase)
 			tag_done = tag.tagging(URL, title)
 			if bs_post.find("div", {"class": "image"}) is None:

@@ -80,7 +80,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			html_post = driver.page_source
 			bs_post = BeautifulSoup(html_post, 'html.parser')
 
-			title = bs_post.find("article", {"class": "recruit"}).find("h2").text.strip()
+			title = bs_post.find("article", {"class": "recruit"}).find("h2").get_text(" ", strip = True)
 			author = bs_post.find("div", {"class": "content"}).find("h1").text.strip()
 			date =  bs_post.find("div", {"class": "section"}).find("p", {"class": "indent"}).text.strip()
 			date = date.split("~")[1]
@@ -92,7 +92,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			now_year = datetime.datetime.now().strftime("%Y")
 			date = now_year + "년 " + date + " 00:00:00"
 			date = str(datetime.datetime.strptime(date, "%Y년 %m월 %d일 %H:%M:%S"))
-			phrase = bs_post.find("p", {'class': "description"}).text.strip()
+			phrase = bs_post.find("p", {'class': "description"}).get_text(" ", strip = True)
 			phrase = post_wash(phrase)		#post 의 공백을 전부 제거하기 위함
 			tag_done = tag.tagging(URL, title)
 			if bs_post.find("div", {"class": "poster"}) is None:

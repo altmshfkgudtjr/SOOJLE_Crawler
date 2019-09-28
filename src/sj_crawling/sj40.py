@@ -33,7 +33,7 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 
-	title = bs.find("td", {"class": "view_index_title"}).text.strip()
+	title = bs.find("td", {"class": "view_index_title"}).get_text(" ", strip = True)
 	author = bs.find("td", {"class": "view_index_title"}).text.strip().split("-")[0].strip()
 	try:
 		date = str(bs)[str(bs).find("마감일") + 17:str(bs).find("마감일") + 28].strip()
@@ -42,7 +42,7 @@ def Parsing_post_data(bs, post_url, URL):
 	except:
 		date = now
 		date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("div", {"id": "print"}).text.strip()
+	post = bs.find("div", {"id": "print"}).get_text(" ", strip = True)
 	post = post_wash(post)
 	tag_done = tag.tagging(URL, title)
 	img = 1

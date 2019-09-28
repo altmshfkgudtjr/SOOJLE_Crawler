@@ -40,14 +40,14 @@ def Parsing_post_data(bs, post_url, URL):
 	domain = Domain_check(URL['url'])
 
 	
-	title = bs.find("div", {"class": "col-lg-9 title"}).find("span").text.strip()
+	title = bs.find("div", {"class": "col-lg-9 title"}).find("span").get_text(" ", strip = True)
 	author = bs.find("span", {"name": "WRITENAME"}).text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
 	date = bs.find("span", {"name": "wdate"}).text
 	date = date + " 00:00:00"
 	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("div", {"class": "form-group"}).text
+	post = bs.find("div", {"class": "form-group"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	tag_done = tag.tagging(URL, title)
 	#이미지가 있으면 이미지 url 을 넣고, 없으면 1을 넣어준다.

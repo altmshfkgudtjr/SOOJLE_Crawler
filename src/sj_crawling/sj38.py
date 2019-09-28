@@ -58,7 +58,7 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 
-	title = bs.find("div", {"class": "tbl_container"}).find("th").text.strip()
+	title = bs.find("div", {"class": "tbl_container"}).find("th").get_text(" ", strip = True)
 	author = bs.find("div", {"class": "tbl_container"}).findAll("tr")[1].findAll("td")[1].text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
@@ -68,7 +68,7 @@ def Parsing_post_data(bs, post_url, URL):
 	if len(date.split(":")) == 2:
 		date = date + ":00"
 	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("div", {"class": "tbl_container"}).findAll("tr")[2].text.strip()
+	post = bs.find("div", {"class": "tbl_container"}).findAll("tr")[2].get_text(" ", strip = True)
 	post = post_wash(post)
 	tag_done = tag.tagging(URL, title)
 	img = 1

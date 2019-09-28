@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from img_size import img_size
 from error_handler import error_handler
-from tknizer import get_tk
+import re
 
 SJ34_DELETE_TAGS = ["갤러리", "게시판"]
 
@@ -68,11 +68,11 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
-	title = bs.find("p", {'class': "large"}).text.strip()
+	title = bs.find("p", {'class': "large"}).get_text(" ", strip = True).strip()
 	author = "0"
 	date = bs.find("time").text.strip()
 	date = everytime_time(date)
-	post = bs.find("p", {'class': "large"}).text.strip()
+	post = bs.find("p", {'class': "large"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	tag_done = tag.tagging(URL, title)
 	if bs.find("figure", {"class": "attach"}) is not None:
@@ -103,6 +103,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 	post_data['author'] = author.upper()
 	post_data['date'] = date
 	post_data['post'] = post.lower()
+	board_tag = re.compile('[^ ㄱ-ㅣ가-힣|a-z]+').sub('', board_tag)
 	for remove_tag in SJ34_DELETE_TAGS:
 		board_tag = board_tag.replace(remove_tag, "")
 	tag_done.append(board_tag)

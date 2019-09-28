@@ -44,11 +44,11 @@ def Parsing_post_data(bs, post_url, URL):
 
 	tds = title_table.findAll("td")
 
-	title = tds[1].text.strip()
+	title = tds[1].get_text(" ", strip = True)
 	author = "0"
 	date = tds[0].text.strip()
 	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("td", {"class": "sf_contents"}).text.strip()
+	post = bs.find("td", {"class": "sf_contents"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	if bs.find("td", {"class": "sf_contents"}).find("img") is None:
 		img = 1
