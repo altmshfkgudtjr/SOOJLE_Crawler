@@ -68,7 +68,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
-	title = bs.find("p", {'class': "large"}).get_text(" ", strip = True).strip()
+	title = bs.find("p", {'class': "large"}).get_text(" ", strip = True)
 	author = "0"
 	date = bs.find("time").text.strip()
 	date = everytime_time(date)
