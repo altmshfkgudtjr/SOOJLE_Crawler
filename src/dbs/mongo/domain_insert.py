@@ -25,6 +25,6 @@ def domain_insert(db):
 					"view": 0,
 					"fav_cnt": 0,
 					"title_token": domain['title'].split(" "),
-					"token": get_tk(domain['title'] + domain['post'])
+					"token": soojle_tokenize(domain['title'],  domain['post'])
 				}
 		collection_domain.insert_one(query)
