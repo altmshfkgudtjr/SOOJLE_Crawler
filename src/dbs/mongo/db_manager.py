@@ -92,8 +92,9 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["view"] = 0
 			post_one["fav_cnt"] = 0
 			if "title_token" in post_one.key():
-				post_one["title_token"] = []
-			post_one["title_token"] = post_one["title"].split(" ")
+				del post_one["title_token"]
+			else:
+				post_one["title_token"] = post_one["title"].split(" ")
 			post_one["token"] = soojle_tokenize(post_one["title"], post_one["post"])
 			post_one["login"] = URL["login"]
 			post_one["learn"] = 0

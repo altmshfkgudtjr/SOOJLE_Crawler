@@ -111,7 +111,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 	post_data['img'] = img
 	post_data['url'] = post_url
 	post_data['info'] = URL['info'].split("_")[1] + "_" + board_tag
-	post_data['title_token'] = [ 0 ]
+	post_data['title_token'] = [ "0" ]
 
 	return_data.append(post_data)
 	return_data.append(title)
