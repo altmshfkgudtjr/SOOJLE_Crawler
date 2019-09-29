@@ -20,12 +20,15 @@ from timeLogWrite import time_write
 #시작위치 및 끝 위치 입력 설정
 ST_NUM = None
 END_NUM = None
-if len(sys.argv) > 1:
-	try:
-		ST_NUM = int(sys.argv[1])
-		END_NUM = int(sys.argv[2])
-	except:
-		print(":::: WRONG INPUT ::::\n\n\n")
+if len(sys.argv) == 1:
+	pass
+elif len(sys.argv) == 2:
+	ST_NUM = int(sys.argv[1])
+elif len(sys.argv) == 3:
+	ST_NUM = int(sys.argv[1])
+	END_NUM = int(sys.argv[2])
+else:
+	print(":::: WRONG INPUT ::::\n\n\n")
 
 #프로그램 시작시간
 start_time = datetime.now()

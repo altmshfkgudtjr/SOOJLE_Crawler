@@ -24,7 +24,10 @@ def Parsing_list_url(main_url, page_url, driver, db):
 
 	driver.get(page_url)
 
-	WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.comments")))
+	try:
+		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.comments")))
+	except:
+		return List
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
 	
@@ -114,7 +117,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 	post_data['title_token'] = [ "0" ]
 
 	return_data.append(post_data)
-	return_data.append(title)
+	return_data.append(post)
 	return_data.append(date)
 	return return_data
 
@@ -212,40 +215,40 @@ def everytime_all_board(URL, end_date, db):
 				time.sleep(3)
 				driver = chromedriver()
 				driver = everytime.login(driver)
-			try:
-				print("page_url :::: ", page_url)	#현재 url 출력
-				print("Page : ", page)				#현재 페이지 출력
+			#try:
+			print("page_url :::: ", page_url)	#현재 url 출력
+			print("Page : ", page)				#현재 페이지 출력
+			post_urls = Parsing_list_url(main_url, page_url, driver, db)
+			# everytime 고질병 문제 고려, 재시도
+			if len(post_urls) == 0:
+				time.sleep(2)
 				post_urls = Parsing_list_url(main_url, page_url, driver, db)
-				# everytime 고질병 문제 고려, 재시도
-				if len(post_urls) == 0:
-					time.sleep(2)
-					post_urls = Parsing_list_url(main_url, page_url, driver, db)
-				post_data_prepare = []
-				# 포스트 반복문
-				for post_url in post_urls:
-					get_post_data = Parsing_post_data(driver, post_url, URL, board['tag'], db)
-					if get_post_data == "error":
-						break
-					title = get_post_data[1]
-					date = get_post_data[2]
-					print(date, "::::", title)	#현재 크롤링한 포스트의 date, title 출력
-					#게시물의 날짜가 end_date 보다 옛날 글이면 continue, 최신 글이면 append
-					if str(date) <= end_date:
-						continue
-					else:
-						post_data_prepare.append(get_post_data[0])
-				add_cnt = db_manager(URL, post_data_prepare, db)
-				print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
-				#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지
-				if add_cnt == 0:
-					page_flag = 0
+			post_data_prepare = []
+			# 포스트 반복문
+			for post_url in post_urls:
+				get_post_data = Parsing_post_data(driver, post_url, URL, board['tag'], db)
+				if get_post_data == "error":
 					break
+				title = get_post_data[1]
+				date = get_post_data[2]
+				print(date, "::::", title)	#현재 크롤링한 포스트의 date, title 출력
+				#게시물의 날짜가 end_date 보다 옛날 글이면 continue, 최신 글이면 append
+				if str(date) <= end_date:
+					continue
 				else:
-					page_flag += 1
-					page += 1
-					page_url = Change_page(board_url, page)
-			except Exception as e:
-				error_handler(e, URL, page_url, db)
+					post_data_prepare.append(get_post_data[0])
+			add_cnt = db_manager(URL, post_data_prepare, db)
+			print("add_OK : ", add_cnt)	#DB에 저장된 게시글 수 출력
+			#DB에 추가된 게시글이 0 이면 break, 아니면 다음페이지
+			if add_cnt == 0:
+				page_flag = 0
 				break
+			else:
+				page_flag += 1
+				page += 1
+				page_url = Change_page(board_url, page)
+#			except Exception as e:
+#				error_handler(e, URL, page_url, db)
+#				break
 	#드라이버 연결 해제
 	driver.quit()

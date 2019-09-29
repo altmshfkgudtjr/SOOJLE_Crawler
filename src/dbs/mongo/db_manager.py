@@ -72,9 +72,6 @@ def db_manager(URL, post_data_prepare, db):
 	if post_data_prepare_len == 0:
 		return add_cnt
 
-	#한 페이지에 title 이 중복되는 것이 있으면 걸러주는 함수
-	post_data_prepare = sameposts_set(post_data_prepare)
-
 	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 same_cnt++
 	for post_one in post_data_prepare:
 		#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
@@ -91,7 +88,7 @@ def db_manager(URL, post_data_prepare, db):
 				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
 			post_one["view"] = 0
 			post_one["fav_cnt"] = 0
-			if "title_token" in post_one.key():
+			if "title_token" in post_one.keys():
 				del post_one["title_token"]
 			else:
 				post_one["title_token"] = post_one["title"].split(" ")
