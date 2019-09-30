@@ -84,7 +84,9 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["hashed"] = hash_done
 			post_one["date"] = datetime_to_mongo(post_one['date'])
 			post_one["post"] = post_one["post"].lower()#[:200]
-			if URL['info'].split("_")[1] != 'everytime':
+			if URL['info'].split("_")[0] == "sj23":
+				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
+			elif URL['info'].split("_")[1] != 'everytime':
 				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
 			post_one["view"] = 0
 			post_one["fav_cnt"] = 0
