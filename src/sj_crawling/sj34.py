@@ -106,7 +106,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 	post_data['author'] = author.upper()
 	post_data['date'] = date
 	post_data['post'] = post.lower()
-	board_tag = re.compile('[^ ㄱ-ㅣ가-힣|a-z]+').sub('', board_tag)
+	board_tag = re.compile('[^ ㄱ-ㅣ가-힣|a-z]+').sub('', board_tag.lower())
 	for remove_tag in SJ34_DELETE_TAGS:
 		board_tag = board_tag.replace(remove_tag, "")
 	tag_done.append(board_tag)

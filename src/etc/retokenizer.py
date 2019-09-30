@@ -24,8 +24,8 @@ def show_percent(post_per):
 		clear()
 	else:
 		clear = lambda: os.system('clear')
-	print(":::: SOOJLE PROJECT RETOKENIZER! ::::\n")
-	print(">>> RETOKENIZING...\n\n")
+	#print(":::: SOOJLE PROJECT RETOKENIZER! ::::\n")
+	#print(">>> RETOKENIZING...\n\n")
 	print(post_per, "%")
 	for i in range(post_per):
 		print("■", end="")
@@ -41,8 +41,8 @@ def retokenizer(ID, PW):
 	for post in posts:
 		cnt += 1
 		post_per = (cnt / (posts_cnt / 100))
-		if int(post_per) % 10 == 0:
-			show_percent(int(post_per))
+		if int(post_per * 10) % 10 == 0:
+			show_percent(int(post_per / 10))
 		target_id = post["_id"]
 		target_token = soojle_tokenize(post["title"], post["post"])
 		db.posts.update_one({"_id": ObjectId(target_id)}, {"$set": {"token": target_token}})
@@ -52,7 +52,7 @@ def retokenizer(ID, PW):
 
 def retokenizer_everytime(ID, PW):
 	client = MongoClient('mongodb://%s:%s@%s' %(ID, PW, HOST))
-	db = client["soojle"]
+	db = client["soojle"]a
 	cnt = 0
 	posts_cnt = db.posts.find().count()
 	posts = db.posts.find({"info": {"$regex": "everytime"}})
@@ -61,9 +61,8 @@ def retokenizer_everytime(ID, PW):
 	for post in posts:
 		cnt += 1
 		post_per = (posts_cnt / cnt) % 10
-		if post_per == 0:
-			show_percent(post_per)
-		print(post["title"])
+		if int(post_per * 10) % 10 == 0:
+			show_percent(int(post_per / 10))
 		target_id = post["_id"]
 		target_token = soojle_tokenize(post["title"], post["post"])
 		post["token"] = target_token
