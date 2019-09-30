@@ -80,10 +80,8 @@ def db_manager(URL, post_data_prepare, db):
 		if db.posts.find_one({"hashed": hash_done}) != None:
 			continue
 		else:
-			post_one["title"] = post_one["title"].lower()#[:200]
 			post_one["hashed"] = hash_done
 			post_one["date"] = datetime_to_mongo(post_one['date'])
-			post_one["post"] = post_one["post"].lower()#[:200]
 			if URL['info'].split("_")[0] == "sj23":
 				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
 			elif URL['info'].split("_")[1] != 'everytime':
@@ -94,13 +92,15 @@ def db_manager(URL, post_data_prepare, db):
 				del post_one["title_token"]
 			else:
 				post_one["title_token"] = post_one["title"].split(" ")
-			post_one["token"] = soojle_tokenize(post_one["title"], post_one["post"])
+			post_one["token"] = soojle_tokenize(post_one["title"].lower(), post_one["post"].lower())
 			post_one["login"] = URL["login"]
 			post_one["learn"] = 0
 			del post_one["author"]
 			if URL['info'].split("_")[1] in contest_list:
 				post_one["end_date"] = post_one['date']
 				post_one["date"] = datetime_to_mongo(now)
+			post_one["title"] = post_one["title"][:100]
+			post_one["post"] = post_one["post"][:200]
 			db.posts.insert_one(post_one)
 			add_cnt += 1
 	return add_cnt
