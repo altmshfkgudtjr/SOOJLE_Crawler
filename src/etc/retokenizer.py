@@ -15,6 +15,7 @@ from pymongo import MongoClient
 from platform import platform
 from bson.objectid import ObjectId
 from tknizer import *
+import time
 
 HOST = 'localhost:27017'
 
@@ -40,9 +41,10 @@ def retokenizer(ID, PW):
 	post_per = 0
 	for post in posts:
 		cnt += 1
-		post_per = (cnt / (posts_cnt / 100))
-		if int(post_per * 10) % 10 == 0:
-			show_percent(int(post_per / 10))
+		print(cnt)
+		#post_per = (cnt / (posts_cnt / 100))
+		#if int(post_per * 10) % 10 == 0:
+		#	show_percent(int(post_per / 10))
 		target_id = post["_id"]
 		target_token = soojle_tokenize(post["title"], post["post"])
 		db.posts.update_one({"_id": ObjectId(target_id)}, {"$set": {"token": target_token}})
@@ -60,9 +62,10 @@ def retokenizer_everytime(ID, PW):
 	show_percent(post_per)
 	for post in posts:
 		cnt += 1
-		post_per = (posts_cnt / cnt) % 10
-		if int(post_per * 10) % 10 == 0:
-			show_percent(int(post_per / 10))
+		print(cnt)
+		#post_per = (posts_cnt / cnt) % 10
+		#if int(post_per * 10) % 10 == 0:
+		#	show_percent(int(post_per / 10))
 		target_id = post["_id"]
 		target_token = soojle_tokenize(post["title"], post["post"])
 		post["token"] = target_token
@@ -81,11 +84,15 @@ if __name__ == '__main__':
 	elif len(sys.argv) == 4:
 		ID = sys.argv[1]
 		PW = sys.argv[2]
-		if sys.argv[3] == 1 or sys.argv[3] == True:
+		if sys.argv[3] == "1" or sys.argv[3] == "True":
 			IS_EVERYTIME = True
 	else:
 		print(":::: WRONG INPUT! ::::\n\n\n")
 	if IS_EVERYTIME == True:
+		print("POSTS = EVERYTIME")
+		time.sleep(3)
 		retokenizer_everytime(ID, PW)
 	else:
+		print("POSTS = ALL")
+		time.sleep(3)
 		retokenizer(ID, PW)
