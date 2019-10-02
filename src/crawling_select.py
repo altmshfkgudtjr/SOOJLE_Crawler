@@ -7,6 +7,7 @@ from db_manager import get_lastly_post
 from db_manager import push_lastly_post
 from date_cut import date_cut
 from error_handler import error_handler
+from error_handler import continue_handler
 from db_health import is_crawling
 import time
 import sj1, sj2, sj3, sj4, sj5, sj6, sj7, sj8, sj9, sj10, sj11, sj12, sj13, sj14, sj15, sj16, sj17, sj18,\
@@ -31,6 +32,7 @@ def Crawling(URL, db):
 
 	#현재 크롤링하는 게시판 info 출력
 	print("Target : ", URL['info'])
+	continue_handler(URL['info'], URL, page_url)
 
 	#크롤링 유무판단
 	if is_crawling(db, URL['info']) == False:
