@@ -49,12 +49,14 @@ def Parsing_list_url(URL, page_url):
 		except:
 			data = (driver, List)
 			return data
-
-	for post in posts:
-		url = post.find("span", {"class": "li_subject li_list2"}).find("a")['onclick']
-		url = url.split("'")[1]
-		url = domain + url
-		List.append(url)
+	try:
+		for post in posts:
+			url = post.find("span", {"class": "li_subject li_list2"}).find("a")['onclick']
+			url = url.split("'")[1]
+			url = domain + url
+			List.append(url)
+	except:
+		List = []
 
 	data = (driver, List)
 
