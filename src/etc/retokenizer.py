@@ -72,7 +72,7 @@ def retokenizer_everytime(ID, PW):
 		del post["_id"]
 		del post["title_token"]
 		post["title"] = "0"
-		db.posts.update_one({"_id": ObjectId(target_id)}, post)
+		db.posts.replace_one({"_id": ObjectId(target_id)}, post)
 	print("\n\n:::: ", cnt, " POSTS RETOKENIZING DONE! ::::\n\n")
 	client.close()
 
