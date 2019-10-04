@@ -54,7 +54,7 @@ def retokenizer(ID, PW):
 
 def retokenizer_everytime(ID, PW):
 	client = MongoClient('mongodb://%s:%s@%s' %(ID, PW, HOST))
-	db = client["soojle"]a
+	db = client["soojle"]
 	cnt = 0
 	posts_cnt = db.posts.find().count()
 	posts = db.posts.find({"info": {"$regex": "everytime"}})
