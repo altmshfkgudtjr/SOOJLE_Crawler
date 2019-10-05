@@ -99,8 +99,8 @@ def db_manager(URL, post_data_prepare, db):
 			if URL['info'].split("_")[1] in contest_list:
 				post_one["end_date"] = post_one['date']
 				post_one["date"] = datetime_to_mongo(now)
-			post_one["title"] = post_one["title"][:100]
-			post_one["post"] = post_one["post"][:200]
+			post_one["title"] = post_one["title"]
+			post_one["post"] = post_one["post"]
 			db.posts.insert_one(post_one)
 			add_cnt += 1
 	return add_cnt
