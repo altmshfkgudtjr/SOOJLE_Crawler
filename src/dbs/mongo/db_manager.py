@@ -6,6 +6,7 @@ from url_list import List
 from datetime import datetime
 import hashlib
 from tknizer import *
+from etc_tagging import add_sejongbuild_tag
 
 
 #md5 해쉬
@@ -99,8 +100,9 @@ def db_manager(URL, post_data_prepare, db):
 			if URL['info'].split("_")[1] in contest_list:
 				post_one["end_date"] = post_one['date']
 				post_one["date"] = datetime_to_mongo(now)
-			post_one["title"] = post_one["title"]
-			post_one["post"] = post_one["post"]
+			post_one['tag'] = add_sejongbuild_tag(post_one['tag'], post_one["title"], post_one["post"])	#세종대학교 대상 예외처리
+			post_one["title"] = post_one["title"]#[:100]
+			post_one["post"] = post_one["post"]#[:200]
 			db.posts.insert_one(post_one)
 			add_cnt += 1
 	return add_cnt
