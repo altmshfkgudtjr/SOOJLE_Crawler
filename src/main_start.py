@@ -15,7 +15,7 @@ from posts_cnt import posts_cnt
 from tag_info import tag_info
 from db_connect import *
 from datetime import datetime, timedelta
-from timeLogWrite import time_write
+from timeLogWrite import time_write, time_start_write
 
 #시작위치 및 끝 위치 입력 설정
 ST_NUM = None
@@ -37,7 +37,8 @@ start_time = datetime.now()
 database = connect_db()
 db = database[1]
 client = database[0]
-
+#시작시간 Logging
+DB_POSTS_LEN = time_start_write(start_time, db)
 db_manager.init_db(db)	#DB가 없으면 생성
 #url_list에서 List를 URL으로 가져옴
 if ST_NUM == None and END_NUM == None:
@@ -78,9 +79,8 @@ if __name__ == '__main__':
 	posts_cnt(db)															# 모든 게시물 빈도 출력
 
 	print("\n\nCrawling End!\n\n")
-	#db_manager.collection_indexing(db)	#인덱싱 작업화
-	disconnect_db(client)	#DB 연결해제
 
-#프로그램 종료시간
-end_time = datetime.now()
-time_write(start_time, end_time)
+	#프로그램 종료시간
+	end_time = datetime.now()
+	time_write(start_time, end_time, db, DB_POSTS_LEN)
+	disconnect_db(client)	#DB 연결해제
