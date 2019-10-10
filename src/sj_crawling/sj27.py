@@ -78,12 +78,20 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 
 			try:
 				driver.get(url)
-			except:				
+			except:
+				if len(post_data_prepare) == 0:
+					lastly_post = None
+				else:
+					lastly_post = post_data_prepare[0]['title']
 				data = (post_data_prepare, lastly_post)
 				return data
 			try:
 				WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.text"))) #a.item을 발견하면 에이작스 로딩이 완료됬다는 가정
 			except:
+				if len(post_data_prepare) == 0:
+					lastly_post = None
+				else:
+					lastly_post = post_data_prepare[0]['title']
 				data = (post_data_prepare, lastly_post)
 				return data
 			html_post = driver.page_source
