@@ -6,6 +6,7 @@ from date_cut import date_cut_dict
 import tag
 from img_size import img_size
 import urllib3
+import time
 urllib3.disable_warnings()
 
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -16,7 +17,11 @@ def Parsing_list_url(URL, bs):
 	domain = Domain_check(URL['url'])
 
 	#리스트 반환
-	posts = bs.find("td", {"id": 'resultsCol'}).findAll("div", {"class": "jobsearch-SerpJobCard unifiedRow row result clickcard"})
+	try:
+		posts = bs.find("td", {"id": 'resultsCol'}).findAll("div", {"class": "jobsearch-SerpJobCard unifiedRow row result clickcard"})
+	except:
+		time.sleep(3)
+		posts = bs.find("td", {"id": 'resultsCol'}).findAll("div", {"class": "jobsearch-SerpJobCard unifiedRow row result clickcard"})
 	posts = bs.select("a.jobtitle")
 	for post in posts:
 		target = post.attrs["href"]
