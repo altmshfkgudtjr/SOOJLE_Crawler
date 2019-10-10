@@ -16,6 +16,7 @@ from tag_info import tag_info
 from db_connect import *
 from datetime import datetime, timedelta
 from timeLogWrite import time_write, time_start_write
+from error_handler import error_handler
 
 #시작위치 및 끝 위치 입력 설정
 ST_NUM = None

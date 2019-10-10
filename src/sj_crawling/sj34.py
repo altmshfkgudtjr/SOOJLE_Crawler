@@ -14,6 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from img_size import img_size
 from error_handler import error_handler
 from error_handler import continue_handler
+from error_handler import error_logging
 import re
 
 SJ34_DELETE_TAGS = ["갤러리", "게시판"]
@@ -179,27 +180,36 @@ def everytime_all_board(URL, end_date, db):
 	# 에브리타임 상단 동적 게시판 긁기=============================================================================
 	board_group_list = bs.find("div", {"id": "submenu"}).findAll('div', {"class": "group"})
 	for board_group in board_group_list:
-		board_li_list = board_group.find("ul").findAll("li")
-		for board_li in board_li_list:
-			board_li_dic = {}
-			board_li_dic['tag'] = board_li.find("a").text
-			board_li_dic['url'] = main_url + board_li.find("a")['href']
-			if (board_li_dic['tag'].find("찾기") != -1):
-				continue
-			board_list.append(board_li_dic)
+		try:
+			board_li_list = board_group.find("ul").findAll("li")
+			for board_li in board_li_list:
+				board_li_dic = {}
+				board_li_dic['tag'] = board_li.find("a").text
+				if board_li.find("a").text.strip() == "더 보기":
+					continue
+				else:
+					board_li_dic['url'] = main_url + board_li.find("a")['href']
+				if (board_li_dic['tag'].find("찾기") != -1):
+					continue
+				board_list.append(board_li_dic)
+		except:
+			continue
 	# 에브리타임 추가 동적 게시판 긁기
 	for search_word in board_search_word:
-		board_search_url_done = board_search_url + search_word
-		driver.get(board_search_url_done)
-		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "a.result")))
-		html = driver.page_source
-		bs = BeautifulSoup(html, 'html.parser')
-		board_a_list = bs.find("div", {"class": "searchresults"}).findAll('a')
-		for board_a in board_a_list:
-			board_li_dic = {}
-			board_li_dic['tag'] = board_a.find("h3").text
-			board_li_dic['url'] = main_url + board_a.get('href')
-			board_list.append(board_li_dic)
+		try:
+			board_search_url_done = board_search_url + search_word
+			driver.get(board_search_url_done)
+			WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "a.result")))
+			html = driver.page_source
+			bs = BeautifulSoup(html, 'html.parser')
+			board_a_list = bs.find("div", {"class": "searchresults"}).findAll('a')
+			for board_a in board_a_list:
+				board_li_dic = {}
+				board_li_dic['tag'] = board_a.find("h3").text
+				board_li_dic['url'] = main_url + board_a.get('href')
+				board_list.append(board_li_dic)
+		except:
+			continue
 	#===========================================================================================================
 	# 동적 게시판들 반복문
 	for board in board_list:
