@@ -13,6 +13,8 @@ sys.path.insert(0,'./dbs/mongo')
 #IML Tokenizer
 sys.path.insert(0,'./etc/IML_Tokenizer/src')
 sys.path.insert(0, '../../IML_Tokenizer/src/')
+#IML AI
+sys.path.insert(0, '../../SJ_AI/src')
 #Server
 sys.path.insert(0,'/home/iml/')
 sys.path.insert(0,'/home/iml/SOOJLE/')

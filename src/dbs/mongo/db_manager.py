@@ -6,7 +6,9 @@ from url_list import List
 from datetime import datetime
 import hashlib
 from tknizer import *
+from LDA import get_topics
 
+TOPIC_NUM = 25
 
 #md5 해쉬
 enc = hashlib.md5()
@@ -101,6 +103,13 @@ def db_manager(URL, post_data_prepare, db):
 				post_one["date"] = datetime_to_mongo(now)
 			post_one["title"] = post_one["title"]#[:100]
 			post_one["post"] = post_one["post"]#[:200]
+			topic = []
+			for _ in range(TOPIC_NUM):
+				topic.append(0)
+			for key in get_topics(post_one["tag"] + post_one["title_token"]):
+				topic[key[0]] = float(key[1])
+			post_one["topic"] = topic
+
 			db.posts.insert_one(post_one)
 			add_cnt += 1
 	return add_cnt
