@@ -93,7 +93,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 				date = now_year + "년 " + date + " 00:00:00"
 				date = str(datetime.datetime.strptime(date, "%Y년 %m월 %d일 %H:%M:%S"))
 			except:
-				data = data[6:].strip()
+				date = date[6:].strip()
 				date = str(datetime.datetime.strptime(date, "%Y년 %m월 %d일 %H:%M:%S"))
 			phrase = bs_post.find("article", {'class': "description"}).get_text(" ", strip = True)
 			phrase = post_wash(phrase)		#post 의 공백을 전부 제거하기 위함
