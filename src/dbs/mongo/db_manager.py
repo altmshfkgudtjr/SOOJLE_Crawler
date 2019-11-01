@@ -7,8 +7,8 @@ from datetime import datetime
 import hashlib
 from tknizer import *
 from LDA import get_topics
-
-TOPIC_NUM = 25
+from LDA import NUM_TOPICS
+TOPIC_NUM = NUM_TOPICS
 
 #md5 해쉬
 enc = hashlib.md5()
