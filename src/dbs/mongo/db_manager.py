@@ -113,6 +113,7 @@ def db_manager(URL, post_data_prepare, db):
 			for key in get_topics(topic_str):
 				topic[key[0]] = float(key[1])
 			post_one["topic"] = topic
+			post_one["popularity"] = 0;
 
 			db.posts.insert_one(post_one)
 			add_cnt += 1
