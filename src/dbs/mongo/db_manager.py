@@ -110,15 +110,11 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["title"] = post_one["title"]#[:100]
 			post_one["post"] = post_one["post"]#[:200]
 			topic = []
-			for _ in range(TOPIC_NUM):
-				topic.append(0)
-			if 'title_token' in post_one:
-				topic_str = post_one["tag"] + post_one["title_token"]
+			if 'token' in post_one:
+				topic_str = post_one["tag"] + post_one["token"]
 			else:
 				topic_str = post_one["tag"]
-			for key in get_topics(topic_str):
-				topic[key[0]] = float(key[1])
-			post_one["topic"] = topic
+			post_one["topic"] = get_topics(topic_str).tolist()
 			post_one["popularity"] = 0;
 
 			db.posts.insert_one(post_one)
