@@ -55,7 +55,7 @@ def tagging(URL, title):
 
 
 	#세종대 main 사이트
-	if info[0] == 'sj1':
+	if info[0] in ['sj1', 'sj44']:
 		tag_main(info, title, tag_list, title_tag)
 	#세종대 udream 사이트 + 데티즌 공모전 + 잡코리아
 	elif info[0] in ["sj2", "sj3", "sj4", "sj5", "sj35", "sj36", "sj37", "sj38", "sj39", "sj40", "sj41", "sj42", "sj43"]:

@@ -33,7 +33,10 @@ def get_lastly_post(URL, db):
 
 	table_name = URL['info']
 	document = db.lastly_post.find_one({"info_id": table_name})
-	lastly_post_title = document['title']
+	if document == None:
+		lastly_post_title = document['title']
+	else:
+		lastly_post_title = 0
 
 	return lastly_post_title
 

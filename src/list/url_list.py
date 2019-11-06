@@ -408,7 +408,7 @@ List = (\
 	#95
 	{'url': "https://bookstore.everytime.kr/?campus=60",\
 	'info': "sj23_everytime_book",\
-	'title_tag' : ["커뮤니티", "거래&대여"], 'login' : 0},\
+	'title_tag' : ["커뮤니티", "장터"], 'login' : 0},\
 	#세종알리 [sj24_sejong_allie]
 	#96
 	{'url': "http://univalli.com/allisejong/search_news.php?&page=",\
@@ -507,7 +507,7 @@ List = (\
 	#118
 	{'url': "http://cafe484.daum.net/_c21_/bbs_list?grpid=1SVkj&fldid=KOco&lastbbsdepth=001VHzzzzzzzzzzzzzzzzzzzzzzzzz&prev_page=1&listnum=20&page=",\
 	'info': "sj30_sejongstation_trade",\
-	'title_tag' : ["세종대역", "거래&대여", "커뮤니티", "기타"], 'login' : 1},\
+	'title_tag' : ["세종대역", "장터", "커뮤니티", "기타"], 'login' : 1},\
 	#세종대 두드림 [sj31_sejongstation_...] [sj32_sejongstation_...]
 	#119
 	{'url': "https://do.sejong.ac.kr/ko/program/all/list/all/",\
@@ -582,5 +582,10 @@ List = (\
 	#134
 	{'url': "https://kr.indeed.com/jobs?q=&l=서울&start=",\
 	'info': "sj43_indeed_job",\
-	'title_tag' : ["취업&진로"], 'login' : 0}\
+	'title_tag' : ["취업&진로"], 'login' : 0},\
+	#네이버블로그 [sj44_naverblog_...]
+	#135
+	{'url': "https://m.blog.naver.com/PostList.nhn?blogId=sejong_univ&from=postList",\
+	'info': "sj44_naverblog_sejong",\
+	'title_tag' : ["교내"], 'login' : 0}\
 	)
