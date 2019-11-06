@@ -73,12 +73,17 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
-	title = "0"
+	if bs.find("h2", {"class": "large"}) != None:
+		title = bs.find("h2", {"class": "large"}).get_text(" ", strip = True)
+	else:
+		title = "0"
 	author = "0"
 	date = bs.find("time").text.strip()
 	date = everytime_time(date)
 	post = bs.find("p", {'class': "large"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
+	if title == "0":
+		title = post[:20] + "..."
 	tag_done = tag.tagging(URL, title)
 	if bs.find("figure", {"class": "attach"}) is not None:
 		try:
