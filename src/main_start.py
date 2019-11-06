@@ -73,7 +73,7 @@ if __name__ == '__main__':
 			print('URL parsing Start! : ' + str(URL["url"]))
 			Crawling(URL, db)
 			#print("Number of DB_posts : ", db_manager.get_table_posts(URL, db))		# 현재 DB에 있는 테이블의 게시글 수를 출력한다
-		print('-----------------------------------------------------------------------------------------------------------------\n')
+			print('-----------------------------------------------------------------------------------------------------------------\n')
 		except Exception as e:
 			error_handler(e, URL, URL["url"], db)
 			continue
