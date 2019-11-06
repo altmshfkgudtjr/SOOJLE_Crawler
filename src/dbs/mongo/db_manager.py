@@ -8,6 +8,7 @@ import hashlib
 from tknizer import *
 from LDA import get_topics
 from LDA import NUM_TOPICS
+from FastText import *
 TOPIC_NUM = NUM_TOPICS
 
 #md5 해쉬
@@ -115,6 +116,7 @@ def db_manager(URL, post_data_prepare, db):
 			else:
 				topic_str = post_one["tag"]
 			post_one["topic"] = get_topics(topic_str).tolist()
+			post_one["ft_vector"] = get_doc_vector(topic_str).tolist()
 			post_one["popularity"] = 0;
 
 			db.posts.insert_one(post_one)
