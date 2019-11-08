@@ -91,7 +91,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			bs_post = BeautifulSoup(html_post, 'html.parser')
 
 			if (bs_post.find("div", {"class": "se-module se-module-text se-title-text"}) == None):
-				title = bs_post.find("div", {"class": "tit_h3"}).get_text(" ", strip = True)
+				title = bs_post.find("h3", {"class": "tit_h3"}).get_text(" ", strip = True)
 			else:
 				title = bs_post.find("div", {"class": "se-module se-module-text se-title-text"}).find("span").get_text(" ", strip = True)
 			date =  bs_post.find("p", {"class": "blog_date"}).text.strip()
