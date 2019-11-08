@@ -157,16 +157,12 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 	post_driver.close()
 	return data
 
-
-
 #url을 받으면 url 그대로 반환해준다. => Page number이 필요하지 않는 url
 def Change_page(url, page):
-
 	return url
 
 
 #입력된 url의 도메인 url 반환
 def Domain_check(url):
 	domain = url.split('/')[0] + '//' + url.split('/')[2]	#도메인 url 추출
-
 	return domain
