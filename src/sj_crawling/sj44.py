@@ -64,83 +64,86 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 
 
 		for post in posts[now_num:]:
-			post_data = {}
-			url = post.find("a", {"class": "link"})['href']
-			url = domain + url
-
 			try:
-				post_driver.get(url)
-				#driver.get(url)
-			except:
-				if len(post_data_prepare) == 0:
-					lastly_post = None
-				else:
-					lastly_post = post_data_prepare[0]['title']
-				data = (post_data_prepare, lastly_post)
-				return data
-			try:
-				WebDriverWait(post_driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.txt_area"))) #a.item을 발견하면 에이작스 로딩이 완료됬다는 가정
-			except:
-				if len(post_data_prepare) == 0:
-					lastly_post = None
-				else:
-					lastly_post = post_data_prepare[0]['title']
-				data = (post_data_prepare, lastly_post)
-				return data
-			html_post = post_driver.page_source
-			bs_post = BeautifulSoup(html_post, 'html.parser')
+				post_data = {}
+				url = post.find("a", {"class": "link"})['href']
+				url = domain + url
 
-			if bs_post.find("div", {"class": "se-module se-module-text se-title-text"}) == None:
-				title = bs_post.find("h3", {"class": "tit_h3"}).get_text(" ", strip = True)
-			else:
-				title = bs_post.find("div", {"class": "se-module se-module-text se-title-text"}).find("span").get_text(" ", strip = True)
-			if bs_post.find("p", {"class": "blog_date"}) == None:
-				date = bs_post.find("p", {"class": "se_date"}).get_text(" ", strip = True)
-			else:
-				date = bs_post.find("p", {"class": "blog_date"}).get_text(" ", strip = True)
-			if date.find("시간") != -1 or date.find("분") != -1 or date.find("초") != -1:
-				now = datetime.datetime.now().strftime("%Y-%m-%d")
-				date = now + " 00:00:00"
-				date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-			else:
-				date = date + ":00"
-				date = str(datetime.datetime.strptime(date, "%Y. %m. %d. %H:%M:%S"))
-			phrase = bs_post.find("div", {'class': "se-main-container"}).get_text(" ", strip = True)
-			phrase = post_wash(phrase)		#post 의 공백을 전부 제거하기 위함
-			tag_done = tag.tagging(URL, title)
-			if bs_post.find("div", {"class": "se-main-container"}).find("img", {"id": "img_2"}) is None:
-				img = 3
-			else:
-				img = bs_post.find("div", {"class": "se-main-container"}).find("img", {"id": "img_2"})['src']		#게시글의 첫번째 이미지를 가져옴.
-				if 1000 <= len(img):
+				try:
+					post_driver.get(url)
+					#driver.get(url)
+				except:
+					if len(post_data_prepare) == 0:
+						lastly_post = None
+					else:
+						lastly_post = post_data_prepare[0]['title']
+					data = (post_data_prepare, lastly_post)
+					return data
+				try:
+					WebDriverWait(post_driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.txt_area"))) #a.item을 발견하면 에이작스 로딩이 완료됬다는 가정
+				except:
+					if len(post_data_prepare) == 0:
+						lastly_post = None
+					else:
+						lastly_post = post_data_prepare[0]['title']
+					data = (post_data_prepare, lastly_post)
+					return data
+				html_post = post_driver.page_source
+				bs_post = BeautifulSoup(html_post, 'html.parser')
+
+				if bs_post.find("div", {"class": "se-module se-module-text se-title-text"}) == None:
+					title = bs_post.find("h3", {"class": "tit_h3"}).get_text(" ", strip = True)
+				else:
+					title = bs_post.find("div", {"class": "se-module se-module-text se-title-text"}).find("span").get_text(" ", strip = True)
+				if bs_post.find("p", {"class": "blog_date"}) == None:
+					date = bs_post.find("p", {"class": "se_date"}).get_text(" ", strip = True)
+				else:
+					date = bs_post.find("p", {"class": "blog_date"}).get_text(" ", strip = True)
+				if date.find("시간") != -1 or date.find("분") != -1 or date.find("초") != -1:
+					now = datetime.datetime.now().strftime("%Y-%m-%d")
+					date = now + " 00:00:00"
+					date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
+				else:
+					date = date + ":00"
+					date = str(datetime.datetime.strptime(date, "%Y. %m. %d. %H:%M:%S"))
+				phrase = bs_post.find("div", {'class': "se-main-container"}).get_text(" ", strip = True)
+				phrase = post_wash(phrase)		#post 의 공백을 전부 제거하기 위함
+				tag_done = tag.tagging(URL, title)
+				if bs_post.find("div", {"class": "se-main-container"}).find("img", {"id": "img_2"}) is None:
 					img = 3
 				else:
-					if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
-						pass
-					elif img.startswith("//"):
-						img = "http:" + img
+					img = bs_post.find("div", {"class": "se-main-container"}).find("img", {"id": "img_2"})['src']		#게시글의 첫번째 이미지를 가져옴.
+					if 1000 <= len(img):
+						img = 3
 					else:
-						img = domain + img
-			if img != 3:
-				if img_size(img):
-					pass
+						if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
+							pass
+						elif img.startswith("//"):
+							img = "http:" + img
+						else:
+							img = domain + img
+				if img != 3:
+					if img_size(img):
+						pass
+					else:
+						img = 3	
+
+				post_data['title'] = title.upper()
+				post_data['author'] = "0"
+				post_data['date'] = date
+				post_data['post'] = phrase.lower()
+				post_data['tag'] = tag_done
+				post_data['img'] = img
+				post_data['url'] = "https://" + url[10:]	# 'm'떼어버리는 작업
+
+				print(date, "::::", title)
+
+				if (date < end_date) or (title.upper() == lastly_post):
+					break
 				else:
-					img = 3	
-
-			post_data['title'] = title.upper()
-			post_data['author'] = "0"
-			post_data['date'] = date
-			post_data['post'] = phrase.lower()
-			post_data['tag'] = tag_done
-			post_data['img'] = img
-			post_data['url'] = "https://" + url[10:]	# 'm'떼어버리는 작업
-
-			print(date, "::::", title)
-
-			if (date < end_date) or (title.upper() == lastly_post):
-				break
-			else:
-				post_data_prepare.append(post_data)
+					post_data_prepare.append(post_data)
+			except:
+				continue
 
 		now_num = len(posts)
 		repeat_num += 1
