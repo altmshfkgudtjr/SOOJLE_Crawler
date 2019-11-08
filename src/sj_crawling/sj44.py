@@ -90,11 +90,14 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			html_post = post_driver.page_source
 			bs_post = BeautifulSoup(html_post, 'html.parser')
 
-			if (bs_post.find("div", {"class": "se-module se-module-text se-title-text"}) == None):
+			if bs_post.find("div", {"class": "se-module se-module-text se-title-text"}) == None:
 				title = bs_post.find("h3", {"class": "tit_h3"}).get_text(" ", strip = True)
 			else:
 				title = bs_post.find("div", {"class": "se-module se-module-text se-title-text"}).find("span").get_text(" ", strip = True)
-			date =  bs_post.find("p", {"class": "blog_date"}).text.strip()
+			if bs_post.find("p", {"class": "blog_date"}) == None:
+				date = bs_post.find("p", {"class": "se_date"}).get_text(" ", strip = True)
+			else:
+				date = bs_post.find("p", {"class": "blog_date"}).get_text(" ", strip = True)
 			if date.find("시간") != -1 or date.find("분") != -1 or date.find("초") != -1:
 				now = datetime.datetime.now().strftime("%Y-%m-%d")
 				date = now + " 00:00:00"
