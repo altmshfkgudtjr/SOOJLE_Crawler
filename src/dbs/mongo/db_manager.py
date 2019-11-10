@@ -62,11 +62,14 @@ def db_manager(URL, post_data_prepare, db):
 	##### tag: 태그, info: 게시판 정보, fav_cnt: 좋아요개수, view: view 개수										 #####
 	#post_data_prepare 을 필터링 check를 해준다.
 	for post in post_data_prepare:
-		if filtering.filter_public(post['title'] + post['post']):
-			print("Unhealty Post ---- ", post['title'])
-		elif URL['info'].split('_')[0] == 'sj20' or  URL['info'].split('-')[0] == 'sj34':
-			if filtering.filter_hardcore(post['title'] + post['post']):
-				print("Harmful Post ---- ", post['title'])
+		if URL['info'].split('_')[0] in ["sj20", "sj23", "sj30", "sj34"]:
+			if filtering.filter_public(post['title'] + post['post']):
+				print("Unhealty Post ---- ", post['title'])
+			elif URL['info'].split('_')[0] == 'sj20' or  URL['info'].split('-')[0] == 'sj34':
+				if filtering.filter_hardcore(post['title'] + post['post']):
+					print("Harmful Post ---- ", post['title'])
+				else:
+					temp.append(post)
 			else:
 				temp.append(post)
 		else:

@@ -123,7 +123,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 		post_data["title"] = post_data["post"][:20] + "..."
 
 	return_data.append(post_data)
-	return_data.append(post)
+	return_data.append(post_data['title'])
 	return_data.append(date)
 	return return_data
 
