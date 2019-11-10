@@ -94,11 +94,11 @@ def db_manager(URL, post_data_prepare, db):
 				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
 			post_one["view"] = 0
 			post_one["fav_cnt"] = 0
-			if "title_token" in post_one.keys():
-				del post_one["title_token"]
+			if post_one["title"][-3:] == "..." and post_one["post"].startswith(post_one["title"][:-3]):
+				post_one["title_token"] = post_one["post"][:20].split(" ")
 			else:
 				post_one["title_token"] = post_one["title"].split(" ")
-			if post_one["post"].startswith(post_one["title"]):
+			if post_one["post"].startswith(post_one["title"][:-3]):
 				post_one["token"] = soojle_tokenize("", post_one["post"].lower())
 			else:
 				post_one["token"] = soojle_tokenize(post_one["title"].lower(), post_one["post"].lower())

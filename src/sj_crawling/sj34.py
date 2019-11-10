@@ -82,9 +82,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 	date = everytime_time(date)
 	post = bs.find("p", {'class': "large"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
-	if title == "0":
-		title = post[:20] + "..."
-	tag_done = tag.tagging(URL, title)
+	tag_done = tag.tagging(URL, post)
 	if bs.find("figure", {"class": "attach"}) is not None:
 		try:
 			img = bs.find("figure", {"class": "attach"}).find("img")['src']		#게시글의 첫번째 이미지를 가져옴.
@@ -121,7 +119,8 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 	post_data['img'] = img
 	post_data['url'] = post_url
 	post_data['info'] = URL['info'].split("_")[1] + "_" + board_tag
-	post_data['title_token'] = [ "0" ]
+	if post_data["title"] == "0":
+		post_data["title"] = post_data["post"][:20] + "..."
 
 	return_data.append(post_data)
 	return_data.append(post)
