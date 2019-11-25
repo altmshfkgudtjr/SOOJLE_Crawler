@@ -104,7 +104,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 			pass
 		else:
 			img = 5
-		
+	img = 5
 
 	#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[],'fav_cnt':0,'view':0} 같은 형식
 	post_data['title'] = title.upper()
@@ -120,7 +120,7 @@ def Parsing_post_data(driver, post_url, URL, board_tag, db):
 	post_data['url'] = post_url
 	post_data['info'] = URL['info'].split("_")[1] + "_" + board_tag
 	if post_data["title"] == "0":
-		post_data["title"] = post_data["post"][:20] + "..."
+		post_data["title"] = post_data["post"][:30] + "..."
 
 	return_data.append(post_data)
 	return_data.append(post_data['title'])
