@@ -23,9 +23,12 @@ def Parsing_list_url(URL, bs):
 		if post_url.startswith("http://"):
 			List.append(post_url)
 		else:
-			post_url = domain + post_url
+			if URL['info'] == "sj1_main_founded":
+				post_url = post_url.split("swc")[0] + "swc&current" + post_url.split("swc")[1][2:]
+				post_url = domain + "/bbs/" + post_url
+			else:
+				post_url = domain + post_url
 			List.append(post_url)
-
 	return List
 
 
@@ -41,6 +44,8 @@ def Parsing_post_data(bs, post_url, URL):
 	if author.find("관리자") != -1:
 		author = "0"
 	date = bs.find("td", {"class": "date"}).text
+	if URL['info'] == "sj1_main_founded":
+		date = date + " 12:00:00"
 	date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
 	post = bs.find("tbody").find("div").get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함

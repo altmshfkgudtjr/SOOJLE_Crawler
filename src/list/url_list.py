@@ -4,6 +4,10 @@
 
 List = (\
 	#세종대 메인 게시판 "sj1_main_..."
+	#0
+	{'url': "https://home.sejong.ac.kr/bbs/bbslist.do?bbsid=1896&wslID=swc&page=1&currentPage=",\
+	'info': "sj1_main_founded",\
+	'title_tag' : ["교내", "소식"], 'login' : 0},\
 	#1
 	{'url': "http://board.sejong.ac.kr/boardlist.do?searchField=ALL&searchLowItem=ALL&bbsConfigFK=333&siteGubun=19&menuGubun=1&currentPage=",\
 	'info': "sj1_main_notice",\
