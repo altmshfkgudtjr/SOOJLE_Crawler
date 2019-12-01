@@ -46,7 +46,11 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 	repeat_num = 0
 	post_driver = chromedriver()	# 포스트 페이지를 위한 드라이버
 	driver.get(post_url)
-	WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.area_text"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
+	if (URL['info'].split("_")[2] == "campustown"):
+		WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.card")))
+		driver.find_element_by_xpath('//*[@id="ct"]/div[3]/div/div[1]/div/button[2]').click()
+	else:
+		WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.area_text"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
 	last_posts = [0]
 	while 1:
 		driver.find_element_by_tag_name("body").send_keys(Keys.END)
@@ -91,10 +95,13 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 				html_post = post_driver.page_source
 				bs_post = BeautifulSoup(html_post, 'html.parser')
 
-				if bs_post.find("div", {"class": "se-module se-module-text se-title-text"}) == None:
+				if (URL['info'].split("_")[2] == "campustown"):
 					title = bs_post.find("h3", {"class": "tit_h3"}).get_text(" ", strip = True)
 				else:
-					title = bs_post.find("div", {"class": "se-module se-module-text se-title-text"}).find("span").get_text(" ", strip = True)
+					if bs_post.find("div", {"class": "se-module se-module-text se-title-text"}) == None:
+						title = bs_post.find("h3", {"class": "tit_h3"}).get_text(" ", strip = True)
+					else:
+						title = bs_post.find("div", {"class": "se-module se-module-text se-title-text"}).find("span").get_text(" ", strip = True)
 				if bs_post.find("p", {"class": "blog_date"}) == None:
 					date = bs_post.find("p", {"class": "se_date"}).get_text(" ", strip = True)
 				else:
@@ -106,22 +113,40 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 				else:
 					date = date + ":00"
 					date = str(datetime.datetime.strptime(date, "%Y. %m. %d. %H:%M:%S"))
-				phrase = bs_post.find("div", {'class': "se-main-container"}).get_text(" ", strip = True)
+				if (URL['info'].split("_")[2] == "campustown"):
+					phrase = bs_post.find("div", {'class': "post_ct"}).get_text(" ", strip = True)
+				else:
+					phrase = bs_post.find("div", {'class': "se-main-container"}).get_text(" ", strip = True)
 				phrase = post_wash(phrase)		#post 의 공백을 전부 제거하기 위함
 				tag_done = tag.tagging(URL, title)
-				if bs_post.find("div", {"class": "se-main-container"}).find("img", {"id": "img_2"}) is None:
-					img = 3
-				else:
-					img = bs_post.find("div", {"class": "se-main-container"}).find("img", {"id": "img_2"})['src']		#게시글의 첫번째 이미지를 가져옴.
-					if 1000 <= len(img):
+				if (URL['info'].split("_")[2] == "campustown"):
+					if bs_post.find("div", {'class': "post_ct"}).find("img", {"id": "img_1"}) is None:
 						img = 3
 					else:
-						if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
-							pass
-						elif img.startswith("//"):
-							img = "http:" + img
+						img = bs_post.find("div", {"class": "post_ct"}).find("img", {"id": "img_1"})['src']		#게시글의 첫번째 이미지를 가져옴.
+						if 1000 <= len(img):
+							img = 3
 						else:
-							img = domain + img
+							if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
+								pass
+							elif img.startswith("//"):
+								img = "http:" + img
+							else:
+								img = domain + img
+				else:
+					if bs_post.find("div", {"class": "se-main-container"}).find("img", {"id": "img_2"}) is None:
+						img = 3
+					else:
+						img = bs_post.find("div", {"class": "se-main-container"}).find("img", {"id": "img_2"})['src']		#게시글의 첫번째 이미지를 가져옴.
+						if 1000 <= len(img):
+							img = 3
+						else:
+							if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
+								pass
+							elif img.startswith("//"):
+								img = "http:" + img
+							else:
+								img = domain + img
 				if img != 3:
 					if img_size(img):
 						pass

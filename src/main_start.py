@@ -69,14 +69,14 @@ if __name__ == '__main__':
 	print("\n\nCrawling Start!\n\n")
 
 	for URL in URLS:	#List에서 하나의 요소 = URL
-		try:
-			print('URL parsing Start! : ' + str(URL["url"]))
-			Crawling(URL, db)
-			#print("Number of DB_posts : ", db_manager.get_table_posts(URL, db))		# 현재 DB에 있는 테이블의 게시글 수를 출력한다
-			print('-----------------------------------------------------------------------------------------------------------------\n')
-		except Exception as e:
-			error_handler(e, URL, URL["url"], db)
-			continue
+		#try:
+		print('URL parsing Start! : ' + str(URL["url"]))
+		Crawling(URL, db)
+		#print("Number of DB_posts : ", db_manager.get_table_posts(URL, db))		# 현재 DB에 있는 테이블의 게시글 수를 출력한다
+		print('-----------------------------------------------------------------------------------------------------------------\n')
+		# except Exception as e:
+		# 	error_handler(e, URL, URL["url"], db)
+		# 	continue
 
 	print(":::: Posts in Boards Count ::::")
 	posts_cnt(db)															# 모든 게시물 빈도 출력

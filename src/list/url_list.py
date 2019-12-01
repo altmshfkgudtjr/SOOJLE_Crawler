@@ -591,5 +591,14 @@ List = (\
 	#135
 	{'url': "https://m.blog.naver.com/PostList.nhn?blogId=sejong_univ&from=postList",\
 	'info': "sj44_naverblog_sejong",\
-	'title_tag' : ["교내"], 'login' : 0}\
+	'title_tag' : ["교내"], 'login' : 0},\
+	#136
+	{'url': "https://m.blog.naver.com/PostList.nhn?blogId=b_ob02",\
+	'info': "sj44_naverblog_campustown",\
+	'title_tag' : ["교내"], 'login' : 0},\
+	#세종대학교 컴퓨터공학과
+	#137
+	{'url': "http://home.sejong.ac.kr/bbs/bbslist.do?bbsid=487&wslID=cedpt&searchField=&searchValue=&currentPage=1&page=",\
+	'info': "sj9_computer_notice",\
+	'title_tag' : ["교내", "컴퓨터공학과", "공지"], 'login' : 0}\
 	)
