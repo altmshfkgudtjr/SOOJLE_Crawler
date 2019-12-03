@@ -47,9 +47,9 @@ def Parsing_post_data(bs, post_url, URL):
 	date = bs.find("span", {"class": "date"}).text
 	date = date + " 00:00:00"
 	try:
-		date = datetime.datetime.strftime(date, "%Y-%m-%d %H:%M:%S")
+		date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
 	except:
-		date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+	 	date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	post = bs.find("div", {"class": "phrase"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	try:
