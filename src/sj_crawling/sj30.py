@@ -83,6 +83,7 @@ def Parsing_list_url(URL, page_url, lastly_post, db, driver):
 				url = domain + url
 				List.append(url)
 				cnt += 1
+		time.sleep(3)
 
 		#항상 첫번째페이지의 공지를 제외한 첫번째글이 lastly_post가 되도록 지정해줌
 		if lastly_num == 1 or lastly_post == 0:
@@ -171,7 +172,7 @@ def Parsing_post_data(driver, post_url, URL):
 	return_data.append(post_data)
 	return_data.append(title)
 	return_data.append(date)
-	time.sleep(2)
+	time.sleep(3)
 	return return_data
 
 
