@@ -23,6 +23,7 @@ def collection_indexing(db):
 	db.posts.createIndex({"hashed":1})
 	db.posts.createIndex({"date":1})
 	db.posts.createIndex({"end_date":1})
+	db.posts.createIndex({"url_hashed":1})
 
 
 def init_db(db):
@@ -81,14 +82,20 @@ def db_manager(URL, post_data_prepare, db):
 	if post_data_prepare_len == 0:
 		return add_cnt
 
-	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 same_cnt++
+	#입력 포스트를 DB포스트들과 title을 비교하여서 중복되지 않으면 add_cnt++, 중복되면 continue
+	#url hashed 값이 같은 게시글이 나오면 continue
 	for post_one in post_data_prepare:
-		#prepare 게시물이 db 게시물과 비교해서 중복되면 same_cnt ++
+		#prepare 게시물이 db 게시물과 비교해서 중복되면 continue
 		hash_before = post_one['title'] + post_one['post']
 		hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
+		url_hash_before = post_one['url']
+		url_hash_done = hashlib.md5(url_hash_before.encode('utf-8')).hexdigest()
 		if db.posts.find_one({"hashed": hash_done}) != None:
 			continue
+		elif db.posts.find_one({"url_hashed": url_hash_done}) != None:
+			continue
 		else:
+			post_one["url_hashed"] = url_hash_done
 			post_one["hashed"] = hash_done
 			post_one["date"] = datetime_to_mongo(post_one['date'])
 			if URL['info'].split("_")[0] == "sj23":
