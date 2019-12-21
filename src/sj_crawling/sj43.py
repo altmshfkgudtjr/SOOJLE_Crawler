@@ -39,7 +39,10 @@ def Parsing_post_data(bs, post_url, URL):
 	domain = Domain_check(URL['url'])
 
 	title = bs.find("h3", {"class": "jobsearch-JobInfoHeader-title"}).get_text(" ", strip = True)
-	author = bs.find("div", {"class": 'icl-u-lg-mr--sm icl-u-xs-mr--xs'}).text.strip()
+	try:
+		author = bs.find("div", {"class": 'icl-u-lg-mr--sm icl-u-xs-mr--xs'}).text.strip()
+	except:
+		author = "Indeed"
 	date = now
 	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
 	post = bs.find("div", {"class": "jobsearch-JobComponent-description"}).get_text(" ", strip = True)
