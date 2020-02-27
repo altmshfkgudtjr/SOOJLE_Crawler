@@ -14,6 +14,10 @@ TOPIC_NUM = NUM_TOPICS
 #md5 해쉬
 enc = hashlib.md5()
 
+#POST INFO
+POST_INFO = []
+#Hidden Posts : 학습용 게시글들
+hidden_posts = ["everytime"]
 #공모전 ~까지를 위한 collum 생성
 contest_list = ["campuspick", "detizen", "jobkorea", "jobsolution", "thinkgood"]
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -25,10 +29,6 @@ def collection_indexing(db):
 	db.posts.createIndex({"end_date":1})
 	db.posts.createIndex({"url_hashed":1})
 
-
-def init_db(db):
-	#soojle 라는 데이터베이스에 접근
-	pass
 
 def get_lastly_post(URL, db):
 	#soojle 라는 데이터베이스에 접근
@@ -51,11 +51,11 @@ def push_lastly_post(URL, lastly_post_title, db):
 
 
 def db_manager(URL, post_data_prepare, db):
+	global POST_INFO
 	add_cnt = 0
 	#table_name = URL['info']
 	table_name = "posts"
 	temp = []
-	
 	#soojle 라는 데이터베이스에 접근
 
 	#게시판에 맞는 테이블 없으면 생성
@@ -98,10 +98,18 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["url_hashed"] = url_hash_done
 			post_one["hashed"] = hash_done
 			post_one["date"] = datetime_to_mongo(post_one['date'])
-			if URL['info'].split("_")[0] == "sj23":
+			# Post_Info Insert
+			if URL['info'].split("_")[0] == "sj23":												# everytime_book
 				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
-			elif URL['info'].split("_")[1] != 'everytime':
+				post_one["info_num"] = 96
+			elif URL['info'].split("_")[1] != 'everytime':										# others
 				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
+				for info in POST_INFO:
+					if post_one['info'] == info['info_id']:
+						post_one['info_num'] = info['info_num']
+						break
+			else:																				# everytime
+				post_one['info_num'] = 123
 			post_one["view"] = 0
 			post_one["fav_cnt"] = 0
 			if post_one["title"][-3:] == "..." and post_one["post"].startswith(post_one["title"][:-3]):
@@ -131,7 +139,11 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["ft_vector"] = get_doc_vector(topic_str).tolist()
 			post_one["popularity"] = 0;
 
-			db.posts.insert_one(post_one)
+			for hidden_info in hidden_posts:
+				if post_one['info'].startswith(hidden_info):
+					db.hidden_posts.insert_one(post_one)
+				else:
+					db.posts.insert_one(post_one)
 			add_cnt += 1
 	return add_cnt
 
@@ -164,3 +176,17 @@ def sameposts_set(post_data_prepare):
 			clear_posts.append(post_data_prepare[i])
 
 	return clear_posts
+
+#post_info 리스트 가져오기
+def get_post_infoes(db):
+	global POST_INFO
+	infoes = db.post_info.find({}, {"_id": False, "info_id": True, "info_num": True})
+	POST_INFO = []
+	for info in infoes:
+		try:
+			info['info_id'] = info['info_id'].split('_')[1] + '_' + info['info_id'].split('_')[2]
+		except:
+			pass
+		POST_INFO.append(info)
+	print(":::: Get Post_info Complete! ::::")
+	return True

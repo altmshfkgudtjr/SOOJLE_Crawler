@@ -68,21 +68,24 @@ def Parsing_post_data(bs, URL):
 		driver_page = URLparser(url)
 		bs_page = BeautifulSoup(driver_page, 'html.parser')
 		try:
-			if bs_page.find("body").find("img")['src'] is None:
-				img = 1
-			else:
-				img = bs_page.find("body").find("img")['src']
-				if 1000 <= len(img):
+			img = bs_page.find("head").find("meta", {"property": "og:image"})['content']
+		except:
+			try:
+				if bs_page.find("body").find("img") is None:
 					img = 1
 				else:
-					if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
-						pass
-					elif img.startswith("//"):
-						img = "http:" + img
+					img = bs_page.find("body").find("img")['src']
+					if 1000 <= len(img):
+						img = 1
 					else:
-						img = domain + img
-		except:
-			 img = 1
+						if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
+							pass
+						elif img.startswith("//"):
+							img = "http:" + img
+						else:
+							img = domain + img
+			except:
+				 img = 1
 		if img != 1:
 			if img_size(img):
 				pass

@@ -40,7 +40,6 @@ db = database[1]
 client = database[0]
 #시작시간 Logging
 DB_POSTS_LEN = time_start_write(start_time, db)
-db_manager.init_db(db)	#DB가 없으면 생성
 #url_list에서 List를 URL으로 가져옴
 if ST_NUM == None and END_NUM == None:
 	URLS = List[:]
@@ -65,6 +64,8 @@ if __name__ == '__main__':
 	#date 테이블 생성 밎 dictionary 화
 	init_date_collection(db)
 	date_init(db)
+	#Post_Info 전역변수생성
+	db_manager.get_post_infoes(db)
 
 	print("\n\nCrawling Start!\n\n")
 

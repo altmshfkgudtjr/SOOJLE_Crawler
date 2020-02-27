@@ -9,10 +9,12 @@ def post_info(db):
 	
 	#soojle 라는 데이터베이스에 접근
 	
-	#post_info 테이블이 존재하면 DROP TABLE
-	db.post_info.drop()
-	
-	#그리고 다시 새로 만든다.
+	#존재유무 파악
+	collist = db.list_collection_names()
+	if 'post_info' in collist:
+		print(":::: post_info ALREADY EXISTS! ::::")
+		return
+
 	#info_id : db게시판 테이블에서 보여지는 식별자값
 	collection = db["post_info"]
 	

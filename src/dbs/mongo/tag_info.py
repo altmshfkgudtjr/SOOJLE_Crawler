@@ -8,8 +8,11 @@ from tagname_list import List_board
 def tag_info(db):
 	#soojle 라는 데이터베이스에 접근
 
-	#만약 tag_info 라는 테이블이 있으면 DROP
-	db.tag_info.drop()
+	#존재유무 파악
+	collist = db.list_collection_names()
+	if 'tag_info' in collist:
+		print(":::: tag_info ALREADY EXISTS! ::::")
+		return
 
 	#tag_info 라는 게시물을 생성해준다.
 	collection = db["tag_info"]
