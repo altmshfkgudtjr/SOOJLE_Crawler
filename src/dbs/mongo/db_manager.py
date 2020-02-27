@@ -28,7 +28,7 @@ def collection_indexing(db):
 
 def init_db(db):
 	#soojle 라는 데이터베이스에 접근
-	print()
+	pass
 
 def get_lastly_post(URL, db):
 	#soojle 라는 데이터베이스에 접근
