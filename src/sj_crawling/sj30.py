@@ -56,7 +56,7 @@ def Parsing_list_url(URL, page_url, lastly_post, db, driver):
 		try:
 			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
 		except:
-			driver.navigate().refresh();
+			driver.refresh();
 			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
 		html = driver.page_source
 		bs = BeautifulSoup(html, 'html.parser')
