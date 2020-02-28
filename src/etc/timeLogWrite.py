@@ -7,6 +7,7 @@ def time_write(start_time, end_time, db, posts_len):
 	start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
 	end_time = end_time.strftime("%Y-%m-%d %H:%M:%S")
 	posts_data = db.posts.find().count()
+	posts_data += db.hidden_posts.find().count()
 
 	print(":::: CRAWLER TIME INFO ::::")
 	print("START : ", start_time)
@@ -27,6 +28,8 @@ def time_write(start_time, end_time, db, posts_len):
 def time_start_write(start_time, db):
 	start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
 	posts_data = db.posts.find().count()
+	posts_data += db.hidden_posts.find().count()
+	
 	print(":::: CRAWLER TIME INFO ::::")
 	print("START : ", start_time)
 	print("NOW_DATA : ", posts_data)
