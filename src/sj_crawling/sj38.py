@@ -33,7 +33,7 @@ def Parsing_list_url(URL, page_url):
 		try:
 			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.aL")))
 		except:
-			return return_data;
+			return (driver, List);
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
 

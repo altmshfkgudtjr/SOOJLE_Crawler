@@ -87,10 +87,22 @@ def Crawling(URL, db):
 			for post_url in post_urls:
 				#Selenium인 경우--------------------------------------------------------------------------------------------------------------------
 				if crawling_name in ['sj29', 'sj30']:#------------------게시판 규격인 경우
-					get_post_data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL)')
+					try:
+						get_post_data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL)')
+					except:
+						try:
+							get_post_data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL)')
+						except:
+							continue
 				#---------------------------------------------------------------------------------------------------게시판 규격이 아닌 경우
 				elif crawling_name in ['sj23', 'sj26', 'sj27', 'sj28', 'sj44']:
-					data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL, lastly_post)')
+					try:
+						data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL, lastly_post)')
+					except:
+						try:
+							data = eval(crawling_name + '.Parsing_post_data(driver, post_url, URL, lastly_post)')
+						except:
+							continue
 					post_data_prepare = data[0]
 					lastly_post = data[1]
 					if lastly_post is None:
@@ -111,10 +123,22 @@ def Crawling(URL, db):
 					#------------------------------------------------
 					#-----------------------------------------------------------------------------------------------위키백과 구조
 					if crawling_name in ['sj21']:
-						get_post_data = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
+						try:
+							get_post_data = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
+						except:
+							try:
+								get_post_data = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
+							except:
+								continue
 					#-----------------------------------------------------------------------------------------------게시판 규격이 아닌 구조
 					elif crawling_name in ["sj4", "sj5", "sj8", "sj16"]:
-						post_data_prepare = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
+						try:
+							post_data_prepare = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
+						except:
+							try:
+								post_data_prepare = eval(crawling_name + '.Parsing_post_data(post_url, URL)')
+							except:
+								continue
 						break
 					#-----------------------------------------------------------------------------------------------게시판 규격인 구조
 					else:
@@ -130,7 +154,13 @@ def Crawling(URL, db):
 							else:
 								bs_post = BeautifulSoup(driver_post, 'html.parser')
 							#-------------------------------------------------------
-						get_post_data = eval(crawling_name + '.Parsing_post_data(bs_post, post_url, URL)')
+						try:
+							get_post_data = eval(crawling_name + '.Parsing_post_data(bs_post, post_url, URL)')
+						except:
+							try:
+								get_post_data = eval(crawling_name + '.Parsing_post_data(bs_post, post_url, URL)')
+							except:
+								continue
 				#-----------------------------------------------------------------------------------------------------------------------------------
 				
 				#post_data_prepare이 이미 완성된 경우-----------------------------------------------------------------------
