@@ -41,7 +41,7 @@ def Parsing_post_data(post_url, URL):
 	
 	title = "세종대백과 :: " + title
 	author = "0"
-	date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+	date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	post = bs.find("div", {"class": "page group"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
 	post = post.split("//<![CDATA")[0]
