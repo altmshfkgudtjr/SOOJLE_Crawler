@@ -13,12 +13,13 @@ def Parsing_list_url(URL, bs):
 	domain = Domain_check(URL['url'])
 
 	#리스트 반환
-	posts = bs.find("table", {"class": 'bbs_ltype tbl30'}).findAll("tr")
+	#posts = bs.find("table", {"class": 'bbs_ltype tbl30'}).findAll("tr")
+	posts = bs.find("table", {"class": 'bbs_ltype interview tbl30'}).findAll("tr")
 	posts = posts[1:]
 	for post in posts:
 		target = post.find("a")['href']
 		page = target
-		List.append(page)
+		List.append(domain + '/' + page)
 
 	return List
 
@@ -31,18 +32,33 @@ def Parsing_post_data(bs, post_url, URL):
 		post_data = {}
 		domain = Domain_check(URL['url'])
 
-		title = bs.find("span", {"class": "txt_jobfair"}).get_text(" ", strip = True)
-		author = bs.find("span", {"class": "tit_company_name"}).text.strip()
-		date = bs.find("p", {"class": 'info'}).find("span").text.strip()
+		title = bs.find("span", {"class": "col_blue"}).get_text(" ", strip = True)
+		author = "0"
+		date = bs.find("dl", {"class": "explainInfoBx"}).find("dd").text.strip()
 		date = date + " 00:00:00"
 		date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
-		post = ""
-		posts = bs.findAll("dl", {"class": "qna_list"})
-		for posts_one in posts:
-			post += posts_one.text.get_text(" ", strip = True)
+		post = bs.find("p", {"class": "tx"}).get_text(" ", strip = True)
 		post = post_wash(post)
 		tag_done = tag.tagging(URL, title)
-		img = 1
+		if bs.find("div", {"class": "img"}).find("img") is None:
+			img = 1
+		else:
+			img = bs.find("div", {"class": "img"}).find("img")['src']		#게시글의 첫번째 이미지를 가져옴.
+			if 1000 <= len(img):
+				img = 1
+			else:
+				if img.startswith("http://") or img.startswith("https://"):		# img가 내부링크인지 외부 링크인지 판단.
+					pass
+				elif img.startswith("//"):
+					img = "http:" + img
+				else:
+					img = domain + img
+		if img != 1:
+			if img_size(img):
+				pass
+			else:
+				img = 1
+
 		#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[],'fav_cnt':0,'view':0} 같은 형식
 		post_data['title'] = title.upper()
 		post_data['author'] = author.upper()
@@ -70,6 +86,6 @@ def Change_page(url, page):
 
 #입력된 url의 도메인 url 반환
 def Domain_check(url):
-	domain = url.split('/')[0] + '//' + url.split('/')[2] + "/" + url.split('/')[3]	#도메인 url 추출
+	domain = url.split('/')[0] + '//' + url.split('/')[2] + "/" + url.split('/')[3]		#도메인 url 추출
 
 	return domain

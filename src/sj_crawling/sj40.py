@@ -19,6 +19,8 @@ def Parsing_list_url(URL, bs):
 	posts = bs.find("table", {"class": 'bbs_ltype'}).findAll("tr")
 	posts = posts[1:]
 	for post in posts:
+		if post.find("a") == None:		# td 안에 tr이 존재하는 경우 Continue
+			continue
 		target = post.find("a")['href']
 		page = domain + "/" + target
 		List.append(page)
@@ -34,7 +36,7 @@ def Parsing_post_data(bs, post_url, URL):
 	domain = Domain_check(URL['url'])
 
 	title = bs.find("td", {"class": "view_index_title"}).get_text(" ", strip = True)
-	author = bs.find("td", {"class": "view_index_title"}).text.strip().split("-")[0].strip()
+	author = bs.find("td", {"class": "view_index_title"}).get_text(" ", strip = True).split("-")[0].strip()
 	try:
 		date = str(bs)[str(bs).find("마감일") + 17:str(bs).find("마감일") + 28].strip()
 		date = date + " 00:00:00"

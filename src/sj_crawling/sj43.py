@@ -38,6 +38,7 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data = {}
 	domain = Domain_check(URL['url'])
 
+	print(post_url)
 	title = bs.find("h3", {"class": "jobsearch-JobInfoHeader-title"}).get_text(" ", strip = True)
 	try:
 		author = bs.find("div", {"class": 'icl-u-lg-mr--sm icl-u-xs-mr--xs'}).text.strip()

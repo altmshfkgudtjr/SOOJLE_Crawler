@@ -38,8 +38,8 @@ def Parsing_post_data(post_url, URL):
 		author = post_infoes[0].find("div").text
 		if author.find("관리자") != -1:
 			author = "0"
-		date = post_infoes[4].text + " 00:00:00"
-		date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
+		date = post_infoes[3].text + " 00:00:00"
+		end_data = post_infoes[4].text + " 00:00:00"
 		post = post_infoes[1].get_text(" ", strip = True) + post_infoes[2].get_text(" ", strip = True) + post_infoes[3].get_text(" ", strip = True) + "~" + post_infoes[4].get_text(" ", strip = True)
 		post = post_wash(post)
 		tag_done = tag.tagging(URL, title)
@@ -49,8 +49,8 @@ def Parsing_post_data(post_url, URL):
 
 		post_data['title'] = title.upper()
 		post_data['author'] = author.upper()
-		db_date = post_infoes[3].text + " 00:00:00"
-		post_data['date'] = str(datetime.datetime.strptime(db_date, "%Y-%m-%d %H:%M:%S"))
+		post_data['date'] = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
+		post_data['end_data'] = datetime.datetime.strptime(end_data, "%Y-%m-%d %H:%M:%S")
 		post_data['post'] = post.upper()
 		post_data['tag'] = tag_done		# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
 		post_data['img'] = img

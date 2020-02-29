@@ -66,7 +66,10 @@ def Parsing_list_url(URL, page_url, lastly_post, db, driver):
 			if post.find("td", {"class": "num"}).find("img") != None:
 				continue
 			title = post.find("td", {"class": "subject"}).find("a").get_text(" ", strip = True)
-			date = post.find("td", {"class": "date"}).text.strip()
+			if post.find("td", {"class": "date"}) == None:
+				date = datetime.now()
+			else:
+				date = post.find("td", {"class": "date"}).text.strip()
 			if date.find(":") != -1:
 				now = datetime.now().strftime("%Y-%m-%d")
 				date = now + " 00:00:00"

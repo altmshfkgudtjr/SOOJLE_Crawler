@@ -11,6 +11,8 @@ def Parsing_list_url(URL, bs):
 	List = []
 	domain = Domain_check(URL['url'])
 
+	if bs.find("div", {"class": "list article mt10"}) is None:
+		return List
 	posts = bs.find("div", {"class": "list article mt10"}).findAll("div", {"class": "item article"})
 	
 	if URL['info'] == "sj7_promotion_research":

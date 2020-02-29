@@ -19,7 +19,7 @@ POST_INFO = []
 #Hidden Posts : 학습용 게시글들
 hidden_posts = ["everytime"]
 #공모전 ~까지를 위한 collum 생성
-contest_list = ["campuspick", "detizen", "jobkorea", "jobsolution", "thinkgood"]
+CONTEST_LIST = ["campuspick", "detizen", "jobkorea", "jobsolution", "thinkgood", "udream_jobinfo"]
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def collection_indexing(db):
@@ -123,7 +123,11 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["login"] = URL["login"]
 			post_one["learn"] = 0
 			del post_one["author"]
-			if URL['info'].split("_")[1] in contest_list:
+
+			if 'end_date' in post_one.keys():
+				post_one["date"] = datetime_to_mongo(post_one["date"])
+				post_one["end_date"] = datetime_to_mongo(post_one["end_date"])
+			elif (URL['info'].split("_")[1] in CONTEST_LIST) or (URL['info'] in CONTEST_LIST):
 				post_one["end_date"] = post_one['date']
 				post_one["date"] = datetime_to_mongo(now)
 			else:

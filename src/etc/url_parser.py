@@ -5,7 +5,8 @@ header = {
 			"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5)\
 			AppleWebKit 537.36 (KHTML, like Gecko) Chrome",
 			"Accept":"text/html,application/xhtml+xml,application/xml;\
-			q=0.9,imgwebp,*/*;q=0.8"}
+			q=0.9,imgwebp,*/*;q=0.8"
+		}
 
 
 def URLparser(URL):	#header을 지정하고 requests.get 하는 함수
