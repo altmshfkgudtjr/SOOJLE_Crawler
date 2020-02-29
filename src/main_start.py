@@ -15,7 +15,7 @@ from posts_cnt import posts_cnt
 from tag_info import tag_info
 from db_connect import *
 from datetime import datetime, timedelta
-from timeLogWrite import time_write, time_start_write
+from timeLogWrite import log_write, log_ready
 from error_handler import error_handler
 
 #시작위치 및 끝 위치 입력 설정
@@ -39,7 +39,7 @@ database = connect_db()
 db = database[1]
 client = database[0]
 #시작시간 Logging
-DB_POSTS_LEN = time_start_write(start_time, db)
+BEFORE_DATA = log_ready(start_time, db)
 #url_list에서 List를 URL으로 가져옴
 if ST_NUM == None and END_NUM == None:
 	URLS = List[:]
@@ -86,5 +86,5 @@ if __name__ == '__main__':
 
 	#프로그램 종료시간
 	end_time = datetime.now()
-	time_write(start_time, end_time, db, DB_POSTS_LEN)
+	log_write(start_time, end_time, db, BEFORE_DATA)
 	disconnect_db(client)	#DB 연결해제
