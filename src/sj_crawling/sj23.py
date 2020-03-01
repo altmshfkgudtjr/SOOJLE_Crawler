@@ -47,13 +47,13 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 	repeat_num = 0
 
 	driver.get(post_url)
-	WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.header"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
+	WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.header"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
 
 	#비교를 하기위해서 make
 	last_posts = [0]
 	while 1:
 		driver.get(post_url)
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.header"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
+		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.header"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
 
 		for i in range(repeat_num):
 			driver.find_element_by_tag_name("body").send_keys(Keys.END)
@@ -75,7 +75,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 			url = domain + url
 
 			driver.get(url)
-			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.group"))) #a.item을 발견하면 에이작스 로딩이 완료됬다는 가정
+			WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.group"))) #a.item을 발견하면 에이작스 로딩이 완료됬다는 가정
 			html_post = driver.page_source
 			bs_post = BeautifulSoup(html_post, 'html.parser')
 

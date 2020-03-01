@@ -47,13 +47,13 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 	now_num = 0
 	repeat_num = 0
 	#driver.get(post_url)
-	#WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.badges"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
+	#WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.badges"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
 
 	#비교를 하기위해서 make
 	last_posts = [0]
 	while 1:
 		driver.get(post_url)
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.badges"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
+		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.badges"))) #div.header을 발견하면 에이작스 로딩이 완료됬다는 가정
 
 
 		for i in range(repeat_num):
@@ -86,7 +86,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 				data = (post_data_prepare, lastly_post)
 				return data
 			try:
-				WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.text"))) #a.item을 발견하면 에이작스 로딩이 완료됬다는 가정
+				WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.text"))) #a.item을 발견하면 에이작스 로딩이 완료됬다는 가정
 			except:
 				if len(post_data_prepare) == 0:
 					lastly_post = None

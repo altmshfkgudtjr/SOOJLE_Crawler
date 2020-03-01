@@ -28,10 +28,10 @@ def Parsing_list_url(URL, page_url):
 	driver.get(page_url)
 
 	try:
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.aL"))) #time.large를 발견하면 에이작스 로딩이 완료됬다는 가정
+		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.aL"))) #time.large를 발견하면 에이작스 로딩이 완료됬다는 가정
 	except:
 		try:
-			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.aL")))
+			WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.aL")))
 		except:
 			return (driver, List);
 	html = driver.page_source

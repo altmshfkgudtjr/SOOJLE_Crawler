@@ -37,7 +37,7 @@ def Parsing_list_url(URL, page_url, lastly_post, db, driver):
 		return data
 	
 	try:
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
+		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
 	except:
 		data = (driver, List)
 		return data
@@ -54,10 +54,10 @@ def Parsing_list_url(URL, page_url, lastly_post, db, driver):
 			data = (driver, List)
 			return data
 		try:
-			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
+			WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
 		except:
 			driver.refresh();
-			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
+			WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "td.headcate")))
 		html = driver.page_source
 		bs = BeautifulSoup(html, 'html.parser')
 		posts = bs.find("table", {"class": "bbsList"}).find("tbody").findAll("tr")
@@ -128,9 +128,9 @@ def Parsing_post_data(driver, post_url, URL):
 	driver.get(post_url)
 
 	if URL['info'].split("_")[2] == 'qna':
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.protectTable")))
+		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.protectTable")))
 	else:
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table#protectTable")))
+		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table#protectTable")))
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
 	

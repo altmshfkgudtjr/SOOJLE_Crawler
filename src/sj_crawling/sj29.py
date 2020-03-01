@@ -27,12 +27,12 @@ def Parsing_list_url(URL, page_url):
 
 	driver = chromedriver()
 	driver.get(page_url)
-	WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.li_list")))
+	WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.li_list")))
 	time.sleep(2)
 	'''
 	for i in range(int(num)):
 		driver.find_element_by_xpath('//*[@id="paging"]/li[4]/a').click()
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.li_num")))
+		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.li_num")))
 	'''
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')

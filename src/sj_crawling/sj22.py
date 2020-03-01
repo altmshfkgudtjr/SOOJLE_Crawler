@@ -36,7 +36,7 @@ def Parsing_list_url(URL, page_url):
 		data = (driver, List)
 		return data
 
-	WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "a.article")))
+	WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "a.article")))
 	html = driver.page_source
 	bs = BeautifulSoup(html, 'html.parser')
 	
@@ -65,10 +65,10 @@ def Parsing_post_data(driver, post_url, URL):
 	driver.get(post_url)
 
 	try:
-		WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "time.large"))) #time.large를 발견하면 에이작스 로딩이 완료됬다는 가정
+		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "time.large"))) #time.large를 발견하면 에이작스 로딩이 완료됬다는 가정
 	except:
 		try:
-			WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "time.large")))
+			WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "time.large")))
 		except:
 			return return_data;
 	html = driver.page_source
