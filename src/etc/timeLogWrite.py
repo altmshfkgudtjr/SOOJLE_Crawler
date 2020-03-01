@@ -30,7 +30,9 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 	classification_all = classification_to_posts + classification_to_hidden
 	crawling_classification_all = copy.deepcopy(classification_all)
 	for one in crawling_classification_all:
-		one['count'] = one['count'] - list(filter(lambda x: one['_id'] == x['_id'], BEFORE_DATA['classification_all']))[0]['count']
+		before_cnt = list(filter(lambda x: one['_id'] == x['_id'], BEFORE_DATA['classification_all']))
+		if (len(before_cnt) != 0):
+			one['count'] = one['count'] - before_cnt[0]['count']
 
 
 	# Shell 출력
