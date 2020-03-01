@@ -19,7 +19,7 @@ POST_INFO = []
 #Hidden Posts : 학습용 게시글들
 hidden_posts = ["everytime"]
 #공모전 ~까지를 위한 collum 생성
-CONTEST_LIST = ["campuspick_activity", "campuspick_contest", "campuspick_club", "detizen_contest", "detizen_activity", "jobkorea_job", "jobkorea_public", "jobsolution_job", "thinkgood_info", "udream_jobinfo"]
+CONTEST_LIST = ["campuspick_activity", "campuspick_contest", "campuspick_club", "detizen_contest", "detizen_activity", "jobkorea_job", "jobkorea_public", "jobsolution_job", "thinkgood_info", "udream_jobinfo", "dodream_event"]
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def collection_indexing(db):

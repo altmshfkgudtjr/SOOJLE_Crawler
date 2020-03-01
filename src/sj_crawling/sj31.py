@@ -13,7 +13,7 @@ def Parsing_list_url(URL, bs):
 	domain = Domain_check(URL['url'])
 	posts = bs.find("ul", {"data-role": "list"}).findAll("li")	#진행중인 포스트만 get
 	for post in posts:
-		if post.find("label", {"class": "CLOSED"}) is None:	
+		if post.find("label", {"class": "CLOSED"}) is None:
 			url = post.find("a")['href']
 			url = domain + url
 			List.append(url)
@@ -35,14 +35,13 @@ def Parsing_post_data(bs, post_url, URL):
 	title = bs.find("div", {"class": "title"}).find("h4").get_text(" ", strip = True)
 	author = "0"
 	dates = bs.find("div", {"data-role": "input"}).findAll("time")
-	if len(dates) < 3:
+	if len(dates) < 2:
 		date = now
 		date = date + " 00:00:00"
 	else:
-		date = dates[2].text.strip()
-		date1 = date.split("(")[0].strip()
-		date2 = date.split(")")[1].strip()
-		date = date1 + " " + date2 + ":00"
+		date = dates[1].text.strip()
+		date = date.split("(")[0].strip()
+		date = date + " 00:00:00"
 		date = str(datetime.datetime.strptime(date, "%Y.%m.%d %H:%M:%S"))
 	post = bs.find("div", {"class": "abstract"}).find("div", {"class": "text"}).get_text(" ", strip = True)
 	post = post_wash(post)		#post 의 공백을 전부 제거하기 위함
@@ -81,6 +80,7 @@ def Parsing_post_data(bs, post_url, URL):
 	return_data.append(post_data)
 	return_data.append(title)
 	return_data.append(date)
+
 	return return_data
 
 
