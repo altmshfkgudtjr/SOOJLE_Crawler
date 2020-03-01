@@ -48,7 +48,7 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 
 
 	# DB 입력
-	target = db.crawling_log.find({"date": {"$gte": datetime.strptime(BEFORE_DATA['target'], "%Y-%m-%d")}}).limit(1)
+	target = db.crawling_log.find({"start_time": {"$gte": datetime.strptime(BEFORE_DATA['target'], "%Y-%m-%d")}}).sort("start_time", -1).limit(1)
 	target = list(target)
 	target = target[0]["_id"]
 	log = {
@@ -64,7 +64,6 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 			'posts': posts_data,
 			'hidden_posts': hidden_posts_data
 		},
-		#"info_crawling": crawling_classification_all,
 		"info_crawling": list(filter(lambda x: x['count'] != 0, crawling_classification_all)),
 		"info_data": classification_all
 	}
