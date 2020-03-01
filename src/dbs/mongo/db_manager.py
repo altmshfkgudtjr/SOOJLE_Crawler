@@ -90,9 +90,22 @@ def db_manager(URL, post_data_prepare, db):
 		hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
 		url_hash_before = post_one['url']
 		url_hash_done = hashlib.md5(url_hash_before.encode('utf-8')).hexdigest()
+		# Post_Info 삽입
+		if URL['info'].split("_")[0] == "sj23":												# everytime_book
+			post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
+			post_one["info_num"] = 96
+		elif URL['info'].split("_")[1] != 'everytime':										# others
+			post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
+			for info in POST_INFO:
+				if post_one['info'] == info['info_id']:
+					post_one['info_num'] = info['info_num']
+					break
+		else:																				# everytime
+			post_one['info_num'] = 123
 		# 중복처리====================================================================
 		duplicate_check = False
 		for hidden_info in hidden_posts:
+			# 중복체크
 			if post_one['info'].startswith(hidden_info):
 				if db.hidden_posts.find_one({"hashed": hash_done}) != None:
 					duplicate_check = True
@@ -109,18 +122,6 @@ def db_manager(URL, post_data_prepare, db):
 			post_one["url_hashed"] = url_hash_done
 			post_one["hashed"] = hash_done
 			post_one["date"] = datetime_to_mongo(post_one['date'])
-			# Post_Info Insert
-			if URL['info'].split("_")[0] == "sj23":												# everytime_book
-				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
-				post_one["info_num"] = 96
-			elif URL['info'].split("_")[1] != 'everytime':										# others
-				post_one["info"] = URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2]
-				for info in POST_INFO:
-					if post_one['info'] == info['info_id']:
-						post_one['info_num'] = info['info_num']
-						break
-			else:																				# everytime
-				post_one['info_num'] = 123
 			post_one["view"] = 0
 			post_one["fav_cnt"] = 0
 			if post_one["title"][-3:] == "..." and post_one["post"].startswith(post_one["title"][:-3]):
