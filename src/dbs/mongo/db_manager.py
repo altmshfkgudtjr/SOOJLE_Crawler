@@ -90,11 +90,22 @@ def db_manager(URL, post_data_prepare, db):
 		hash_done = hashlib.md5(hash_before.encode('utf-8')).hexdigest()
 		url_hash_before = post_one['url']
 		url_hash_done = hashlib.md5(url_hash_before.encode('utf-8')).hexdigest()
-		if db.posts.find_one({"hashed": hash_done}) != None:
+		# 중복처리====================================================================
+		duplicate_check = False
+		for hidden_info in hidden_posts:
+			if post_one['info'].startswith(hidden_info):
+				if db.hidden_posts.find_one({"hashed": hash_done}) != None:
+					duplicate_check = True
+				elif db.hidden_posts.find_one({"url_hashed": url_hash_done}) != None:
+					duplicate_check = True
+			else:
+				if db.posts.find_one({"hashed": hash_done}) != None:
+					duplicate_check = True
+				elif db.posts.find_one({"url_hashed": url_hash_done}) != None:
+					duplicate_check = True
+		if duplicate_check == True:
 			continue
-		elif db.posts.find_one({"url_hashed": url_hash_done}) != None:
-			continue
-		else:
+		else:#========================================================================
 			post_one["url_hashed"] = url_hash_done
 			post_one["hashed"] = hash_done
 			post_one["date"] = datetime_to_mongo(post_one['date'])

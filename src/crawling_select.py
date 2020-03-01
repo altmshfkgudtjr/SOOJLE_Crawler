@@ -193,8 +193,8 @@ def Crawling(URL, db):
 			if add_cnt == 0:
 				break
 			else:
-					page += 1
-					page_url = eval(crawling_name + '.Change_page(main_url, page)')
+				page += 1
+				page_url = eval(crawling_name + '.Change_page(main_url, page)')
 		# Error handler : 만약 크롤링이 실패했을 경우, 에러를 logging 하고 크롤링을 중단한다.
 		except Exception as e:
 			error_handler(e, URL, page_url, db)
