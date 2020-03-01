@@ -64,7 +64,8 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 			'posts': posts_data,
 			'hidden_posts': hidden_posts_data
 		},
-		"info_crawling": crawling_classification_all,
+		#"info_crawling": crawling_classification_all,
+		"info_crawling": list(filter(lambda x: x['count'] != 0, crawling_classification_all)),
 		"info_data": classification_all
 	}
 	db.crawling_log.update_one({"_id": ObjectId(target)}, {"$set": log})
@@ -117,7 +118,6 @@ def log_ready(start_time, db):
 
 	# DB 입력
 	log = {
-		"date": datetime.strptime(start_time, "%Y-%m-%d"),
 		"start_time": datetime.now(),
 	}
 	db.crawling_log.insert_one(log)
