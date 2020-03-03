@@ -1,6 +1,7 @@
 """     2019.02.10		"""
 """   SooJel Project	"""
 """ BY *IML *NB *837477 """
+# python3 main_start <시작위치:int> <끝위치:int> <제외:list>
 
 import sj_path	#환경변수 지정
 from url_list import List
@@ -21,6 +22,7 @@ from error_handler import error_handler
 #시작위치 및 끝 위치 입력 설정
 ST_NUM = None
 END_NUM = None
+EXCEPT_NUMS = []
 if len(sys.argv) == 1:
 	pass
 elif len(sys.argv) == 2:
@@ -28,6 +30,11 @@ elif len(sys.argv) == 2:
 elif len(sys.argv) == 3:
 	ST_NUM = int(sys.argv[1])
 	END_NUM = int(sys.argv[2])
+elif len(sys.argv) == 4:
+	ST_NUM = int(sys.argv[1])
+	END_NUM = int(sys.argv[2])
+	EXCEPT_NUMS = sys.argv[3][1:-1].split(",")
+	EXCEPT_NUMS = list(map(int, EXCEPT_NUMS))
 else:
 	print(":::: WRONG INPUT ::::\n\n\n")
 
@@ -51,6 +58,11 @@ else:
 	URLS = List[ST_NUM:END_NUM]
 
 if __name__ == '__main__':
+	# 제외할 URL index
+	EXCPET_INFO = []
+	for EXCEPT_NUM in EXCEPT_NUMS:
+		EXCPET_INFO.append(List[EXCEPT_NUM]['info'])
+	
 	print("\n\n")
 	print(":::< SooJle Project >:::")
 	print("TODAY : ", datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "\n\n")
@@ -70,6 +82,8 @@ if __name__ == '__main__':
 	print("\n\nCrawling Start!\n\n")
 
 	for URL in URLS:	#List에서 하나의 요소 = URL
+		if URL['info'] in EXCPET_INFO:
+			continue
 		try:
 			print('URL parsing Start! : ' + str(URL["url"]))
 			Crawling(URL, db)
