@@ -33,6 +33,9 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 		before_cnt = list(filter(lambda x: one['_id'] == x['_id'], BEFORE_DATA['classification_all']))
 		if (len(before_cnt) != 0):
 			one['count'] = one['count'] - before_cnt[0]['count']
+	classification_crawling_sort = list(filter(lambda x: x['count'] != 0, crawling_classification_all))
+	classification_crawling_sort.sort(key=lambda cnt: cnt['count'] ,reverse=True)
+	classification_all.sort(key=lambda cnt: cnt['count'] ,reverse=True)
 
 
 	# Shell 출력
@@ -66,7 +69,7 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 			'posts': posts_data,
 			'hidden_posts': hidden_posts_data
 		},
-		"info_crawling": list(filter(lambda x: x['count'] != 0, crawling_classification_all)),
+		"info_crawling": classification_crawling_sort,
 		"info_data": classification_all
 	}
 	db.crawling_log.update_one({"_id": ObjectId(target)}, {"$set": log})
