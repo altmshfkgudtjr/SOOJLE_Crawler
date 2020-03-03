@@ -17,6 +17,7 @@ def init_url_collection(db):
 			"title_tag": component['title_tag'],
 			"login": component['login'],
 			"crawling": True,
+			"stay_guideline": 0,
 			"stay_cnt": 0
 		}
 		if "post_url" in component:
