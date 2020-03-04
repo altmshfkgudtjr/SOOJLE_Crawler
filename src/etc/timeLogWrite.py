@@ -53,9 +53,6 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 
 
 	# DB 입력
-	target = db.crawling_log.find({"start_time": {"$gte": datetime.strptime(BEFORE_DATA['target'], "%Y-%m-%d")}}).sort("start_time", -1).limit(1)
-	target = list(target)
-	target = target[0]["_id"]
 	log = {
 		'end_time': end_time,
 		'running_time': str(running_time),
@@ -72,7 +69,7 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 		"info_crawling": classification_crawling_sort,
 		"info_data": classification_all
 	}
-	db.crawling_log.update_one({"_id": ObjectId(target)}, {"$set": log})
+	db.crawling_log.update_one({"_id": ObjectId(BEFORE_DATA['target'])}, {"$set": log})
 
 
 
@@ -125,11 +122,12 @@ def log_ready(start_time, db):
 		"start_time": datetime.now(),
 	}
 	db.crawling_log.insert_one(log)
-
+	log_id = db.crawling_log.find({"start_time": {"$gte": log["start_time"]}}, {"_id": True}).sort("start_time", -1).limit(1)
+	log_id = list(log_id)[0]['_id']
 
 	# 반환 데이터
 	output = {
-		'target': start_time,
+		'target': log_id,
 		'posts_data': posts_data,
 		'hidden_posts_data': hidden_posts_data,
 		'all_data': posts_data + hidden_posts_data,
