@@ -132,7 +132,7 @@ def db_manager(URL, post_data_prepare, db):
 				post_one["token"] = soojle_tokenize("", post_one["post"].lower())
 			else:
 				post_one["token"] = soojle_tokenize(post_one["title"].lower(), post_one["post"].lower())
-			post_one["token"] = list(post_one["title_token"] + post_one["token"])
+			post_one["token"] = list(post_one["title_token"] + post_one["token"] + post_one['tag'])
 			post_one["login"] = URL["login"]
 			post_one["learn"] = 0
 			del post_one["author"]
