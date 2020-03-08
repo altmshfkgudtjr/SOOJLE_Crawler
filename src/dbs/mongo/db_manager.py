@@ -22,13 +22,6 @@ hidden_posts = ["everytime"]
 CONTEST_LIST = ["campuspick_activity", "campuspick_contest", "campuspick_club", "detizen_contest", "detizen_activity", "jobkorea_job", "jobkorea_public", "jobsolution_job", "thinkgood_info", "udream_jobinfo", "dodream_event"]
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-def collection_indexing(db):
-	#콜렉션 인덱싱 작업
-	db.posts.createIndex({"hashed":1})
-	db.posts.createIndex({"date":1})
-	db.posts.createIndex({"end_date":1})
-	db.posts.createIndex({"url_hashed":1})
-
 
 def get_lastly_post(URL, db):
 	#soojle 라는 데이터베이스에 접근
