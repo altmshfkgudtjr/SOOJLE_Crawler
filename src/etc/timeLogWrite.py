@@ -37,7 +37,7 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 	classification_crawling_sort.sort(key=lambda cnt: cnt['count'] ,reverse=True)
 	classification_all.sort(key=lambda cnt: cnt['count'] ,reverse=True)
 	# Category info Get
-	category_all = db.category_of_topic.find({}, {"_id": False, "category_name": True, "info": True})
+	category_all = db.SJ_CATEGORY.find({}, {"_id": False, "category_name": True, "info": True})
 	category_all = list(category_all)
 	# Crawling Category
 	for category in category_all:
