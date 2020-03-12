@@ -37,7 +37,7 @@ def is_crawling(db, target_crawler):
 		print(":::: URL HEALTH DONE! - NONE ::::")
 		return True
 	if target["crawling"] == False and target["stay_cnt"] == 0:
-		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"crawling": True}})
+		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"crawling": True, "stay_guideline": 0}})
 	elif target["crawling"] == False and target["stay_cnt"] > 0:
 		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"stay_cnt": target["stay_cnt"] - 1}})
 	else:
