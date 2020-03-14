@@ -4,6 +4,7 @@ import datetime
 from date_cut import date_cut_dict
 import tag
 from img_size import img_size
+import re
 
 
 
@@ -57,6 +58,12 @@ def Parsing_post_data(bs, post_url, URL):
 		else:
 			img = 1
 	tag_done = tag.tagging(URL, title)
+
+	post_url_a = post_url.split("&viewNum=")[0]
+	post_url_b = post_url.split("&viewNum=")[1]
+	while post_url_b[0] != '&':
+		post_url_b = post_url_b[1:]
+	post_url = post_url_a+post_url_b
 
 	#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[], img:1, 'view':0} 같은 형식
 	post_data['title'] = title.upper()
