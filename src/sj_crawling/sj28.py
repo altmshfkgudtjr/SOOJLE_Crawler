@@ -31,7 +31,6 @@ def Parsing_list_url(URL, page_url):
 
 	List.append(page_url)
 	
-
 	data = (driver, List)
 
 	return data
@@ -53,7 +52,7 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 	while 1:
 		driver.get(post_url)
 		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.badges"))) #p.badges을 발견하면 에이작스 로딩이 완료됬다는 가정
-		driver.find_element_by_xpath('//*[@id="container"]/div[3]').click()
+		driver.find_element_by_xpath('//*[@id="container"]/div[3]/a[3]').click()
 		WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.badges")))
 
 		for i in range(repeat_num):
@@ -64,6 +63,8 @@ def Parsing_post_data(driver, post_url, URL, lastly_post):
 		bs = BeautifulSoup(html, 'html.parser')
 
 		posts = bs.find("div", {"class": 'list'}).findAll("a", {"class": "item"})
+
+
 		#더이상 내릴 수 없으면 break
 		if len(last_posts) == len(posts):
 			break
