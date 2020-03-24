@@ -40,13 +40,13 @@ def Parsing_post_data(bs, post_url, URL):
 	author = bs.find("div", {"class": "col-xs-10 lbb"}).text.strip()
 	if author.find("관리자") != -1:
 		author = "0"
-	date = bs.find("span", {"name": "Edate"}).text
-	date = date + " 00:00:00"
-	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
+	date = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 	post = bs.find("section", {"class": "wrapper-lg"}).get_text(" ", strip = True)
 	post = post_wash(post)
 	tag_done = tag.tagging(URL, title)
 	img = 1
+	end_date = bs.find("span", {"name": "Edate"}).text + " 00:00:00"
+	end_date = str(datetime.datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S"))
 
 	#post_data = {'title': ,'author': ,'date': ,'post': ,'tag':[],'fav_cnt':0,'view':0} 같은 형식
 	post_data['title'] = title.upper()
@@ -56,6 +56,7 @@ def Parsing_post_data(bs, post_url, URL):
 	post_data['tag'] = tag_done 	# 태그1/태그2/태그3/태그4/.../ 같은 형식의 태그string이 들어간다.
 	post_data['img'] = img
 	post_data['url'] = post_url
+	post_data['end_date'] = end_date
 
 	return_data.append(post_data)
 	return_data.append(title)

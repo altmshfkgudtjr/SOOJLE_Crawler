@@ -131,7 +131,7 @@ def db_manager(URL, post_data_prepare, db):
 			del post_one["author"]
 
 			if 'end_date' in post_one.keys():
-				post_one["date"] = datetime_to_mongo(post_one["date"])
+				#post_one["date"] = datetime_to_mongo(post_one["date"])
 				post_one["end_date"] = datetime_to_mongo(post_one["end_date"])
 			elif (URL['info'].split("_")[1] + "_" + URL['info'].split("_")[2] in CONTEST_LIST):
 				post_one["end_date"] = post_one['date']

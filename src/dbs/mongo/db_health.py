@@ -14,7 +14,6 @@ def url_health_check(target_url, db):
 		return
 	else:
 		target_obj = db.url.find_one({"_id": ObjectId(target_id)})
-	print("fucking health check")
 	if target_obj["stay_cnt"] > 0:
 		db.url.update_one({"_id": ObjectId(target_id)}, {"$set": {"stay_cnt": target_obj["stay_cnt"] - 1}})
 	else:

@@ -265,6 +265,10 @@ def everytime_all_board(URL, end_date, db):
 					page_url = Change_page(board_url, page)
 			except Exception as e:
 				error_handler(e, URL, page_url, db)
+				driver.quit()
+				time.sleep(3)
+				driver = chromedriver()
+				driver = everytime.login(driver)
 				break
 	#드라이버 연결 해제
 	driver.quit()
