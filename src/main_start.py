@@ -19,6 +19,7 @@ from db_connect import *
 from datetime import datetime, timedelta
 from timeLogWrite import log_write, log_ready
 from error_handler import error_handler
+from domain_insert import domain_insert
 
 #시작위치 및 끝 위치 입력 설정
 ST_NUM = None
@@ -72,6 +73,8 @@ if __name__ == '__main__':
 	init_crawler_collection(db)
 	#Post_Info 전역변수생성
 	db_manager.get_post_infoes(db)
+	#도메인 생성
+	domain_insert(db)
 
 
 	#크롤러 관리자 갱신==========================
