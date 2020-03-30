@@ -767,5 +767,15 @@ List = (\
 	'title': "세종대학교 JOB 솔루션 - 비지니스 매너", 'date': today,\
 	'post': "에티켓과 매너는 다르다? 비즈니스에서 꼭 필요한 글로벌 매너, 신입사원을 위한 TIP, 글로벌 비지니스 매너에 대해서 알려드립니다",\
 	'img': "1", 'url': "http://u.educe.co.kr/jobsej/?mod=business&m_idx=205",\
-	'title_tag': ["사이트", "취업&진로"]}\
+	'title_tag': ["사이트", "취업&진로"]},
+	{'post_id': "146", 'info': "domain_oj_new",\
+	'title': "EX-OJ", 'date': today,\
+	'post': "세종대학교 OJ 시스템 [신버전]",\
+	'img': "1", 'url': "https://ex-oj.sejong.ac.kr/index.php/auth/login/",\
+	'title_tag': ["사이트", "IT&컴퓨터"]},\
+	{'post_id': "146", 'info': "domain_oj_new",\
+	'title': "OJ", 'date': today,\
+	'post': "세종대학교 OJ 시스템 [구버전]",\
+	'img': "1", 'url': "https://oj.sejong.ac.kr/index.php/auth/login/",\
+	'title_tag': ["사이트", "IT&컴퓨터"]}
 )
