@@ -93,7 +93,7 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 		"category_crawling": category_all,
 		"category_data": category_total
 	}
-	db.crawling_log.update_one({"_id": ObjectId(BEFORE_DATA['target'])}, {"$set": log})
+	db.crawler_log.update_one({"_id": ObjectId(BEFORE_DATA['target'])}, {"$set": log})
 
 
 
@@ -145,8 +145,8 @@ def log_ready(start_time, db):
 	log = {
 		"start_time": datetime.now(),
 	}
-	db.crawling_log.insert_one(log)
-	log_id = db.crawling_log.find({"start_time": {"$gte": log["start_time"]}}, {"_id": True}).sort("start_time", -1).limit(1)
+	db.crawler_log.insert_one(log)
+	log_id = db.crawler_log.find({"start_time": {"$gte": log["start_time"]}}, {"_id": True}).sort("start_time", -1).limit(1)
 	log_id = list(log_id)[0]['_id']
 
 	# 반환 데이터
