@@ -85,7 +85,7 @@ if __name__ == '__main__':
 	#현재 크롤링 가능 여부 확인
 	if Can_crawling(db):
 		print("\n\nCrawling Start!\n\n")
-		# CRAWLER_MANAGER['crawling'] = True
+		CRAWLER_MANAGER['crawling'] = True
 		CRAWLER_MANAGER['start_time'] = start_time
 		update_crawler_manager(db, CRAWLER_MANAGER)
 		#시작시간 Logging
