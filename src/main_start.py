@@ -85,7 +85,7 @@ if __name__ == '__main__':
 	#현재 크롤링 가능 여부 확인
 	if Can_crawling(db):
 		print("\n\nCrawling Start!\n\n")
-		CRAWLER_MANAGER['crawling'] = True
+		# CRAWLER_MANAGER['crawling'] = True
 		CRAWLER_MANAGER['start_time'] = start_time
 		update_crawler_manager(db, CRAWLER_MANAGER)
 		#시작시간 Logging
@@ -113,7 +113,10 @@ if __name__ == '__main__':
 
 		#프로그램 종료시간
 		end_time = datetime.now()
-		log_write(start_time, end_time, db, BEFORE_DATA)
+		try:
+			log_write(start_time, end_time, db, BEFORE_DATA)
+		except:
+			error_logging(e, '', '', db)
 
 		#크롤러 관리자 갱신==========================
 		CRAWLER_MANAGER['crawling'] = False
