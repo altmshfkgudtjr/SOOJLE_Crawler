@@ -18,7 +18,7 @@ from tag_info import tag_info
 from db_connect import *
 from datetime import datetime, timedelta
 from timeLogWrite import log_write, log_ready
-from error_handler import error_handler
+from error_handler import error_handler, error_logging
 from domain_insert import domain_insert
 
 #시작위치 및 끝 위치 입력 설정

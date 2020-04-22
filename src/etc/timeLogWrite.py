@@ -41,7 +41,9 @@ def log_write(start_time, end_time, db, BEFORE_DATA):
 	category_all = list(category_all)
 	# Crawling Category
 	for category in category_all:
+		print('\n\n\n', category['info'])
 		category['info'] = list(map(lambda x: x.split("_")[1] + "_" + x.split("_")[2], category['info']))
+		print('\n\n\n', category['info'])
 		category['count'] = 0
 	category_total = copy.deepcopy(category_all)
 	for info_crawling in classification_crawling_sort:
