@@ -19,13 +19,15 @@ def post_info(db):
 	collection = db["post_info"]
 	
 	#info_id : sj_domain, title_tag : 도메인, login : 0 추가
-	collection.insert_one({"info_id": "sj_domain", "title_tag": "도메인/"})
+	collection.insert_one({"info_id": "sj_domain", "title_tag": "도메인/", "info_num": 0})
 	print(":::: post_info CREATE Complete! ::::")
 	
 	#url_list 에서 각 게시판의 info, title_tag, login 값을 post_info 테이블에 넣어준다.
 	#login은 로그인 유무
+	cnt = 1
 	for URL in List:
-		collection.insert_one({"info_id": URL['info'], "title_tag": URL['title_tag']})
+		collection.insert_one({"info_id": URL['info'], "title_tag": URL['title_tag'], "info_num": cnt})
+		cnt+=1
 	print(":::: post_info INSERT Complete! ::::")
 
 	#도메인 sj_domain 테이블 추가 + domain_list 추가
