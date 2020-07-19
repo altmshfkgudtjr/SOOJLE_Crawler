@@ -46,7 +46,7 @@ def Parsing_post_data(bs, post_url, URL):
 		author = "Indeed"
 	date = now
 	date = str(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
-	post = bs.find("div", {"class": "jobsearch-JobComponent-description"}).get_text(" ", strip = True)
+	post = bs.find("div", {"id": "jobDescriptionText"}).get_text(" ", strip = True)
 	post = post_wash(post)
 	tag_done = tag.tagging(URL, title)
 	img = 1
