@@ -405,7 +405,7 @@ List = (\
 	'title_tag' : ["커뮤니티", "기타"], 'login' : 0},\
 	#세종위키백과 [sj21_sejong_wiki]
 	#94
-	{'url': "http://sejongwiki.kr/start",\
+	{'url': "http://sejong.wiki/",\
 	'info': "sj21_sejong_wiki",\
 	'title_tag' : ["위키백과", "기타"], 'login' : 0},\
 	#에브리타임 책방 [sj23_everytime_book]
